@@ -10,6 +10,12 @@ on:
         description: "Competitor slug to scrape"
         required: false
         default: "opentext"
+      scrape_only:
+        description: "Scrape only, skip analysis (no API key needed)"
+        required: false
+        default: "false"
+        type: choice
+        options: ["false", "true"]
       analyze_only:
         description: "Skip scraping, re-analyze cached data only"
         required: false
@@ -45,13 +51,14 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}
         run: |
           COMPETITOR="${{ github.event.inputs.competitor || 'opentext' }}"
+          SCRAPE_ONLY="${{ github.event.inputs.scrape_only || 'false' }}"
           ANALYZE_ONLY="${{ github.event.inputs.analyze_only || 'false' }}"
 
-          if [ "$ANALYZE_ONLY" = "true" ]; then
-            python main.py --competitor "$COMPETITOR" --analyze-only
-          else
-            python main.py --competitor "$COMPETITOR"
-          fi
+          ARGS="--competitor $COMPETITOR"
+          [ "$SCRAPE_ONLY" = "true" ]  && ARGS="$ARGS --scrape-only"
+          [ "$ANALYZE_ONLY" = "true" ] && ARGS="$ARGS --analyze-only"
+
+          python main.py $ARGS
 
       - name: Upload raw scrape data
         uses: actions/upload-artifact@v4

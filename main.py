@@ -3,6 +3,7 @@ Competitive Intelligence orchestrator.
 
 Usage:
     python main.py                     # scrape all sources + generate report
+    python main.py --scrape-only       # scrape only, skip analysis (no API key needed)
     python main.py --analyze-only      # skip scraping, re-analyze cached raw data
     python main.py --competitor opentext  # explicit competitor (default: opentext)
 
@@ -71,6 +72,7 @@ def load_cached_raw(output_dir: Path) -> dict[str, dict]:
 def main():
     parser = argparse.ArgumentParser(description="Competitive Intelligence runner")
     parser.add_argument("--competitor", default="opentext", help="Competitor slug (default: opentext)")
+    parser.add_argument("--scrape-only", action="store_true", help="Scrape only; skip analysis (no API key needed)")
     parser.add_argument("--analyze-only", action="store_true", help="Skip scraping; use cached raw data")
     args = parser.parse_args()
 
@@ -83,12 +85,22 @@ def main():
     else:
         scraped = run_scrapers(output_dir)
 
+    if args.scrape_only:
+        print("\nScrape complete. Raw data saved to:", output_dir)
+        for key, filename in RAW_FILE_MAP.items():
+            path = output_dir / filename
+            if path.exists():
+                pages = json.loads(path.read_text()).get("pages", [])
+                ok = sum(1 for p in pages if not p["content"].startswith("ERROR"))
+                print(f"  {key}: {ok}/{len(pages)} pages scraped successfully")
+        return
+
     report_date = date.today().isoformat()
     logger.info("=== Running analysis (date: %s) ===", report_date)
     report = summarize.run(output_dir, scraped, report_date)
 
     print("\n" + "=" * 60)
-    print("COMPETITIVE INTELLIGENCE REPORT — OpenText")
+    print(f"COMPETITIVE INTELLIGENCE REPORT — {args.competitor.upper()}")
     print("=" * 60)
     print(json.dumps(report, indent=2))
     print("\nFull report saved to:", output_dir / "ci_report.json")
