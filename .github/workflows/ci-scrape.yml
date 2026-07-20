@@ -23,6 +23,9 @@ on:
         type: choice
         options: ["false", "true"]
 
+permissions:
+  contents: write
+
 jobs:
   scrape-and-analyze:
     runs-on: ubuntu-latest
