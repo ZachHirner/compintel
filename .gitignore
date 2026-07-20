@@ -1,5 +1,6 @@
 __pycache__/
 *.pyc
-# Ignore raw scrape dumps but track the final CI reports
+# Raw dumps in the root competitor dir are transient; datestamped runs are tracked
 data/*/*_raw.json
+!data/*/*/*_raw.json
 .env

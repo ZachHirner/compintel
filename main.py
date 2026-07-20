@@ -76,26 +76,36 @@ def main():
     parser.add_argument("--analyze-only", action="store_true", help="Skip scraping; use cached raw data")
     args = parser.parse_args()
 
+    report_date = date.today().isoformat()
+
+    # Datestamped subdirectory preserves each run's raw data historically
+    run_dir = DATA_ROOT / args.competitor / report_date
+    run_dir.mkdir(parents=True, exist_ok=True)
+
+    # Latest symlink/alias dir for --analyze-only convenience
     output_dir = DATA_ROOT / args.competitor
     output_dir.mkdir(parents=True, exist_ok=True)
 
     if args.analyze_only:
-        logger.info("--analyze-only: loading cached raw data")
+        logger.info("--analyze-only: loading cached raw data from %s", output_dir)
         scraped = load_cached_raw(output_dir)
     else:
-        scraped = run_scrapers(output_dir)
+        scraped = run_scrapers(run_dir)
+        # Also write to the flat competitor dir so --analyze-only always finds latest
+        for key, filename in RAW_FILE_MAP.items():
+            src = run_dir / filename
+            if src.exists():
+                (output_dir / filename).write_bytes(src.read_bytes())
 
     if args.scrape_only:
-        print("\nScrape complete. Raw data saved to:", output_dir)
+        print("\nScrape complete. Raw data saved to:", run_dir)
         for key, filename in RAW_FILE_MAP.items():
-            path = output_dir / filename
+            path = run_dir / filename
             if path.exists():
                 pages = json.loads(path.read_text()).get("pages", [])
                 ok = sum(1 for p in pages if not p["content"].startswith("ERROR"))
                 print(f"  {key}: {ok}/{len(pages)} pages scraped successfully")
         return
-
-    report_date = date.today().isoformat()
     logger.info("=== Running analysis (date: %s) ===", report_date)
     report = summarize.run(output_dir, scraped, report_date)
 
