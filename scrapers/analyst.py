@@ -23,8 +23,8 @@ URLS = [
     "https://www.forrester.com/blogs/",
     # OpenText leadership page — signals strategic direction when IDC/analyst pages are paywalled
     "https://www.opentext.com/about/leadership",
-    # OpenText resource library — surfaces publicly cited analyst report callouts
-    "https://www.opentext.com/resources/analyst-reports",
+    # OpenText newsroom — press releases citing analyst recognition (replaces 404 analyst-reports page)
+    "https://www.opentext.com/about/news",
 ]
 
 

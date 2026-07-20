@@ -17,8 +17,8 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "opentext"
 
 URLS = [
-    # Capterra — OpenText ALM/Quality Center (less aggressive bot blocking than G2)
-    "https://www.capterra.com/p/37903/ALM-Quality-Center/",
+    # GetApp — OpenText ALM/Quality Center reviews (Capterra sister site, less aggressive bot blocking)
+    "https://www.getapp.com/it-management-software/a/alm-quality-center/reviews/",
     # PeerSpot — OpenText ValueEdge reviews (formerly ITCentral Station)
     "https://www.peerspot.com/products/opentext-valueedge-reviews",
     # PeerSpot — UFT One reviews (100+ detailed reviews with pros/cons)
