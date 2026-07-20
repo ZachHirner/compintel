@@ -7,8 +7,7 @@ if [ "${CLAUDE_CODE_REMOTE:-}" != "true" ]; then
 fi
 
 echo "Installing compintel dependencies..."
-# SETUPTOOLS_USE_DISTUTILS=stdlib required for undetected-chromedriver's legacy setup.py
-SETUPTOOLS_USE_DISTUTILS=stdlib pip install -r "$CLAUDE_PROJECT_DIR/requirements.txt"
+pip install -r "$CLAUDE_PROJECT_DIR/requirements.txt"
 
 # Make scrapers and analysis importable from project root
 echo "export PYTHONPATH=\"$CLAUDE_PROJECT_DIR\"" >> "$CLAUDE_ENV_FILE"

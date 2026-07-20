@@ -1,10 +1,13 @@
 """
 Shared browser driver and scraping utilities for all CI scrapers.
+Uses plain Selenium with the Chrome binary available on the GitHub Actions runner.
 """
 import time
 import logging
 from bs4 import BeautifulSoup
-import undetected_chromedriver as uc
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 
 logger = logging.getLogger(__name__)
 
@@ -12,18 +15,19 @@ _DEFAULT_WAIT = 6
 _DEFAULT_CHAR_LIMIT = 25_000
 
 
-def _build_driver() -> uc.Chrome:
-    options = uc.ChromeOptions()
+def _build_driver() -> webdriver.Chrome:
+    options = Options()
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-gpu")
+    options.add_argument("--window-size=1920,1080")
     options.add_argument(
         "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     )
-    # version_main must match the Chrome binary on the runner (currently 150)
-    return uc.Chrome(options=options, use_subprocess=True, version_main=150)
+    # Use ChromeDriver from PATH (pre-installed on GitHub Actions ubuntu runners)
+    return webdriver.Chrome(options=options)
 
 
 def scrape_site(url: str, wait: int = _DEFAULT_WAIT, char_limit: int = _DEFAULT_CHAR_LIMIT) -> str:

@@ -1,0 +1,79 @@
+name: Competitive Intelligence Scrape
+
+on:
+  schedule:
+    # Every Monday at 7am UTC (start of the work week)
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+    inputs:
+      competitor:
+        description: "Competitor slug to scrape"
+        required: false
+        default: "opentext"
+      analyze_only:
+        description: "Skip scraping, re-analyze cached data only"
+        required: false
+        default: "false"
+        type: choice
+        options: ["false", "true"]
+
+jobs:
+  scrape-and-analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Set up Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Run CI pipeline
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          COMPETITOR="${{ github.event.inputs.competitor || 'opentext' }}"
+          ANALYZE_ONLY="${{ github.event.inputs.analyze_only || 'false' }}"
+
+          if [ "$ANALYZE_ONLY" = "true" ]; then
+            python main.py --competitor "$COMPETITOR" --analyze-only
+          else
+            python main.py --competitor "$COMPETITOR"
+          fi
+
+      - name: Upload raw scrape data
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ci-raw-data-${{ github.event.inputs.competitor || 'opentext' }}-${{ github.run_id }}
+          path: data/
+          retention-days: 30
+
+      - name: Commit CI report to repo
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          COMPETITOR="${{ github.event.inputs.competitor || 'opentext' }}"
+          REPORT_PATH="data/$COMPETITOR/ci_report.json"
+
+          if [ -f "$REPORT_PATH" ]; then
+            git add "$REPORT_PATH"
+            git diff --staged --quiet || git commit -m "chore: update $COMPETITOR CI report [$(date -u +%Y-%m-%d)]"
+            git push
+          else
+            echo "No report file found at $REPORT_PATH, skipping commit"
+          fi
