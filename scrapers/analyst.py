@@ -16,15 +16,15 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "opentext"
 
 URLS = [
-    # Gartner Peer Insights — OpenText vendor profile (public)
+    # Gartner Peer Insights — OpenText vendor profiles (public)
     "https://www.gartner.com/reviews/market/devops-platforms/vendor/opentext",
     "https://www.gartner.com/reviews/market/software-test-automation/vendor/opentext",
-    # Forrester vendor profile page
-    "https://www.forrester.com/vendor-profile/opentext-corp--VID1152",
-    # IDC vendor page
-    "https://www.idc.com/vendor/opentext",
-    # OpenText's own analyst-relations page (reveals which quadrants they cite)
-    "https://www.opentext.com/about/analyst-relations",
+    # Forrester public blog — vendor profile pages are login-walled
+    "https://www.forrester.com/blogs/",
+    # OpenText leadership page — signals strategic direction when IDC/analyst pages are paywalled
+    "https://www.opentext.com/about/leadership",
+    # OpenText resource library — surfaces publicly cited analyst report callouts
+    "https://www.opentext.com/resources/analyst-reports",
 ]
 
 

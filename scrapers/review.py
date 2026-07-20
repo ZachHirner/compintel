@@ -17,15 +17,15 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "opentext"
 
 URLS = [
-    # G2 — OpenText ALM / Quality Center
-    "https://www.g2.com/products/opentext-alm-quality-center/reviews",
-    # G2 — OpenText ValueEdge (formerly Micro Focus)
-    "https://www.g2.com/products/opentext-valueedge/reviews",
-    # G2 — OpenText UFT One (test automation)
-    "https://www.g2.com/products/micro-focus-uft-one/reviews",
-    # TrustRadius — OpenText ALM
+    # Capterra — OpenText ALM/Quality Center (less aggressive bot blocking than G2)
+    "https://www.capterra.com/p/37903/ALM-Quality-Center/",
+    # PeerSpot — OpenText ValueEdge reviews (formerly ITCentral Station)
+    "https://www.peerspot.com/products/opentext-valueedge-reviews",
+    # PeerSpot — UFT One reviews (100+ detailed reviews with pros/cons)
+    "https://www.peerspot.com/products/micro-focus-uft-one-reviews",
+    # TrustRadius — OpenText ALM (confirmed working)
     "https://www.trustradius.com/products/opentext-alm-quality-center/reviews",
-    # Gartner Peer Insights reviews (public summaries)
+    # Gartner Peer Insights — UFT One reviews (confirmed working)
     "https://www.gartner.com/reviews/market/software-test-automation/vendor/opentext/product/opentext-uft-one",
 ]
 
