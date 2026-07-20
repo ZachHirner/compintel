@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+# Ignore raw scrape dumps but track the final CI reports
+data/*/*_raw.json
+.env
