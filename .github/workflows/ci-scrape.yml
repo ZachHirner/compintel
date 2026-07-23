@@ -33,11 +33,6 @@ jobs:
         competitor: [opentext, playwright, uipath, accelq, keysight]
       fail-fast: false
     runs-on: ubuntu-latest
-    # When a specific competitor is provided via workflow_dispatch, skip all others.
-    if: >
-      github.event_name != 'workflow_dispatch' ||
-      github.event.inputs.competitor == '' ||
-      github.event.inputs.competitor == matrix.competitor
 
     steps:
       - name: Checkout
@@ -63,8 +58,15 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}
         run: |
           COMPETITOR="${{ matrix.competitor }}"
+          REQUESTED="${{ github.event.inputs.competitor }}"
           SCRAPE_ONLY="${{ github.event.inputs.scrape_only || 'false' }}"
           ANALYZE_ONLY="${{ github.event.inputs.analyze_only || 'false' }}"
+
+          # If a specific competitor was requested, skip all others
+          if [ -n "$REQUESTED" ] && [ "$REQUESTED" != "$COMPETITOR" ]; then
+            echo "Skipping $COMPETITOR (only running $REQUESTED)"
+            exit 0
+          fi
 
           ARGS="--competitor $COMPETITOR"
           [ "$SCRAPE_ONLY" = "true" ]  && ARGS="$ARGS --scrape-only"
