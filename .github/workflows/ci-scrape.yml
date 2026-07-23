@@ -90,10 +90,11 @@ jobs:
 
           COMPETITOR="${{ matrix.competitor }}"
           RUN_DATE="$(date -u +%Y-%m-%d)"
-          RAW_DIR="data/$COMPETITOR/$RUN_DATE"
+          RUN_TIME="$(date -u +%H%M%S)"
+          RAW_DIR="data/$COMPETITOR/$RUN_DATE/$RUN_TIME"
           REPORT_PATH="data/$COMPETITOR/ci_report.json"
 
-          # Stage datestamped raw files (tracked via .gitignore negation rule)
+          # Stage timestamped run folder (tracked via .gitignore negation rule)
           if [ -d "$RAW_DIR" ]; then
             git add "$RAW_DIR/"
           fi
