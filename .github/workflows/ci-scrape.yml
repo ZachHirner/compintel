@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       competitor:
-        description: "Competitor slug to scrape"
+        description: "Run a specific competitor only (leave blank to run all)"
         required: false
-        default: "opentext"
+        default: ""
       scrape_only:
         description: "Scrape only, skip analysis (no API key needed)"
         required: false
@@ -28,7 +28,16 @@ permissions:
 
 jobs:
   scrape-and-analyze:
+    strategy:
+      matrix:
+        competitor: [opentext, playwright, uipath, accelq, keysight]
+      fail-fast: false
     runs-on: ubuntu-latest
+    # When a specific competitor is provided via workflow_dispatch, skip all others.
+    if: >
+      github.event_name != 'workflow_dispatch' ||
+      github.event.inputs.competitor == '' ||
+      github.event.inputs.competitor == matrix.competitor
 
     steps:
       - name: Checkout
@@ -53,7 +62,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          COMPETITOR="${{ github.event.inputs.competitor || 'opentext' }}"
+          COMPETITOR="${{ matrix.competitor }}"
           SCRAPE_ONLY="${{ github.event.inputs.scrape_only || 'false' }}"
           ANALYZE_ONLY="${{ github.event.inputs.analyze_only || 'false' }}"
 
@@ -67,7 +76,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: ci-raw-data-${{ github.event.inputs.competitor || 'opentext' }}-${{ github.run_id }}
+          name: ci-raw-data-${{ matrix.competitor }}-${{ github.run_id }}
           path: data/
           retention-days: 30
 
@@ -77,7 +86,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          COMPETITOR="${{ github.event.inputs.competitor || 'opentext' }}"
+          COMPETITOR="${{ matrix.competitor }}"
           RUN_DATE="$(date -u +%Y-%m-%d)"
           RAW_DIR="data/$COMPETITOR/$RUN_DATE"
           REPORT_PATH="data/$COMPETITOR/ci_report.json"
