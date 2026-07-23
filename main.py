@@ -86,10 +86,13 @@ def main():
     parser.add_argument("--analyze-only", action="store_true", help="Skip scraping; use cached raw data")
     args = parser.parse_args()
 
-    report_date = date.today().isoformat()
+    from datetime import datetime
+    now = datetime.utcnow()
+    report_date = now.strftime("%Y-%m-%d")
+    run_timestamp = now.strftime("%H%M%S")
 
-    # Datestamped subdirectory preserves each run's raw data historically
-    run_dir = DATA_ROOT / args.competitor / report_date
+    # data/<competitor>/YYYY-MM-DD/HHMMSS/ — unique folder per run
+    run_dir = DATA_ROOT / args.competitor / report_date / run_timestamp
     run_dir.mkdir(parents=True, exist_ok=True)
 
     # Latest symlink/alias dir for --analyze-only convenience

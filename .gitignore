@@ -1,6 +1,6 @@
 __pycache__/
 *.pyc
-# Raw dumps in the root competitor dir are transient; datestamped runs are tracked
+# Raw dumps in the root competitor dir are transient; timestamped runs are tracked
 data/*/*_raw.json
-!data/*/*/*_raw.json
+!data/*/*/*/*_raw.json
 .env
