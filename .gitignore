@@ -1,6 +1,10 @@
 __pycache__/
 *.pyc
-# Raw dumps in the root competitor dir are transient; timestamped runs are tracked
-data/*/*_raw.json
-!data/*/*/*/*_raw.json
+# Only ignore flat raw files in the competitor root (transient latest-run copies)
+# Timestamped run folders (data/<competitor>/YYYY-MM-DD/HHMMSS/) are tracked
+data/opentext/*_raw.json
+data/playwright/*_raw.json
+data/uipath/*_raw.json
+data/accelq/*_raw.json
+data/keysight/*_raw.json
 .env
