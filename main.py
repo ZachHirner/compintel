@@ -2,22 +2,24 @@
 Competitive Intelligence orchestrator.
 
 Usage:
-    python main.py                     # scrape all sources + generate report
-    python main.py --scrape-only       # scrape only, skip analysis (no API key needed)
-    python main.py --analyze-only      # skip scraping, re-analyze cached raw data
-    python main.py --competitor opentext  # explicit competitor (default: opentext)
+    python main.py                          # scrape all sources + generate report
+    python main.py --scrape-only            # scrape only, skip analysis (no API key needed)
+    python main.py --analyze-only           # skip scraping, re-analyze cached raw data
+    python main.py --competitor opentext    # explicit competitor (default: opentext)
+
+Supported competitors: opentext, playwright, uipath, accelq, keysight
 
 Environment variables:
     ANTHROPIC_API_KEY  — required for the analysis step
 """
 import argparse
+import importlib
 import json
 import logging
 import sys
 from datetime import date
 from pathlib import Path
 
-from scrapers import competitor, social_media, analyst, review
 from analysis import summarize
 
 logging.basicConfig(
@@ -29,12 +31,7 @@ logger = logging.getLogger(__name__)
 
 DATA_ROOT = Path("data")
 
-SCRAPER_MAP = {
-    "competitor": competitor,
-    "social_media": social_media,
-    "analyst": analyst,
-    "review": review,
-}
+SUPPORTED_COMPETITORS = ["opentext", "playwright", "uipath", "accelq", "keysight"]
 
 RAW_FILE_MAP = {
     "competitor": "competitor_raw.json",
@@ -44,9 +41,17 @@ RAW_FILE_MAP = {
 }
 
 
-def run_scrapers(output_dir: Path) -> dict[str, dict]:
+def load_scraper_modules(competitor: str) -> dict:
+    """Dynamically import the four scraper modules for the given competitor."""
+    return {
+        key: importlib.import_module(f"scrapers.{competitor}.{key}")
+        for key in ["competitor", "social_media", "analyst", "review"]
+    }
+
+
+def run_scrapers(output_dir: Path, scraper_modules: dict) -> dict[str, dict]:
     results = {}
-    for key, module in SCRAPER_MAP.items():
+    for key, module in scraper_modules.items():
         logger.info("=== Running %s scraper ===", key)
         try:
             results[key] = module.run(output_dir)
@@ -71,7 +76,12 @@ def load_cached_raw(output_dir: Path) -> dict[str, dict]:
 
 def main():
     parser = argparse.ArgumentParser(description="Competitive Intelligence runner")
-    parser.add_argument("--competitor", default="opentext", help="Competitor slug (default: opentext)")
+    parser.add_argument(
+        "--competitor",
+        default="opentext",
+        choices=SUPPORTED_COMPETITORS,
+        help=f"Competitor slug (default: opentext). One of: {', '.join(SUPPORTED_COMPETITORS)}",
+    )
     parser.add_argument("--scrape-only", action="store_true", help="Scrape only; skip analysis (no API key needed)")
     parser.add_argument("--analyze-only", action="store_true", help="Skip scraping; use cached raw data")
     args = parser.parse_args()
@@ -90,7 +100,8 @@ def main():
         logger.info("--analyze-only: loading cached raw data from %s", output_dir)
         scraped = load_cached_raw(output_dir)
     else:
-        scraped = run_scrapers(run_dir)
+        scraper_modules = load_scraper_modules(args.competitor)
+        scraped = run_scrapers(run_dir, scraper_modules)
         # Also write to the flat competitor dir so --analyze-only always finds latest
         for key, filename in RAW_FILE_MAP.items():
             src = run_dir / filename
@@ -106,6 +117,7 @@ def main():
                 ok = sum(1 for p in pages if not p["content"].startswith("ERROR"))
                 print(f"  {key}: {ok}/{len(pages)} pages scraped successfully")
         return
+
     logger.info("=== Running analysis (date: %s) ===", report_date)
     report = summarize.run(output_dir, scraped, report_date)
 
