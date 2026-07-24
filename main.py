@@ -87,11 +87,12 @@ def main():
     args = parser.parse_args()
 
     from datetime import datetime
-    now = datetime.utcnow()
+    import zoneinfo
+    now = datetime.now(tz=zoneinfo.ZoneInfo("America/Chicago"))
     report_date = now.strftime("%Y-%m-%d")
-    run_timestamp = now.strftime("%H%M%S")
+    run_timestamp = now.strftime("%H-%M-%S")
 
-    # data/<competitor>/YYYY-MM-DD/HHMMSS/ — unique folder per run
+    # data/<competitor>/YYYY-MM-DD/HH-MM-SS/ — unique folder per run, Central Time
     run_dir = DATA_ROOT / args.competitor / report_date / run_timestamp
     run_dir.mkdir(parents=True, exist_ok=True)
 

@@ -89,15 +89,11 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           COMPETITOR="${{ matrix.competitor }}"
-          RUN_DATE="$(date -u +%Y-%m-%d)"
-          RUN_TIME="$(date -u +%H%M%S)"
-          RAW_DIR="data/$COMPETITOR/$RUN_DATE/$RUN_TIME"
+          RUN_DATE="$(TZ='America/Chicago' date +%Y-%m-%d)"
           REPORT_PATH="data/$COMPETITOR/ci_report.json"
 
-          # Stage timestamped run folder (tracked via .gitignore negation rule)
-          if [ -d "$RAW_DIR" ]; then
-            git add "$RAW_DIR/"
-          fi
+          # Stage everything new under this competitor's data folder
+          git add "data/$COMPETITOR/"
 
           # Stage CI report if present (scrape-only runs won't have one)
           if [ -f "$REPORT_PATH" ]; then
