@@ -1,13 +1,13 @@
 """
 Shared browser driver and scraping utilities for all CI scrapers.
-Uses plain Selenium with the Chrome binary available on the GitHub Actions runner.
+Uses Selenium with stealth patches to avoid bot detection.
 """
 import time
 import logging
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
+from selenium_stealth import stealth
 
 logger = logging.getLogger(__name__)
 
@@ -17,23 +17,34 @@ _DEFAULT_CHAR_LIMIT = 25_000
 
 def _build_driver() -> webdriver.Chrome:
     options = Options()
-    options.add_argument("--headless")
+    options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-gpu")
     options.add_argument("--window-size=1920,1080")
-    options.add_argument(
-        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option("useAutomationExtension", False)
+
+    driver = webdriver.Chrome(options=options)
+
+    stealth(
+        driver,
+        languages=["en-US", "en"],
+        vendor="Google Inc.",
+        platform="Win32",
+        webgl_vendor="Intel Inc.",
+        renderer="Intel Iris OpenGL Engine",
+        fix_hairline=True,
     )
-    # Use ChromeDriver from PATH (pre-installed on GitHub Actions ubuntu runners)
-    return webdriver.Chrome(options=options)
+
+    return driver
 
 
 def scrape_site(url: str, wait: int = _DEFAULT_WAIT, char_limit: int = _DEFAULT_CHAR_LIMIT) -> str:
     """
-    Load *url* in a headless Chrome instance, wait for JS to render,
-    strip scripts/styles, and return plain text up to *char_limit* chars.
+    Load *url* in a Chrome instance with stealth patches applied,
+    wait for JS to render, strip scripts/styles, and return plain text.
     """
     driver = _build_driver()
     try:
