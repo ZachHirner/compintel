@@ -18,14 +18,12 @@ COMPETITOR = "keysight"
 URLS = [
     # Forrester blog — AI-driven and model-based test automation coverage
     "https://www.forrester.com/blogs/",
-    # Keysight newsroom — press releases with analyst mentions
-    "https://www.keysight.com/us/en/about/newsroom/press-releases.html",
-    # Capterra — Eggplant reviews
-    "https://www.capterra.com/p/131233/Eggplant/",
-    # SlashDot — Eggplant reviews
-    "https://slashdot.org/software/p/Eggplant/",
-    # Eggplant resources — whitepapers and analyst-adjacent content
-    "https://www.eggplantsoftware.com/resources",
+    # Keysight news releases (current working URL)
+    "https://www.keysight.com/us/en/about/newsroom/news-releases.html",
+    # Eggplant blog — product and market positioning content
+    "https://www.eggplantsoftware.com/blog",
+    # Reddit — r/softwaretesting Eggplant/Keysight mentions
+    "https://www.reddit.com/r/softwaretesting/search/?q=eggplant+keysight&sort=new",
 ]
 
 

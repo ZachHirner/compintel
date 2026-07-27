@@ -18,10 +18,10 @@ URLS = [
     "https://www.accelq.com/",
     # Product overview — codeless AI-powered automation pitch
     "https://www.accelq.com/platform/",
-    # Features page — detailed capability listing
-    "https://www.accelq.com/features/",
-    # Integrations — CI/CD and tool ecosystem signals
-    "https://www.accelq.com/integrations/",
+    # Autopilot AI feature page
+    "https://www.accelq.com/accelq-autopilot/",
+    # Pricing page — signals market positioning
+    "https://www.accelq.com/pricing/",
     # Resources / newsroom — recent announcements and positioning shifts
     "https://www.accelq.com/resources/",
 ]

@@ -23,10 +23,8 @@ URLS = [
     "https://www.peerspot.com/products/micro-focus-uft-one-reviews",
     # TrustRadius — OpenText ALM
     "https://www.trustradius.com/products/opentext-alm-quality-center/reviews",
-    # Capterra — OpenText ALM reviews
-    "https://www.capterra.com/p/68228/HP-ALM/",
-    # Capterra — UFT One reviews
-    "https://www.capterra.com/p/207594/UFT-One/",
+    # TrustRadius — UFT One reviews
+    "https://www.trustradius.com/products/opentext-uft-one/reviews",
 ]
 
 

@@ -19,7 +19,7 @@ URLS = [
     # GitHub repo — stars, issues, contributor activity, README positioning
     "https://github.com/microsoft/playwright",
     # GitHub discussions — community pain points and feature requests
-    "https://github.com/microsoft/playwright/discussions",
+    "https://github.com/microsoft/playwright/blob/main/CHANGELOG.md",
     # Microsoft LinkedIn — company-level promotion of Playwright
     "https://www.linkedin.com/company/microsoft/",
     # YouTube playlist — official Playwright demo and tutorial videos

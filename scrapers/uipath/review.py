@@ -22,10 +22,8 @@ URLS = [
     "https://www.peerspot.com/products/uipath-reviews",
     # TrustRadius — UiPath reviews
     "https://www.trustradius.com/products/uipath/reviews",
-    # Capterra — UiPath reviews
-    "https://www.capterra.com/p/155035/UiPath/",
-    # SlashDot — UiPath reviews
-    "https://slashdot.org/software/p/UiPath/",
+    # Reddit — r/UiPath community sentiment
+    "https://www.reddit.com/r/uipath/search/?q=test+automation&sort=new",
 ]
 
 

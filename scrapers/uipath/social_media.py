@@ -21,7 +21,7 @@ URLS = [
     # UiPath blog — content strategy signals product focus areas
     "https://www.uipath.com/blog",
     # Blog category: testing — most relevant posts for competitive intel
-    "https://www.uipath.com/blog/testing",
+    "https://www.uipath.com/blog/tag/test-automation",
     # YouTube channel — demo and product announcement videos
     "https://www.youtube.com/@UiPath",
 ]
