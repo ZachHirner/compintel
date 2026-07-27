@@ -15,14 +15,16 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "uipath"
 
 URLS = [
-    # Gartner Peer Insights — UiPath in Software Test Automation market
-    "https://www.gartner.com/reviews/market/software-test-automation/vendor/uipath",
-    # Gartner Peer Insights — UiPath in Robotic Process Automation market (adjacent)
-    "https://www.gartner.com/reviews/market/robotic-process-automation/vendor/uipath",
     # Forrester blog — vendor profile and Wave coverage mentions
     "https://www.forrester.com/blogs/",
-    # UiPath analyst relations page — links to public analyst recognitions
-    "https://www.uipath.com/company/analyst-recognition",
+    # UiPath newsroom — press releases with analyst mentions
+    "https://www.uipath.com/newsroom",
+    # Capterra — UiPath reviews
+    "https://www.capterra.com/p/155035/UiPath/",
+    # SlashDot — UiPath reviews
+    "https://slashdot.org/software/p/UiPath/",
+    # IDC MarketScape mentions via UiPath blog
+    "https://www.uipath.com/blog/automation/analyst-reports",
 ]
 
 

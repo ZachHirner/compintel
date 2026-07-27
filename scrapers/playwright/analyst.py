@@ -15,14 +15,16 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "playwright"
 
 URLS = [
-    # Gartner Peer Insights — Playwright vendor profile in Software Test Automation
-    "https://www.gartner.com/reviews/market/software-test-automation/vendor/microsoft/product/playwright",
-    # Gartner Peer Insights — broader Software Test Automation market overview
-    "https://www.gartner.com/reviews/market/software-test-automation",
-    # Forrester blog — search for any Playwright or open-source test automation coverage
+    # Forrester blog — open-source test automation coverage
     "https://www.forrester.com/blogs/",
     # Playwright changelog / announcements — signals strategic direction
     "https://playwright.dev/docs/release-notes",
+    # Playwright GitHub issues — community pain points and feature requests
+    "https://github.com/microsoft/playwright/issues?q=is%3Aissue+is%3Aopen+sort%3Acomments-desc",
+    # Capterra — Playwright reviews
+    "https://www.capterra.com/p/10003683/Playwright/",
+    # SlashDot — Playwright reviews
+    "https://slashdot.org/software/p/Playwright/",
 ]
 
 

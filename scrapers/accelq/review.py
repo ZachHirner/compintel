@@ -18,8 +18,10 @@ URLS = [
     "https://www.peerspot.com/products/accelq-reviews",
     # TrustRadius — AccelQ user reviews
     "https://www.trustradius.com/products/accelq/reviews",
-    # Gartner Peer Insights — AccelQ reviews in Software Test Automation
-    "https://www.gartner.com/reviews/market/software-test-automation/vendor/accelq",
+    # Capterra — AccelQ reviews
+    "https://www.capterra.com/p/10008848/ACCELQ/",
+    # SlashDot — AccelQ reviews
+    "https://slashdot.org/software/p/ACCELQ/",
 ]
 
 

@@ -16,14 +16,16 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "keysight"
 
 URLS = [
-    # Gartner Peer Insights — Keysight (Eggplant) in Software Test Automation
-    "https://www.gartner.com/reviews/market/software-test-automation/vendor/keysight",
-    # Gartner Peer Insights — Eggplant product profile
-    "https://www.gartner.com/reviews/market/software-test-automation/vendor/keysight/product/eggplant-test",
-    # Forrester blog — any coverage of AI-driven or model-based test automation
+    # Forrester blog — AI-driven and model-based test automation coverage
     "https://www.forrester.com/blogs/",
-    # Keysight analyst relations — links to public recognitions
-    "https://www.keysight.com/us/en/about/analyst-relations.html",
+    # Keysight newsroom — press releases with analyst mentions
+    "https://www.keysight.com/us/en/about/newsroom/press-releases.html",
+    # Capterra — Eggplant reviews
+    "https://www.capterra.com/p/131233/Eggplant/",
+    # SlashDot — Eggplant reviews
+    "https://slashdot.org/software/p/Eggplant/",
+    # Eggplant resources — whitepapers and analyst-adjacent content
+    "https://www.eggplantsoftware.com/resources",
 ]
 
 

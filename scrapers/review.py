@@ -25,8 +25,8 @@ URLS = [
     "https://www.peerspot.com/products/micro-focus-uft-one-reviews",
     # TrustRadius — OpenText ALM (confirmed working)
     "https://www.trustradius.com/products/opentext-alm-quality-center/reviews",
-    # Gartner Peer Insights — UFT One reviews (confirmed working)
-    "https://www.gartner.com/reviews/market/software-test-automation/vendor/opentext/product/opentext-uft-one",
+    # Capterra — UFT One reviews
+    "https://www.capterra.com/p/207594/UFT-One/",
 ]
 
 

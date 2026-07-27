@@ -17,16 +17,16 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "opentext"
 
 URLS = [
-    # GetApp — OpenText ALM/Quality Center reviews (Capterra sister site, less aggressive bot blocking)
-    "https://www.getapp.com/it-management-software/a/alm-quality-center/reviews/",
-    # PeerSpot — OpenText ValueEdge reviews (formerly ITCentral Station)
+    # PeerSpot — OpenText ValueEdge reviews
     "https://www.peerspot.com/products/opentext-valueedge-reviews",
     # PeerSpot — UFT One reviews (100+ detailed reviews with pros/cons)
     "https://www.peerspot.com/products/micro-focus-uft-one-reviews",
-    # TrustRadius — OpenText ALM (confirmed working)
+    # TrustRadius — OpenText ALM
     "https://www.trustradius.com/products/opentext-alm-quality-center/reviews",
-    # Gartner Peer Insights — UFT One reviews (confirmed working)
-    "https://www.gartner.com/reviews/market/software-test-automation/vendor/opentext/product/opentext-uft-one",
+    # Capterra — OpenText ALM reviews
+    "https://www.capterra.com/p/68228/HP-ALM/",
+    # Capterra — UFT One reviews
+    "https://www.capterra.com/p/207594/UFT-One/",
 ]
 
 

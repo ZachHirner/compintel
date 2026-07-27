@@ -16,14 +16,16 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "accelq"
 
 URLS = [
-    # Gartner Peer Insights — AccelQ vendor profile in Software Test Automation
-    "https://www.gartner.com/reviews/market/software-test-automation/vendor/accelq",
-    # Gartner Peer Insights — broader Software Test Automation market
-    "https://www.gartner.com/reviews/market/software-test-automation",
-    # Forrester blog — any coverage of codeless/AI test automation
+    # Forrester blog — coverage of codeless/AI test automation
     "https://www.forrester.com/blogs/",
-    # AccelQ case studies — analyst-adjacent social proof signals
-    "https://www.accelq.com/case-studies/",
+    # AccelQ resources — whitepapers and analyst-adjacent content
+    "https://www.accelq.com/resources/",
+    # Capterra — AccelQ reviews
+    "https://www.capterra.com/p/10008848/ACCELQ/",
+    # SlashDot — AccelQ reviews
+    "https://slashdot.org/software/p/ACCELQ/",
+    # AccelQ newsroom / press page
+    "https://www.accelq.com/news/",
 ]
 
 
