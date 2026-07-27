@@ -9,7 +9,7 @@ posts mentioning Eggplant or Keysight software testing.
 import json
 import logging
 from pathlib import Path
-from scrapers.base import scrape_multiple
+from scrapers.base import scrape_multiple, zenrows_scrape_multiple
 
 logger = logging.getLogger(__name__)
 
@@ -28,8 +28,8 @@ URLS = [
 
 
 def run(output_dir: Path) -> dict:
-    logger.info("[analyst] Starting analyst page scrape for Keysight")
-    raw = scrape_multiple(URLS)
+    logger.info("[analyst] Starting analyst page scrape for Keysight (via Zenrows)")
+    raw = zenrows_scrape_multiple(URLS)
 
     output = {
         "source_type": "analyst_websites",

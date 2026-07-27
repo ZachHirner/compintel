@@ -8,7 +8,7 @@ test automation.
 import json
 import logging
 from pathlib import Path
-from scrapers.base import scrape_multiple
+from scrapers.base import scrape_multiple, zenrows_scrape_multiple
 
 logger = logging.getLogger(__name__)
 
@@ -29,8 +29,8 @@ URLS = [
 
 
 def run(output_dir: Path) -> dict:
-    logger.info("[competitor] Starting Keysight/Eggplant product page scrape")
-    raw = scrape_multiple(URLS)
+    logger.info("[competitor] Starting Keysight/Eggplant product page scrape (via Zenrows)")
+    raw = zenrows_scrape_multiple(URLS)
 
     output = {
         "source_type": "competitor_website",
