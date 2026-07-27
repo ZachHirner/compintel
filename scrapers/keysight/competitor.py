@@ -15,16 +15,16 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "keysight"
 
 URLS = [
-    # Eggplant product landing page (Keysight Software Testing)
-    "https://www.keysight.com/us/en/products/software-testing.html",
-    # Eggplant DAI — Digital Automation Intelligence (flagship product)
-    "https://www.keysight.com/us/en/products/software-testing/eggplant-test.html",
-    # Eggplant Manager — test management component
-    "https://www.keysight.com/us/en/products/software-testing/eggplant-manager.html",
-    # Software testing overview / hub page
-    "https://www.eggplantsoftware.com/",
-    # Newsroom — press releases and analyst recognition
-    "https://www.keysight.com/us/en/about/newsroom.html",
+    # Keysight software solutions hub (updated URL after Eggplant rebrand)
+    "https://www.keysight.com/us/en/solutions/software-test-and-simulation.html",
+    # Eggplant DAI product page (current URL)
+    "https://www.keysight.com/us/en/products/network-test/protocol-load-test/eggplant-digital-automation-intelligence.html",
+    # Keysight software testing overview
+    "https://www.keysight.com/us/en/home.html",
+    # Eggplant blog — product updates and positioning
+    "https://www.eggplantsoftware.com/blog",
+    # Keysight newsroom (current URL)
+    "https://www.keysight.com/us/en/about/newsroom/news-releases.html",
 ]
 
 

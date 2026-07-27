@@ -20,12 +20,10 @@ URLS = [
     "https://www.forrester.com/blogs/",
     # AccelQ resources — whitepapers and analyst-adjacent content
     "https://www.accelq.com/resources/",
-    # Capterra — AccelQ reviews
-    "https://www.capterra.com/p/10008848/ACCELQ/",
-    # SlashDot — AccelQ reviews
-    "https://slashdot.org/software/p/ACCELQ/",
-    # AccelQ newsroom / press page
-    "https://www.accelq.com/news/",
+    # AccelQ blog — product announcements and market positioning
+    "https://www.accelq.com/blog/",
+    # Reddit — r/softwaretesting AccelQ mentions
+    "https://www.reddit.com/r/softwaretesting/search/?q=accelq&sort=new",
 ]
 
 

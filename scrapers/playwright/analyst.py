@@ -21,10 +21,8 @@ URLS = [
     "https://playwright.dev/docs/release-notes",
     # Playwright GitHub issues — community pain points and feature requests
     "https://github.com/microsoft/playwright/issues?q=is%3Aissue+is%3Aopen+sort%3Acomments-desc",
-    # Capterra — Playwright reviews
-    "https://www.capterra.com/p/10003683/Playwright/",
-    # SlashDot — Playwright reviews
-    "https://slashdot.org/software/p/Playwright/",
+    # Microsoft DevBlogs — engineering announcements for Playwright
+    "https://devblogs.microsoft.com/search?term=playwright",
 ]
 
 

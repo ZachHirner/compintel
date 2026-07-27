@@ -20,12 +20,10 @@ URLS = [
     "https://www.forrester.com/blogs/",
     # OpenText leadership page — signals strategic direction
     "https://www.opentext.com/about/leadership",
-    # OpenText newsroom — press releases citing analyst recognition
+    # OpenText press releases — analyst recognition mentions
     "https://www.opentext.com/about/press-releases",
-    # IDC analyst coverage via OpenText press releases
-    "https://www.opentext.com/about/analyst-recognition",
-    # Capterra — OpenText ALM reviews (Gartner-owned, lighter bot protection)
-    "https://www.capterra.com/p/68228/HP-ALM/",
+    # OpenText partner ecosystem — signals integrations and market positioning
+    "https://www.opentext.com/partners",
 ]
 
 

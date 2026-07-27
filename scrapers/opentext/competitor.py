@@ -21,7 +21,7 @@ URLS = [
     "https://www.opentext.com/products/valueedge",
     "https://www.opentext.com/products/application-quality-management",
     # Newsroom — press releases reveal positioning shifts
-    "https://www.opentext.com/about/newsroom",
+    "https://www.opentext.com/about/press-releases",
 ]
 
 

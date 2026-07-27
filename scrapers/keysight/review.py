@@ -20,10 +20,8 @@ URLS = [
     "https://www.peerspot.com/products/eggplant-dai-reviews",
     # TrustRadius — Eggplant reviews
     "https://www.trustradius.com/products/eggplant/reviews",
-    # Capterra — Eggplant reviews
-    "https://www.capterra.com/p/131233/Eggplant/",
-    # SlashDot — Eggplant reviews
-    "https://slashdot.org/software/p/Eggplant/",
+    # Reddit — r/softwaretesting Eggplant sentiment
+    "https://www.reddit.com/r/softwaretesting/search/?q=eggplant&sort=new",
 ]
 
 

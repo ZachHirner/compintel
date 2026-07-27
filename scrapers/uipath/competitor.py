@@ -17,7 +17,7 @@ URLS = [
     # Test Suite product landing page
     "https://www.uipath.com/product/test-suite",
     # Test Manager — test management component
-    "https://www.uipath.com/product/test-suite/test-manager",
+    "https://docs.uipath.com/test-manager/automation-cloud/latest",
     # Studio — authoring environment for test automation
     "https://www.uipath.com/product/studio",
     # Platform overview — positions UiPath beyond RPA into end-to-end automation

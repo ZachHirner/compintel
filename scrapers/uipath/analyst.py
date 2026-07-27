@@ -19,12 +19,10 @@ URLS = [
     "https://www.forrester.com/blogs/",
     # UiPath newsroom — press releases with analyst mentions
     "https://www.uipath.com/newsroom",
-    # Capterra — UiPath reviews
-    "https://www.capterra.com/p/155035/UiPath/",
-    # SlashDot — UiPath reviews
-    "https://slashdot.org/software/p/UiPath/",
-    # IDC MarketScape mentions via UiPath blog
-    "https://www.uipath.com/blog/automation/analyst-reports",
+    # UiPath resources — whitepapers and analyst content
+    "https://www.uipath.com/resources/analyst-reports",
+    # UiPath company overview — positioning signals
+    "https://www.uipath.com/company/about-us",
 ]
 
 

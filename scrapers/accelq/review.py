@@ -18,10 +18,8 @@ URLS = [
     "https://www.peerspot.com/products/accelq-reviews",
     # TrustRadius — AccelQ user reviews
     "https://www.trustradius.com/products/accelq/reviews",
-    # Capterra — AccelQ reviews
-    "https://www.capterra.com/p/10008848/ACCELQ/",
-    # SlashDot — AccelQ reviews
-    "https://slashdot.org/software/p/ACCELQ/",
+    # Reddit — r/softwaretesting AccelQ sentiment
+    "https://www.reddit.com/r/softwaretesting/search/?q=accelq&sort=new",
 ]
 
 
