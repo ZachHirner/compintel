@@ -22,8 +22,10 @@ URLS = [
     "https://www.peerspot.com/products/uipath-reviews",
     # TrustRadius — UiPath reviews
     "https://www.trustradius.com/products/uipath/reviews",
-    # Gartner Peer Insights — UiPath Test Suite reviews
-    "https://www.gartner.com/reviews/market/software-test-automation/vendor/uipath/product/uipath-test-suite",
+    # Capterra — UiPath reviews
+    "https://www.capterra.com/p/155035/UiPath/",
+    # SlashDot — UiPath reviews
+    "https://slashdot.org/software/p/UiPath/",
 ]
 
 

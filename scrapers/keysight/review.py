@@ -20,8 +20,10 @@ URLS = [
     "https://www.peerspot.com/products/eggplant-dai-reviews",
     # TrustRadius — Eggplant reviews
     "https://www.trustradius.com/products/eggplant/reviews",
-    # Gartner Peer Insights — Eggplant reviews in Software Test Automation
-    "https://www.gartner.com/reviews/market/software-test-automation/vendor/keysight/product/eggplant-test",
+    # Capterra — Eggplant reviews
+    "https://www.capterra.com/p/131233/Eggplant/",
+    # SlashDot — Eggplant reviews
+    "https://slashdot.org/software/p/Eggplant/",
 ]
 
 

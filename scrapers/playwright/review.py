@@ -20,8 +20,10 @@ URLS = [
     "https://www.peerspot.com/products/playwright-reviews",
     # TrustRadius — Playwright user reviews
     "https://www.trustradius.com/products/playwright/reviews",
-    # Gartner Peer Insights — Playwright reviews in Software Test Automation
-    "https://www.gartner.com/reviews/market/software-test-automation/vendor/microsoft/product/playwright",
+    # Capterra — Playwright reviews
+    "https://www.capterra.com/p/10003683/Playwright/",
+    # SlashDot — Playwright reviews
+    "https://slashdot.org/software/p/Playwright/",
 ]
 
 
