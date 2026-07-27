@@ -61,6 +61,7 @@ jobs:
       - name: Run CI pipeline
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ZENROWS_API_KEY: ${{ secrets.ZENROWS_API_KEY }}
           PYTHONPATH: ${{ github.workspace }}
         run: |
           COMPETITOR="${{ matrix.competitor }}"

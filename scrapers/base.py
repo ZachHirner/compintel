@@ -1,9 +1,12 @@
 """
 Shared browser driver and scraping utilities for all CI scrapers.
 Uses Selenium with stealth patches to avoid bot detection.
+Zenrows proxy is available for sites that block datacenter IPs.
 """
+import os
 import time
 import logging
+import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -39,6 +42,47 @@ def _build_driver() -> webdriver.Chrome:
     )
 
     return driver
+
+
+def zenrows_scrape_multiple(urls: list[str], char_limit: int = _DEFAULT_CHAR_LIMIT) -> dict[str, str]:
+    """
+    Scrape a list of URLs via the Zenrows residential proxy API.
+    Use this for sites that block GitHub Actions datacenter IPs (e.g. Keysight).
+    Requires ZENROWS_API_KEY environment variable.
+    Returns {url: text_content}.
+    """
+    api_key = os.environ.get("ZENROWS_API_KEY", "")
+    if not api_key:
+        logger.warning("ZENROWS_API_KEY not set — skipping Zenrows scrape")
+        return {url: "ERROR: ZENROWS_API_KEY not configured" for url in urls}
+
+    results: dict[str, str] = {}
+    for url in urls:
+        try:
+            logger.info("Fetching via Zenrows: %s", url)
+            resp = requests.get(
+                "https://api.zenrows.com/v1/",
+                params={
+                    "apikey": api_key,
+                    "url": url,
+                    "js_render": "true",
+                    "wait": "3000",
+                },
+                timeout=60,
+            )
+            if resp.status_code == 200:
+                soup = BeautifulSoup(resp.text, "html.parser")
+                for tag in soup(["script", "style", "noscript", "svg"]):
+                    tag.decompose()
+                text = soup.get_text(separator="\n", strip=True)
+                results[url] = text[:char_limit]
+            else:
+                logger.warning("Zenrows returned %s for %s", resp.status_code, url)
+                results[url] = f"ERROR: Zenrows HTTP {resp.status_code}"
+        except Exception as exc:
+            logger.warning("Zenrows failed for %s: %s", url, exc)
+            results[url] = f"ERROR: {exc}"
+    return results
 
 
 def scrape_site(url: str, wait: int = _DEFAULT_WAIT, char_limit: int = _DEFAULT_CHAR_LIMIT) -> str:
