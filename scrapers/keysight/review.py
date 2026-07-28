@@ -16,12 +16,7 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "keysight"
 
 URLS = [
-    # PeerSpot — Eggplant DAI reviews with detailed pros/cons
-    "https://www.peerspot.com/products/eggplant-dai-reviews",
-    # TrustRadius — Eggplant reviews
-    "https://www.trustradius.com/products/eggplant/reviews",
-    # Reddit — r/softwaretesting Eggplant sentiment
-    "https://www.reddit.com/r/softwaretesting/search/?q=eggplant&sort=new",
+    "https://www.peerspot.com/vendors/keysight-technologies#vendor-productlist-section",
 ]
 
 
