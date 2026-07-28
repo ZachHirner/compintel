@@ -16,14 +16,10 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "keysight"
 
 URLS = [
-    # LinkedIn — Keysight Technologies company page
-    "https://www.linkedin.com/company/keysight-technologies/",
-    # LinkedIn Jobs — signals hiring direction
-    "https://www.linkedin.com/company/keysight-technologies/jobs/",
-    # Keysight blog
-    "https://www.keysight.com/us/en/about/keysight-blog.html",
-    # YouTube — Keysight demos and webinars
-    "https://www.youtube.com/@KeysightTech",
+    "https://www.linkedin.com/company/keysight-technologies?trk=nav_type_overview",
+    "https://www.linkedin.com/company/keysight-technologies/jobs?trk=nav_type_jobs",
+    "https://www.keysight.com/blogs/en/",
+    "https://www.youtube.com/@keysight",
 ]
 
 
