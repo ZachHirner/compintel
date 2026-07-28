@@ -17,13 +17,13 @@ URLS = [
     # Homepage
     "https://www.accelq.com/",
     # Web automation
-    "https://www.accelq.com/web-automation-testing/",
+    "https://www.accelq.com/products/test-automation-web/",
     # Mobile automation
-    "https://www.accelq.com/mobile-automation-testing/",
+    "https://www.accelq.com/products/test-automation-mobile/",
     # API automation
-    "https://www.accelq.com/api-automation-testing/",
+    "https://www.accelq.com/products/test-automation-api/",
     # Manual test management
-    "https://www.accelq.com/manual-test-management/",
+    "https://www.accelq.com/products/manual-test-management/",
     # Resources
     "https://www.accelq.com/resources/",
 ]
