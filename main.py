@@ -122,6 +122,12 @@ def main():
                 print(f"  {key}: {ok}/{len(pages)} pages scraped successfully")
         return
 
+    import os
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        logger.warning("ANTHROPIC_API_KEY not set — skipping analysis, scrape data saved.")
+        print("\nScrape complete (analysis skipped — no ANTHROPIC_API_KEY). Raw data saved to:", run_dir)
+        return
+
     logger.info("=== Running analysis (date: %s) ===", report_date)
     report = summarize.run(output_dir, scraped, report_date)
 
