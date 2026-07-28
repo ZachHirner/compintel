@@ -8,29 +8,29 @@ test automation.
 import json
 import logging
 from pathlib import Path
-from scrapers.base import scrape_multiple, zenrows_scrape_multiple
+from scrapers.base import scrape_multiple
 
 logger = logging.getLogger(__name__)
 
 COMPETITOR = "keysight"
 
 URLS = [
-    # Keysight software solutions hub (updated URL after Eggplant rebrand)
-    "https://www.keysight.com/us/en/solutions/software-test-and-simulation.html",
-    # Eggplant DAI product page (current URL)
+    # Eggplant DAI product page on Keysight
     "https://www.keysight.com/us/en/products/network-test/protocol-load-test/eggplant-digital-automation-intelligence.html",
-    # Keysight software testing overview
-    "https://www.keysight.com/us/en/home.html",
-    # Eggplant blog — product updates and positioning
-    "https://www.eggplantsoftware.com/blog",
-    # Keysight newsroom (current URL)
+    # Keysight software solutions overview
+    "https://www.keysight.com/us/en/solutions/software-test-and-simulation.html",
+    # GitHub — Eggplant open-source tooling and community signals
+    "https://github.com/eggplant",
+    # PeerSpot — Eggplant DAI reviews
+    "https://www.peerspot.com/products/eggplant-dai-reviews",
+    # Keysight newsroom
     "https://www.keysight.com/us/en/about/newsroom/news-releases.html",
 ]
 
 
 def run(output_dir: Path) -> dict:
-    logger.info("[competitor] Starting Keysight/Eggplant product page scrape (via Zenrows)")
-    raw = zenrows_scrape_multiple(URLS)
+    logger.info("[competitor] Starting Keysight/Eggplant product page scrape")
+    raw = scrape_multiple(URLS)
 
     output = {
         "source_type": "competitor_website",

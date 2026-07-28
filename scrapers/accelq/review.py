@@ -14,12 +14,8 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "accelq"
 
 URLS = [
-    # PeerSpot — AccelQ reviews with detailed pros/cons
-    "https://www.peerspot.com/products/accelq-reviews",
-    # TrustRadius — AccelQ user reviews
-    "https://www.trustradius.com/products/accelq/reviews",
-    # Reddit — r/softwaretesting AccelQ sentiment
-    "https://www.reddit.com/r/softwaretesting/search/?q=accelq&sort=new",
+    # PeerSpot — AccelQ reviews (anchor directly to reviews section)
+    "https://www.peerspot.com/products/accelq-reviews#reviews-container",
 ]
 
 

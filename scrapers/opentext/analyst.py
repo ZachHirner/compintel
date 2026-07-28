@@ -16,14 +16,8 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "opentext"
 
 URLS = [
-    # Forrester public blog — vendor profile pages are login-walled
-    "https://www.forrester.com/blogs/",
-    # OpenText leadership page — signals strategic direction
-    "https://www.opentext.com/about/leadership",
-    # OpenText press releases — analyst recognition mentions
-    "https://www.opentext.com/about/press-releases",
-    # OpenText partner ecosystem — signals integrations and market positioning
-    "https://www.opentext.com/partners",
+    # Forrester search — OpenText mentions in the last 30 days
+    "https://www.forrester.com/allSearch?query=OpenText&publishedSinceInDays=30",
 ]
 
 

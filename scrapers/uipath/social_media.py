@@ -16,13 +16,13 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "uipath"
 
 URLS = [
-    # LinkedIn public company page
+    # LinkedIn company overview
     "https://www.linkedin.com/company/uipath/",
-    # UiPath blog — content strategy signals product focus areas
+    # LinkedIn Jobs — signals hiring direction
+    "https://www.linkedin.com/company/uipath/jobs/",
+    # UiPath blog
     "https://www.uipath.com/blog",
-    # Blog category: testing — most relevant posts for competitive intel
-    "https://www.uipath.com/blog/tag/test-automation",
-    # YouTube channel — demo and product announcement videos
+    # YouTube channel
     "https://www.youtube.com/@UiPath",
 ]
 

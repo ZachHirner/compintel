@@ -16,14 +16,8 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "accelq"
 
 URLS = [
-    # Forrester blog — coverage of codeless/AI test automation
-    "https://www.forrester.com/blogs/",
-    # AccelQ resources — whitepapers and analyst-adjacent content
-    "https://www.accelq.com/resources/",
-    # AccelQ blog — product announcements and market positioning
-    "https://www.accelq.com/blog/",
-    # Reddit — r/softwaretesting AccelQ mentions
-    "https://www.reddit.com/r/softwaretesting/search/?q=accelq&sort=new",
+    # Forrester search — AccelQ mentions, last 30 days
+    "https://www.forrester.com/allSearch?query=AccelQ&publishedSinceInDays=30",
 ]
 
 

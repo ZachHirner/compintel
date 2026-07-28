@@ -15,14 +15,12 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "uipath"
 
 URLS = [
-    # Forrester blog — vendor profile and Wave coverage mentions
-    "https://www.forrester.com/blogs/",
-    # UiPath newsroom — press releases with analyst mentions
+    # UiPath analyst reports page
+    "https://www.uipath.com/resources/automation-analyst-reports",
+    # Forrester search — UiPath mentions, last 30 days
+    "https://www.forrester.com/allSearch?query=UiPath&publishedSinceInDays=30",
+    # UiPath newsroom
     "https://www.uipath.com/newsroom",
-    # UiPath resources — whitepapers and analyst content
-    "https://www.uipath.com/resources/analyst-reports",
-    # UiPath company overview — positioning signals
-    "https://www.uipath.com/company/about-us",
 ]
 
 

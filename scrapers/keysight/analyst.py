@@ -9,27 +9,25 @@ posts mentioning Eggplant or Keysight software testing.
 import json
 import logging
 from pathlib import Path
-from scrapers.base import scrape_multiple, zenrows_scrape_multiple
+from scrapers.base import scrape_multiple
 
 logger = logging.getLogger(__name__)
 
 COMPETITOR = "keysight"
 
 URLS = [
-    # Forrester blog — AI-driven and model-based test automation coverage
-    "https://www.forrester.com/blogs/",
-    # Keysight news releases (current working URL)
+    # Forrester search — Keysight/Eggplant mentions, last 30 days
+    "https://www.forrester.com/allSearch?query=Keysight+Eggplant&publishedSinceInDays=30",
+    # Keysight newsroom
     "https://www.keysight.com/us/en/about/newsroom/news-releases.html",
-    # Eggplant blog — product and market positioning content
-    "https://www.eggplantsoftware.com/blog",
-    # Reddit — r/softwaretesting Eggplant/Keysight mentions
-    "https://www.reddit.com/r/softwaretesting/search/?q=eggplant+keysight&sort=new",
+    # TrustRadius — Eggplant analyst-adjacent reviews
+    "https://www.trustradius.com/products/eggplant/reviews",
 ]
 
 
 def run(output_dir: Path) -> dict:
-    logger.info("[analyst] Starting analyst page scrape for Keysight (via Zenrows)")
-    raw = zenrows_scrape_multiple(URLS)
+    logger.info("[analyst] Starting analyst page scrape for Keysight")
+    raw = scrape_multiple(URLS)
 
     output = {
         "source_type": "analyst_websites",

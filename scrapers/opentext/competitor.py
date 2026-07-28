@@ -16,12 +16,14 @@ COMPETITOR = "opentext"
 URLS = [
     # Product catalogue
     "https://www.opentext.com/products/listing",
-    # DevOps / Quality suite (ValueEdge, Micro Focus legacy)
+    # DevOps / Quality suite
     "https://www.opentext.com/products/devops-cloud",
-    "https://www.opentext.com/products/valueedge",
+    # Core Software Delivery Platform (SaaS)
+    "https://www.opentext.com/products/saas/core-software-delivery-platform",
+    # Application Quality Management
     "https://www.opentext.com/products/application-quality-management",
     # Newsroom — press releases reveal positioning shifts
-    "https://www.opentext.com/about/press-releases",
+    "https://www.opentext.com/about/press-release-listing",
 ]
 
 

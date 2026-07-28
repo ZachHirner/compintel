@@ -16,10 +16,10 @@ COMPETITOR = "playwright"
 URLS = [
     # Homepage — headline positioning and key value props
     "https://playwright.dev/",
-    # Docs landing — feature overview and supported languages
-    "https://playwright.dev/docs/intro",
-    # Feature highlights: auto-waits, traces, parallel execution
-    "https://playwright.dev/docs/test-runners",
+    # Writing tests — core usage docs
+    "https://playwright.dev/docs/writing-tests",
+    # Codegen — AI/auto-generation pitch
+    "https://playwright.dev/docs/codegen-intro",
     # Supported browsers and platforms
     "https://playwright.dev/docs/browsers",
     # GitHub releases page — cadence and recent changes

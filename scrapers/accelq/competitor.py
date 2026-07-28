@@ -14,15 +14,17 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "accelq"
 
 URLS = [
-    # Homepage — headline positioning and key value props
+    # Homepage
     "https://www.accelq.com/",
-    # Product overview — codeless AI-powered automation pitch
-    "https://www.accelq.com/platform/",
-    # Autopilot AI feature page
-    "https://www.accelq.com/accelq-autopilot/",
-    # Pricing page — signals market positioning
-    "https://www.accelq.com/pricing/",
-    # Resources / newsroom — recent announcements and positioning shifts
+    # Web automation
+    "https://www.accelq.com/web-automation-testing/",
+    # Mobile automation
+    "https://www.accelq.com/mobile-automation-testing/",
+    # API automation
+    "https://www.accelq.com/api-automation-testing/",
+    # Manual test management
+    "https://www.accelq.com/manual-test-management/",
+    # Resources
     "https://www.accelq.com/resources/",
 ]
 
