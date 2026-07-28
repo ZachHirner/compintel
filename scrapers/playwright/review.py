@@ -16,12 +16,8 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "playwright"
 
 URLS = [
-    # PeerSpot — Playwright reviews with detailed pros/cons
-    "https://www.peerspot.com/products/playwright-reviews",
     # TrustRadius — Playwright user reviews
     "https://www.trustradius.com/products/playwright/reviews",
-    # Reddit — r/QualityAssurance Playwright discussion
-    "https://www.reddit.com/r/QualityAssurance/search/?q=playwright&sort=new",
 ]
 
 

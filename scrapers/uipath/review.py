@@ -16,14 +16,10 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "uipath"
 
 URLS = [
-    # PeerSpot — UiPath Test Suite reviews with detailed pros/cons
-    "https://www.peerspot.com/products/uipath-test-suite-reviews",
-    # PeerSpot — UiPath platform reviews (broader, more volume)
+    # PeerSpot — UiPath platform reviews
     "https://www.peerspot.com/products/uipath-reviews",
-    # TrustRadius — UiPath reviews
-    "https://www.trustradius.com/products/uipath/reviews",
-    # Reddit — r/UiPath community sentiment
-    "https://www.reddit.com/r/uipath/search/?q=test+automation&sort=new",
+    # PeerSpot — UiPath vendor Q&A
+    "https://www.peerspot.com/vendors/uipath/questions",
 ]
 
 

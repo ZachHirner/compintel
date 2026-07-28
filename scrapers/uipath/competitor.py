@@ -14,16 +14,14 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "uipath"
 
 URLS = [
-    # Test Suite product landing page
-    "https://www.uipath.com/product/test-suite",
-    # Test Manager — test management component
-    "https://docs.uipath.com/test-manager/automation-cloud/latest",
-    # Studio — authoring environment for test automation
+    # Agentic Testing — new AI-driven testing positioning
+    "https://www.uipath.com/solutions/technology/agentic-testing",
+    # Product overview
+    "https://www.uipath.com/product",
+    # Agentic Automation — broader platform pitch
+    "https://www.uipath.com/platform/agentic-automation",
+    # Studio — authoring environment
     "https://www.uipath.com/product/studio",
-    # Platform overview — positions UiPath beyond RPA into end-to-end automation
-    "https://www.uipath.com/platform",
-    # Newsroom — press releases reveal positioning and partnership shifts
-    "https://www.uipath.com/newsroom",
 ]
 
 

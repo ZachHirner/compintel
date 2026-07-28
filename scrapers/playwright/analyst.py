@@ -15,14 +15,10 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "playwright"
 
 URLS = [
-    # Forrester blog — open-source test automation coverage
-    "https://www.forrester.com/blogs/",
-    # Playwright changelog / announcements — signals strategic direction
+    # Forrester search — Playwright mentions, last 30 days, reports tab
+    "https://www.forrester.com/allSearch?query=Playwright&activeTab=Reports&publishedSinceInDays=30",
+    # Playwright release notes — cadence and strategic direction signals
     "https://playwright.dev/docs/release-notes",
-    # Playwright GitHub issues — community pain points and feature requests
-    "https://github.com/microsoft/playwright/issues?q=is%3Aissue+is%3Aopen+sort%3Acomments-desc",
-    # Microsoft DevBlogs — engineering announcements for Playwright
-    "https://devblogs.microsoft.com/search?term=playwright",
 ]
 
 

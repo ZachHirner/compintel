@@ -17,14 +17,16 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "opentext"
 
 URLS = [
-    # PeerSpot — OpenText ValueEdge reviews
-    "https://www.peerspot.com/products/opentext-valueedge-reviews",
-    # PeerSpot — UFT One reviews (100+ detailed reviews with pros/cons)
-    "https://www.peerspot.com/products/micro-focus-uft-one-reviews",
-    # TrustRadius — OpenText ALM
-    "https://www.trustradius.com/products/opentext-alm-quality-center/reviews",
-    # TrustRadius — UFT One reviews
-    "https://www.trustradius.com/products/opentext-uft-one/reviews",
+    # PeerSpot — OpenText vendor overview page
+    "https://www.peerspot.com/vendors/opentext",
+    # PeerSpot — OpenText Performance Engineering reviews
+    "https://www.peerspot.com/products/opentext-performance-engineering-reviews",
+    # PeerSpot — OpenText Functional Testing reviews
+    "https://www.peerspot.com/products/opentext-functional-testing-reviews",
+    # PeerSpot — Application Quality Management reviews
+    "https://www.peerspot.com/products/opentext-application-quality-management-reviews",
+    # PeerSpot — OpenText vendor Q&A
+    "https://www.peerspot.com/vendors/opentext/questions",
 ]
 
 

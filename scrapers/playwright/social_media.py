@@ -16,14 +16,14 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "playwright"
 
 URLS = [
-    # GitHub repo — stars, issues, contributor activity, README positioning
-    "https://github.com/microsoft/playwright",
-    # GitHub discussions — community pain points and feature requests
-    "https://github.com/microsoft/playwright/blob/main/CHANGELOG.md",
-    # Microsoft LinkedIn — company-level promotion of Playwright
+    # Microsoft LinkedIn company overview
     "https://www.linkedin.com/company/microsoft/",
-    # YouTube playlist — official Playwright demo and tutorial videos
+    # Microsoft LinkedIn Jobs — signals hiring direction
+    "https://www.linkedin.com/company/microsoft/jobs/",
+    # Playwright YouTube channel
     "https://www.youtube.com/@Playwrightdev",
+    # Playwright LinkedIn (community/product page)
+    "https://www.linkedin.com/company/playwrightweb/",
 ]
 
 

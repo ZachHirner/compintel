@@ -17,12 +17,13 @@ logger = logging.getLogger(__name__)
 COMPETITOR = "opentext"
 
 URLS = [
-    # LinkedIn public company page (no login required for basic info)
+    # LinkedIn company overview
     "https://www.linkedin.com/company/opentext/",
-    # OpenText blog — content strategy signals which products they're pushing
+    # LinkedIn Jobs — signals hiring direction and focus areas
+    "https://www.linkedin.com/company/opentext/jobs/",
+    # OpenText blog
     "https://blogs.opentext.com/",
-    "https://blogs.opentext.com/category/devops/",
-    # OpenText YouTube channel page (public metadata)
+    # OpenText YouTube channel
     "https://www.youtube.com/@OpenText",
 ]
 
