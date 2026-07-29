@@ -24,6 +24,7 @@ URLS = [
     "https://www.youtube.com/@Playwrightdev",
     # Playwright LinkedIn (community/product page)
     "https://www.linkedin.com/company/playwrightweb/",
+    "https://x.com/playwrightweb?lang=en",
 ]
 
 
