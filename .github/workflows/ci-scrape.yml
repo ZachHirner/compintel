@@ -2,8 +2,8 @@ name: Competitive Intelligence Scrape
 
 on:
   schedule:
-    # Every Monday at 3:05pm Central Time (CDT = UTC-5, CST = UTC-6)
-    - cron: "5 20 * * 1"
+    # Monday, Wednesday, Friday at 8:30am Central Time (CDT = UTC-5, CST = UTC-6)
+    - cron: "30 13 * * 1,3,5"
   workflow_dispatch:
     inputs:
       competitor:
