@@ -15,7 +15,7 @@ COMPETITOR = "uipath"
 
 URLS = [
     # Agentic Testing — new AI-driven testing positioning
-    "https://www.uipath.com/solutions/technology/agentic-testing",
+    "https://www.uipath.com/platform/agentic-automation/agentic-ai",
     # Product overview
     "https://www.uipath.com/product",
     # Agentic Automation — broader platform pitch

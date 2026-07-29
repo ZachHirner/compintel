@@ -17,7 +17,6 @@ COMPETITOR = "keysight"
 
 URLS = [
     "https://www.forrester.com/allSearch?query=Keysight&publishedSinceInDays=30&activeTab=All",
-    "https://www.keysight.com/us/en/about/newsroom/news-releases.html",
 ]
 
 
