@@ -25,6 +25,7 @@ URLS = [
     "https://blogs.opentext.com/",
     # OpenText YouTube channel
     "https://www.youtube.com/@OpenText",
+    "https://x.com/OpenText?lang=en",
 ]
 
 

@@ -22,6 +22,7 @@ URLS = [
     "https://www.accelq.com/blog/",
     # YouTube channel — product demos and webinars
     "https://www.youtube.com/@accelq",
+    "https://x.com/ACCELQ?lang=en",
 ]
 
 
