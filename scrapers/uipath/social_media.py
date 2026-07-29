@@ -24,6 +24,8 @@ URLS = [
     "https://www.uipath.com/blog",
     # YouTube channel
     "https://www.youtube.com/@UiPath",
+    # X/Twitter
+    "https://x.com/UiPath?lang=en",
 ]
 
 
