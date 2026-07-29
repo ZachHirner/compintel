@@ -137,35 +137,56 @@ def run_health_check() -> int:
             status, detail = _check_url(driver, r.url)
             r.status = status
             r.detail = detail
-            icon = "✓" if status == "OK" else "✗"
+            icon = "✓" if status == "OK" else ("~" if status == "THIN" else "✗")
             logger.info("%s [%s] %s/%s — %s (%s)", icon, status, r.competitor, r.scraper_type, r.url, detail)
     finally:
         driver.quit()
 
-    # Summary
+    # Summary — THIN is a warning only; hard failures are BLOCKED/404/ERROR
     ok = [r for r in pending if r.status == "OK"]
-    broken = [r for r in pending if r.status != "OK"]
+    thin = [r for r in pending if r.status == "THIN"]
+    hard_failures = [r for r in pending if r.status in ("BLOCKED", "404", "ERROR")]
 
     print(f"\n{'='*60}")
-    print(f"HEALTH CHECK SUMMARY: {len(ok)}/{total} OK")
+    print(f"HEALTH CHECK SUMMARY: {len(ok)}/{total} OK, {len(thin)} THIN (warnings), {len(hard_failures)} hard failures")
     print(f"{'='*60}")
-    if broken:
+
+    if thin:
+        print("\nTHIN URLS (warnings — page loaded but content may be limited):")
+        for r in thin:
+            print(f"  [THIN] {r.competitor}/{r.scraper_type}: {r.url}")
+            if r.detail:
+                print(f"         {r.detail}")
+
+    if hard_failures:
         print("\nBROKEN URLS:")
-        for r in broken:
+        for r in hard_failures:
             print(f"  [{r.status}] {r.competitor}/{r.scraper_type}: {r.url}")
             if r.detail:
                 print(f"         {r.detail}")
 
-        # Write broken URL list to file for the workflow to read
+    # Write failure file whenever there's anything to report (hard failures + thin warnings)
+    reportable = hard_failures + thin
+    if reportable:
         with open("health_check_failures.txt", "w") as f:
-            f.write(f"URL Health Check Failures — {len(broken)}/{total} URLs have issues\n\n")
-            for r in broken:
-                f.write(f"[{r.status}] {r.competitor}/{r.scraper_type}\n")
-                f.write(f"  URL: {r.url}\n")
-                if r.detail:
-                    f.write(f"  Detail: {r.detail}\n")
-                f.write("\n")
+            if hard_failures:
+                f.write(f"BROKEN URLs ({len(hard_failures)}) — require fixing before next scrape run\n\n")
+                for r in hard_failures:
+                    f.write(f"[{r.status}] {r.competitor}/{r.scraper_type}\n")
+                    f.write(f"  URL: {r.url}\n")
+                    if r.detail:
+                        f.write(f"  Detail: {r.detail}\n")
+                    f.write("\n")
+            if thin:
+                f.write(f"THIN URLs ({len(thin)}) — loaded but returned little content (warnings only)\n\n")
+                for r in thin:
+                    f.write(f"[THIN] {r.competitor}/{r.scraper_type}\n")
+                    f.write(f"  URL: {r.url}\n")
+                    if r.detail:
+                        f.write(f"  Detail: {r.detail}\n")
+                    f.write("\n")
 
+    if hard_failures:
         return 1
 
     print("\nAll URLs healthy.")
