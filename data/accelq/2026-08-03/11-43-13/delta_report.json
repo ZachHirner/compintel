@@ -1,0 +1,35 @@
+{
+  "competitor": "accelq",
+  "run_date": "2026-08-03",
+  "previous_run_dir": "data/accelq/2026-08-03/11-02-17",
+  "changes_detected": true,
+  "changed_pages": [
+    {
+      "url": "https://www.linkedin.com/company/accelq/",
+      "source_type": "social_media",
+      "prev_length": 17524,
+      "curr_length": 17120,
+      "length_delta": -404,
+      "change_pct": 2.3
+    },
+    {
+      "url": "https://www.youtube.com/@accelq",
+      "source_type": "social_media",
+      "prev_length": 5958,
+      "curr_length": 5958,
+      "length_delta": 0,
+      "change_pct": 0.0
+    },
+    {
+      "url": "https://www.forrester.com/allSearch?query=AccelQ&publishedSinceInDays=30",
+      "source_type": "analyst",
+      "prev_length": 5569,
+      "curr_length": 5562,
+      "length_delta": -7,
+      "change_pct": 0.1
+    }
+  ],
+  "new_pages": [],
+  "removed_pages": [],
+  "unchanged_count": 9
+}
