@@ -1,0 +1,51 @@
+{
+  "competitor": "opentext",
+  "run_date": "2026-08-03",
+  "previous_run_dir": "data/opentext/2026-08-03/11-02-24",
+  "changes_detected": true,
+  "changed_pages": [
+    {
+      "url": "https://www.linkedin.com/company/opentext/",
+      "source_type": "social_media",
+      "prev_length": 19984,
+      "curr_length": 19984,
+      "length_delta": 0,
+      "change_pct": 0.0
+    },
+    {
+      "url": "https://www.youtube.com/@OpenText",
+      "source_type": "social_media",
+      "prev_length": 7176,
+      "curr_length": 7179,
+      "length_delta": 3,
+      "change_pct": 0.0
+    },
+    {
+      "url": "https://www.peerspot.com/products/opentext-performance-engineering-reviews",
+      "source_type": "review",
+      "prev_length": 44104,
+      "curr_length": 42256,
+      "length_delta": -1848,
+      "change_pct": 4.2
+    },
+    {
+      "url": "https://www.peerspot.com/products/opentext-functional-testing-reviews",
+      "source_type": "review",
+      "prev_length": 32961,
+      "curr_length": 31113,
+      "length_delta": -1848,
+      "change_pct": 5.6
+    },
+    {
+      "url": "https://www.peerspot.com/products/opentext-application-quality-management-reviews",
+      "source_type": "review",
+      "prev_length": 34510,
+      "curr_length": 32662,
+      "length_delta": -1848,
+      "change_pct": 5.4
+    }
+  ],
+  "new_pages": [],
+  "removed_pages": [],
+  "unchanged_count": 11
+}
