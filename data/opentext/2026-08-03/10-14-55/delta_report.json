@@ -1,0 +1,99 @@
+{
+  "competitor": "opentext",
+  "run_date": "2026-08-03",
+  "previous_run_dir": "data/opentext/2026-07-31/13-49-04",
+  "changes_detected": true,
+  "changed_pages": [
+    {
+      "url": "https://www.opentext.com/products/saas/core-software-delivery-platform",
+      "source_type": "competitor",
+      "prev_length": 25000,
+      "curr_length": 24746,
+      "length_delta": -254,
+      "change_pct": 1.0
+    },
+    {
+      "url": "https://www.linkedin.com/company/opentext/",
+      "source_type": "social_media",
+      "prev_length": 17174,
+      "curr_length": 17261,
+      "length_delta": 87,
+      "change_pct": 0.5
+    },
+    {
+      "url": "https://blogs.opentext.com/",
+      "source_type": "social_media",
+      "prev_length": 14019,
+      "curr_length": 14019,
+      "length_delta": 0,
+      "change_pct": 0.0
+    },
+    {
+      "url": "https://www.youtube.com/@OpenText",
+      "source_type": "social_media",
+      "prev_length": 7176,
+      "curr_length": 7179,
+      "length_delta": 3,
+      "change_pct": 0.0
+    },
+    {
+      "url": "https://x.com/OpenText?lang=en",
+      "source_type": "social_media",
+      "prev_length": 2263,
+      "curr_length": 2257,
+      "length_delta": -6,
+      "change_pct": 0.3
+    },
+    {
+      "url": "https://www.forrester.com/allSearch?query=OpenText&publishedSinceInDays=30",
+      "source_type": "analyst",
+      "prev_length": 4446,
+      "curr_length": 4435,
+      "length_delta": -11,
+      "change_pct": 0.2
+    },
+    {
+      "url": "https://www.peerspot.com/vendors/opentext",
+      "source_type": "review",
+      "prev_length": 11987,
+      "curr_length": 11978,
+      "length_delta": -9,
+      "change_pct": 0.1
+    },
+    {
+      "url": "https://www.peerspot.com/products/opentext-performance-engineering-reviews",
+      "source_type": "review",
+      "prev_length": 25000,
+      "curr_length": 25000,
+      "length_delta": 0,
+      "change_pct": 0.0
+    },
+    {
+      "url": "https://www.peerspot.com/products/opentext-functional-testing-reviews",
+      "source_type": "review",
+      "prev_length": 25000,
+      "curr_length": 25000,
+      "length_delta": 0,
+      "change_pct": 0.0
+    },
+    {
+      "url": "https://www.peerspot.com/products/opentext-application-quality-management-reviews",
+      "source_type": "review",
+      "prev_length": 25000,
+      "curr_length": 25000,
+      "length_delta": 0,
+      "change_pct": 0.0
+    },
+    {
+      "url": "https://www.peerspot.com/vendors/opentext/questions",
+      "source_type": "review",
+      "prev_length": 11987,
+      "curr_length": 11978,
+      "length_delta": -9,
+      "change_pct": 0.1
+    }
+  ],
+  "new_pages": [],
+  "removed_pages": [],
+  "unchanged_count": 5
+}
