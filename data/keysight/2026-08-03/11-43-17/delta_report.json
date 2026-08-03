@@ -1,0 +1,27 @@
+{
+  "competitor": "keysight",
+  "run_date": "2026-08-03",
+  "previous_run_dir": "data/keysight/2026-08-03/11-02-14",
+  "changes_detected": true,
+  "changed_pages": [
+    {
+      "url": "https://www.linkedin.com/company/keysight-technologies?trk=nav_type_overview",
+      "source_type": "social_media",
+      "prev_length": 19381,
+      "curr_length": 18942,
+      "length_delta": -439,
+      "change_pct": 2.3
+    },
+    {
+      "url": "https://www.youtube.com/@keysight",
+      "source_type": "social_media",
+      "prev_length": 5873,
+      "curr_length": 5831,
+      "length_delta": -42,
+      "change_pct": 0.7
+    }
+  ],
+  "new_pages": [],
+  "removed_pages": [],
+  "unchanged_count": 5
+}
