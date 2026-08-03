@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tricentis CI Research Agent — Capstone Presentation</title>
+<style>
+  :root {
+    --blue: #003B71;
+    --teal: #00A99D;
+    --teal-light: #00c4b7;
+    --gray-bg: #F4F6F8;
+    --gray-border: #D0D7E2;
+    --text-dark: #1A1A2E;
+    --text-muted: #6B7280;
+    --white: #ffffff;
+    --slide-bg: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0f1117;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* ── TOP BAR ── */
+  #topbar {
+    width: 100%;
+    background: #1a1d27;
+    border-bottom: 1px solid #2d3148;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+  }
+
+  #topbar .logo {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--teal);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  #topbar .controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #topbar button {
+    background: #2d3148;
+    border: 1px solid #3d4168;
+    color: #cdd0e3;
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  #topbar button:hover { background: var(--teal); color: white; border-color: var(--teal); }
+  #topbar button.active { background: var(--teal); color: white; border-color: var(--teal); }
+
+  #save-status {
+    font-size: 11px;
+    color: #6B7280;
+    min-width: 120px;
+    text-align: right;
+  }
+
+  #save-status.saved { color: var(--teal); }
+  #save-status.saving { color: #f59e0b; }
+
+  /* ── SLIDE CONTAINER ── */
+  #stage {
+    margin-top: 54px;
+    width: 100%;
+    max-width: 1100px;
+    padding: 30px 20px 100px;
+  }
+
+  /* ── SLIDE ── */
+  .slide {
+    display: none;
+    background: var(--slide-bg);
+    border-radius: 16px;
+    min-height: 580px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 48px rgba(0,0,0,0.4);
+  }
+
+  .slide.active { display: flex; flex-direction: column; }
+
+  /* accent bar top */
+  .slide::before {
+    content: '';
+    display: block;
+    height: 5px;
+    background: linear-gradient(90deg, var(--blue), var(--teal));
+    flex-shrink: 0;
+  }
+
+  .slide-inner {
+    padding: 52px 64px 52px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── COVER SLIDE ── */
+  .slide-cover .slide-inner {
+    justify-content: center;
+    align-items: flex-start;
+    gap: 16px;
+    background: linear-gradient(135deg, #f8faff 0%, #eef4ff 100%);
+  }
+
+  .cover-eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+
+  .cover-title {
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--blue);
+    line-height: 1.15;
+    max-width: 700px;
+  }
+
+  .cover-subtitle {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 600px;
+    line-height: 1.5;
+    margin-top: 4px;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+
+  .cover-meta-item {
+    background: white;
+    border: 1px solid var(--gray-border);
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 13px;
+    color: var(--text-dark);
+  }
+
+  .cover-meta-item span {
+    display: block;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+
+  /* ── SECTION SLIDES ── */
+  .slide-header {
+    margin-bottom: 32px;
+  }
+
+  .slide-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 6px;
+  }
+
+  .slide-title {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--blue);
+    line-height: 1.2;
+  }
+
+  .slide-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* ── BULLET LIST ── */
+  .bullet-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .bullet-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--text-dark);
+    line-height: 1.55;
+  }
+
+  .bullet-list li::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--teal);
+    border-radius: 50%;
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+
+  /* ── CARD GRID ── */
+  .card-grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  .card-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .card-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  .card {
+    background: var(--gray-bg);
+    border: 1px solid var(--gray-border);
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+
+  .card-icon {
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  .card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 6px;
+  }
+
+  .card-body {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 18px;
+    top: 10px;
+    bottom: 10px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--blue), var(--teal));
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 20px;
+    position: relative;
+  }
+
+  .timeline-dot {
+    width: 38px;
+    height: 38px;
+    background: var(--blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+
+  .timeline-content { flex: 1; padding-top: 6px; }
+
+  .timeline-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 4px;
+  }
+
+  .timeline-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ── TWO-COL LAYOUT ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    flex: 1;
+  }
+
+  .col-section-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+    border-bottom: 2px solid var(--teal);
+    padding-bottom: 6px;
+  }
+
+  /* ── STAT TILES ── */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .stat-tile {
+    background: var(--blue);
+    color: white;
+    border-radius: 10px;
+    padding: 18px 16px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--teal-light);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    opacity: 0.85;
+    line-height: 1.3;
+  }
+
+  /* ── FLOW DIAGRAM ── */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin: 16px 0;
+  }
+
+  .flow-step {
+    background: var(--blue);
+    color: white;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    flex: 1;
+    min-width: 100px;
+  }
+
+  .flow-step .step-num {
+    font-size: 10px;
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .flow-arrow {
+    color: var(--teal);
+    font-size: 20px;
+    padding: 0 6px;
+    flex-shrink: 0;
+  }
+
+  /* ── ROADMAP ITEMS ── */
+  .roadmap-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .roadmap-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: var(--gray-bg);
+    border: 1px solid var(--gray-border);
+    border-left: 4px solid var(--teal);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+
+  .roadmap-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+
+  .roadmap-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 3px;
+  }
+
+  .roadmap-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.45;
+  }
+
+  /* ── CLOSING SLIDE ── */
+  .slide-closing .slide-inner {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, var(--blue) 0%, #005a8e 100%);
+  }
+
+  .closing-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .closing-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.75);
+    max-width: 520px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  .closing-badge {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    padding: 12px 24px;
+    color: var(--teal-light);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── EDIT STYLES ── */
+  [contenteditable="true"] {
+    outline: none;
+    border-radius: 4px;
+    transition: background 0.15s, box-shadow 0.15s;
+    cursor: text;
+  }
+
+  [contenteditable="true"]:hover {
+    background: rgba(0, 169, 157, 0.06);
+    box-shadow: 0 0 0 1px rgba(0,169,157,0.25);
+  }
+
+  [contenteditable="true"]:focus {
+    background: rgba(0, 169, 157, 0.1);
+    box-shadow: 0 0 0 2px rgba(0,169,157,0.5);
+  }
+
+  /* ── SLIDE NAV ── */
+  #nav {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #1a1d27;
+    border: 1px solid #2d3148;
+    border-radius: 40px;
+    padding: 8px 16px;
+    z-index: 100;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+
+  #nav button {
+    background: #2d3148;
+    border: 1px solid #3d4168;
+    color: #cdd0e3;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+
+  #nav button:hover:not(:disabled) { background: var(--teal); color: white; border-color: var(--teal); }
+  #nav button:disabled { opacity: 0.3; cursor: default; }
+
+  #slide-counter {
+    font-size: 13px;
+    color: #8b8faa;
+    min-width: 60px;
+    text-align: center;
+  }
+
+  .dot-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #3d4168;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .dot.active { background: var(--teal); width: 20px; border-radius: 4px; }
+
+  /* ── SLIDE NUMBER BADGE ── */
+  .slide-num-badge {
+    position: absolute;
+    bottom: 20px;
+    right: 28px;
+    font-size: 11px;
+    color: var(--gray-border);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── ADD/DELETE SLIDE BUTTONS ── */
+  .slide-actions {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: none;
+    gap: 6px;
+    z-index: 10;
+  }
+
+  .slide:hover .slide-actions,
+  .slide.active .slide-actions { display: flex; }
+
+  .slide-actions button {
+    background: rgba(255,255,255,0.9);
+    border: 1px solid var(--gray-border);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 11px;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.15s;
+  }
+
+  .slide-actions button:hover { background: var(--teal); color: white; border-color: var(--teal); }
+  .slide-actions button.danger:hover { background: #ef4444; color: white; border-color: #ef4444; }
+
+  /* ── EDIT MODE INDICATOR ── */
+  #edit-banner {
+    display: none;
+    position: fixed;
+    top: 54px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--teal);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 16px;
+    border-radius: 0 0 8px 8px;
+    letter-spacing: 0.5px;
+    z-index: 99;
+  }
+
+  body.edit-mode #edit-banner { display: block; }
+
+  /* print/fullscreen */
+  @media print {
+    body { background: white; }
+    #topbar, #nav, #edit-banner, .slide-actions { display: none !important; }
+    #stage { margin-top: 0; padding: 0; max-width: 100%; }
+    .slide { display: flex !important; page-break-after: always; box-shadow: none; border-radius: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div id="topbar">
+  <div class="logo">Tricentis &nbsp;|&nbsp; Capstone 2025</div>
+  <div class="controls">
+    <button id="btn-edit" onclick="toggleEdit()">✏️ Edit Mode</button>
+    <button onclick="addSlide()">+ Add Slide</button>
+    <button onclick="toggleFullscreen()">⛶ Fullscreen</button>
+    <button onclick="window.print()">🖨 Print</button>
+    <div id="save-status">All changes saved</div>
+  </div>
+</div>
+
+<div id="edit-banner">✏️ EDIT MODE — Click any text to edit</div>
+
+<!-- SLIDES -->
+<div id="stage">
+
+  <!-- SLIDE 1: COVER -->
+  <div class="slide slide-cover active" data-index="0">
+    <div class="slide-actions">
+      <button onclick="duplicateSlide(this)">Duplicate</button>
+      <button class="danger" onclick="deleteSlide(this)">Delete</button>
+    </div>
+    <div class="slide-inner">
+      <div class="cover-eyebrow" data-editable>Tricentis Internship Capstone Project</div>
+      <div class="cover-title" data-editable>Competitive Intelligence Research Agent</div>
+      <div class="cover-subtitle" data-editable>An automated pipeline that continuously tracks, analyzes, and delivers actionable competitive intelligence — so sales reps always walk into deals prepared.</div>
+      <div class="cover-meta">
+        <div class="cover-meta-item"><span>Presented By</span><span data-editable>Zach Hirner</span></div>
+        <div class="cover-meta-item"><span>Team</span><span data-editable>Tricentis Sales Enablement</span></div>
+        <div class="cover-meta-item"><span>Date</span><span data-editable>Summer 2025</span></div>
+      </div>
+    </div>
+    <div class="slide-num-badge">1</div>
+  </div>
+
+  <!-- SLIDE 2: THE PROBLEM -->
+  <div class="slide" data-index="1">
+    <div class="slide-actions">
+      <button onclick="duplicateSlide(this)">Duplicate</button>
+      <button class="danger" onclick="deleteSlide(this)">Delete</button>
+    </div>
+    <div class="slide-inner">
+      <div class="slide-header">
+        <div class="slide-label" data-editable>The Problem</div>
+        <div class="slide-title" data-editable>Sales reps were flying blind against competitors</div>
+      </div>
+      <div class="slide-body">
+        <div class="card-grid cols-2">
+          <div class="card">
+            <div class="card-icon">📋</div>
+            <div class="card-title" data-editable>Research was manual & ad-hoc</div>
+            <div class="card-body" data-editable>When an AE walked into a deal against OpenText or UiPath, finding current intel meant hours of Googling — or going in unprepared.</div>
+          </div>
+          <div class="card">
+            <div class="card-icon">⏳</div>
+            <div class="card-title" data-editable>Intel went stale quickly</div>
+            <div class="card-body" data-editable>Competitors update pricing, launch products, and shift messaging constantly. Existing docs were often months out of date.</div>
+          </div>
+          <div class="card">
+            <div class="card-icon">🚨</div>
+            <div class="card-title" data-editable>No early warning system</div>
+            <div class="card-body" data-editable>When a competitor quietly updated their pricing or launched a new feature, Tricentis only found out when a prospect brought it up.</div>
+          </div>
+          <div class="card">
+            <div class="card-icon">🔍</div>
+            <div class="card-title" data-editable>New competitors had no coverage</div>
+            <div class="card-body" data-editable>When a lesser-known player showed up in a deal, there was no fast way to research them. AEs were on their own.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num-badge">2</div>
+  </div>
+
+  <!-- SLIDE 3: WHAT IS IT -->
+  <div class="slide" data-index="2">
+    <div class="slide-actions">
+      <button onclick="duplicateSlide(this)">Duplicate</button>
+      <button class="danger" onclick="deleteSlide(this)">Delete</button>
+    </div>
+    <div class="slide-inner">
+      <div class="slide-header">
+        <div class="slide-label" data-editable>The Solution</div>
+        <div class="slide-title" data-editable>What is the CI Research Agent?</div>
+      </div>
+      <div class="slide-body">
+        <div class="stat-row">
+          <div class="stat-tile">
+            <div class="stat-number" data-editable>5</div>
+            <div class="stat-label" data-editable>Competitors tracked automatically</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-number" data-editable>20+</div>
+            <div class="stat-label" data-editable>Sources scraped per run</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-number" data-editable>3x</div>
+            <div class="stat-label" data-editable>Per week, fully automated</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-number" data-editable>0</div>
+            <div class="stat-label" data-editable>Manual effort to maintain</div>
+          </div>
+        </div>
+        <ul class="bullet-list">
+          <li data-editable>An automated scraping pipeline that collects data from competitor websites, social media, analyst coverage, and review platforms — 3 times per week on a schedule.</li>
+          <li data-editable>An AI analysis layer powered by Claude that synthesizes raw scraped data into structured, sales-ready intelligence reports with battle card notes, customer sentiment, and analyst positioning.</li>
+          <li data-editable>A delta detection system that compares each run against the last, surfacing exactly what changed — new product names, updated pricing, shifted messaging — the moment it happens.</li>
+          <li data-editable>A Research Agent that any team member can talk to: ask about a competitor, request ad-hoc research on a new company, or trigger the creation of new pipeline scrapers through conversation.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-num-badge">3</div>
+  </div>
+
+  <!-- SLIDE 4: HOW IT WORKS -->
+  <div class="slide" data-index="3">
+    <div class="slide-actions">
+      <button onclick="duplicateSlide(this)">Duplicate</button>
+      <button class="danger" onclick="deleteSlide(this)">Delete</button>
+    </div>
+    <div class="slide-inner">
+      <div class="slide-header">
+        <div class="slide-label" data-editable>Architecture</div>
+        <div class="slide-title" data-editable>How it works — end to end</div>
+      </div>
+      <div class="slide-body">
+        <div class="flow">
+          <div class="flow-step"><span class="step-num">Step 1</span><span data-editable>Scraping</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><span class="step-num">Step 2</span><span data-editable>AI Analysis</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><span class="step-num">Step 3</span><span data-editable>Delta Detection</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step"><span class="step-num">Step 4</span><span data-editable>Health Monitoring</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step" style="background: var(--teal);"><span class="step-num">Output</span><span data-editable>CI Report</span></div>
+        </div>
+        <div class="card-grid cols-2" style="margin-top: 8px;">
+          <div class="card">
+            <div class="card-title" data-editable>Scraping Layer</div>
+            <div class="card-body" data-editable>Selenium + stealth browser visits competitor websites, LinkedIn, YouTube, X/Twitter, Forrester, Gartner, PeerSpot, and TrustRadius. Runs Monday, Wednesday, Friday at 8:30 AM Central via GitHub Actions.</div>
+          </div>
+          <div class="card">
+            <div class="card-title" data-editable>AI Analysis Layer</div>
+            <div class="card-body" data-editable>Claude synthesizes all raw text into a structured JSON report: executive summary, key products, positioning themes, strengths, weaknesses, and Tricentis-specific battle card notes.</div>
+          </div>
+          <div class="card">
+            <div class="card-title" data-editable>Delta Detection</div>
+            <div class="card-body" data-editable>Every run is compared against the previous one using line-level diffs. Claude identifies exactly what wording, pricing, or product names changed and flags it in a delta report.</div>
+          </div>
+          <div class="card">
+            <div class="card-title" data-editable>Health Monitoring</div>
+            <div class="card-body" data-editable>A separate job runs every other day checking all URLs. If pages go down or get blocked, GitHub Issues are opened automatically — no manual oversight needed.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num-badge">4</div>
+  </div>
+
+  <!-- SLIDE 5: THE RESEARCH AGENT -->
+  <div class="slide" data-index="4">
+    <div class="slide-actions">
+      <button onclick="duplicateSlide(this)">Duplicate</button>
+      <button class="danger" onclick="deleteSlide(this)">Delete</button>
+    </div>
+    <div class="slide-inner">
+      <div class="slide-header">
+        <div class="slide-label" data-editable>The Research Agent</div>
+        <div class="slide-title" data-editable>Beyond the pipeline — an AI analyst anyone can talk to</div>
+      </div>
+      <div class="slide-body">
+        <div class="two-col">
+          <div>
+            <div class="col-section-title" data-editable>Three Skills</div>
+            <ul class="bullet-list">
+              <li><strong data-editable>Scheduled Intel Reference</strong> — <span data-editable>Pull existing reports and supplement with live web research on demand.</span></li>
+              <li><strong data-editable>Ad-Hoc Research</strong> — <span data-editable>Research any competitor not in the pipeline. Discovers URLs, visits sources, and produces a full structured CI report in minutes.</span></li>
+              <li><strong data-editable>Script Generator</strong> — <span data-editable>Automatically generates all scraper files and opens a GitHub PR to add a new competitor to the pipeline permanently — through conversation, no coding required.</span></li>
+            </ul>
+          </div>
+          <div>
+            <div class="col-section-title" data-editable>What It Delivers</div>
+            <ul class="bullet-list">
+              <li data-editable>Executive summary of the competitor's current market position</li>
+              <li data-editable>Key products and target segments</li>
+              <li data-editable>Current messaging themes from website + social</li>
+              <li data-editable>Customer sentiment from review platforms</li>
+              <li data-editable>Analyst standing — Gartner, Forrester</li>
+              <li data-editable>Battle card notes: where Tricentis wins, where they win, discovery questions, and suggested talk tracks for AEs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num-badge">5</div>
+  </div>
+
+  <!-- SLIDE 6: BUILD TIMELINE -->
+  <div class="slide" data-index="5">
+    <div class="slide-actions">
+      <button onclick="duplicateSlide(this)">Duplicate</button>
+      <button class="danger" onclick="deleteSlide(this)">Delete</button>
+    </div>
+    <div class="slide-inner">
+      <div class="slide-header">
+        <div class="slide-label" data-editable>Project Timeline</div>
+        <div class="slide-title" data-editable>What was built, in order</div>
+      </div>
+      <div class="slide-body">
+        <div class="two-col">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot">1</div>
+              <div class="timeline-content">
+                <div class="timeline-title" data-editable>Scraping Infrastructure</div>
+                <div class="timeline-desc" data-editable>Built Selenium + stealth scrapers for 5 competitors × 4 source types. 20+ URLs per run.</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot">2</div>
+              <div class="timeline-content">
+                <div class="timeline-title" data-editable>GitHub Actions Automation</div>
+                <div class="timeline-desc" data-editable>Scheduled pipeline running Mon/Wed/Fri. All 5 competitors run in parallel. Results committed back to the repo automatically.</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot">3</div>
+              <div class="timeline-content">
+                <div class="timeline-title" data-editable>Claude AI Analysis Layer</div>
+                <div class="timeline-desc" data-editable>Raw text → structured JSON CI report with executive summary, battle card notes, and customer sentiment per competitor.</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot">4</div>
+              <div class="timeline-content">
+                <div class="timeline-title" data-editable>URL Health Check System</div>
+                <div class="timeline-desc" data-editable>Runs every other day. Auto-opens GitHub Issues on hard failures. Prevents silent data degradation.</div>
+              </div>
+            </div>
+          </div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot" style="background: var(--teal);">5</div>
+              <div class="timeline-content">
+                <div class="timeline-title" data-editable>Bug Fixes from Real Data</div>
+                <div class="timeline-desc" data-editable>Fixed broken URLs found by health checks. Added X/Twitter for all 5 competitors. Removed login-wall LinkedIn jobs pages.</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot" style="background: var(--teal);">6</div>
+              <div class="timeline-content">
+                <div class="timeline-title" data-editable>Research Agent (CLAUDE.md)</div>
+                <div class="timeline-desc" data-editable>Embedded a 3-skill AI Research Agent into the repo. Any team member can interact with it through Claude Code — no technical knowledge required.</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot" style="background: var(--teal);">7</div>
+              <div class="timeline-content">
+                <div class="timeline-title" data-editable>Delta Detection</div>
+                <div class="timeline-desc" data-editable>Line-level diffs showing exactly what text, numbers, and product names changed between runs. AI summaries quote specific changes.</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot" style="background: var(--teal);">8</div>
+              <div class="timeline-content">
+                <div class="timeline-title" data-editable>Analysis Quality Fixes</div>
+                <div class="timeline-desc" data-editable>Removed hardcoded competitor names. Raised per-page character cap 4k → 10k so Claude sees more of what was scraped.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num-badge">6</div>
+  </div>
+
+  <!-- SLIDE 7: FUTURE ROADMAP -->
+  <div class="slide" data-index="6">
+    <div class="slide-actions">
+      <button onclick="duplicateSlide(this)">Duplicate</button>
+      <button class="danger" onclick="deleteSlide(this)">Delete</button>
+    </div>
+    <div class="slide-inner">
+      <div class="slide-header">
+        <div class="slide-label" data-editable>Future Vision</div>
+        <div class="slide-title" data-editable>How this project can evolve</div>
+      </div>
+      <div class="slide-body">
+        <div class="roadmap-list">
+          <div class="roadmap-item">
+            <div class="roadmap-icon">🔌</div>
+            <div>
+              <div class="roadmap-title" data-editable>Proxy Integration</div>
+              <div class="roadmap-desc" data-editable>Integrating a rotating residential proxy service (Zenrows, ScraperAPI) would dramatically increase the percentage of competitor pages that return real content — review sites, analyst pages, and paywalled resources currently blocked.</div>
+            </div>
+          </div>
+          <div class="roadmap-item">
+            <div class="roadmap-icon">💬</div>
+            <div>
+              <div class="roadmap-title" data-editable>Slack Integration</div>
+              <div class="roadmap-desc" data-editable>Push delta alerts and new reports directly into a Tricentis Slack channel. An AE could type /intel uipath and receive a battle card in seconds — no GitHub, no browser, no manual lookup.</div>
+            </div>
+          </div>
+          <div class="roadmap-item">
+            <div class="roadmap-icon">📊</div>
+            <div>
+              <div class="roadmap-title" data-editable>Showpad Integration</div>
+              <div class="roadmap-desc" data-editable>Auto-generate battle card PDFs after each analysis run and push them directly to Showpad via their REST API — updating the existing published asset in place. Sales reps always find the current version. Zero manual uploads, zero stale decks.</div>
+            </div>
+          </div>
+          <div class="roadmap-item">
+            <div class="roadmap-icon">📈</div>
+            <div>
+              <div class="roadmap-title" data-editable>Trend Tracking</div>
+              <div class="roadmap-desc" data-editable>The timestamped data structure already captures every historical run. A trend layer would visualize how a competitor's messaging, pricing, or headcount changes month over month — turning snapshots into a longitudinal feed.</div>
+            </div>
+          </div>
+          <div class="roadmap-item">
+            <div class="roadmap-icon">🌐</div>
+            <div>
+              <div class="roadmap-title" data-editable>Unlimited Competitor Coverage</div>
+              <div class="roadmap-desc" data-editable>The Script Generator skill makes adding any new competitor a one-conversation operation. As Tricentis encounters new players in deals, the pipeline grows to match — no engineering sprint required.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-num-badge">7</div>
+  </div>
+
+  <!-- SLIDE 8: CLOSING -->
+  <div class="slide slide-closing" data-index="7">
+    <div class="slide-actions">
+      <button onclick="duplicateSlide(this)">Duplicate</button>
+      <button class="danger" onclick="deleteSlide(this)">Delete</button>
+    </div>
+    <div class="slide-inner">
+      <div class="closing-title" data-editable>From manual research to automated intelligence</div>
+      <div class="closing-sub" data-editable>The Tricentis CI Research Agent turns a process that took hours into one that runs automatically, surfaces changes the moment they happen, and puts the right intel in every AE's hands before every deal.</div>
+      <div class="closing-badge" data-editable>Thank you — Questions?</div>
+    </div>
+    <div class="slide-num-badge" style="color: rgba(255,255,255,0.3);">8</div>
+  </div>
+
+</div>
+
+<!-- NAV -->
+<div id="nav">
+  <button id="btn-prev" onclick="changeSlide(-1)">←</button>
+  <div class="dot-row" id="dot-row"></div>
+  <div id="slide-counter">1 / 8</div>
+  <button id="btn-next" onclick="changeSlide(1)">→</button>
+</div>
+
+<script>
+  // ── STATE ──
+  let currentSlide = 0;
+  let editMode = false;
+  let saveTimer = null;
+  const STORAGE_KEY = 'tricentis_capstone_v1';
+
+  // ── INIT ──
+  document.addEventListener('DOMContentLoaded', () => {
+    loadFromStorage();
+    buildDots();
+    updateNav();
+    setupAutoSave();
+    document.addEventListener('keydown', handleKey);
+  });
+
+  // ── SLIDE NAV ──
+  function getSlides() {
+    return Array.from(document.querySelectorAll('.slide'));
+  }
+
+  function changeSlide(dir) {
+    const slides = getSlides();
+    const next = currentSlide + dir;
+    if (next < 0 || next >= slides.length) return;
+    slides[currentSlide].classList.remove('active');
+    currentSlide = next;
+    slides[currentSlide].classList.add('active');
+    updateNav();
+  }
+
+  function goToSlide(i) {
+    const slides = getSlides();
+    if (i < 0 || i >= slides.length) return;
+    slides[currentSlide].classList.remove('active');
+    currentSlide = i;
+    slides[currentSlide].classList.add('active');
+    updateNav();
+  }
+
+  function updateNav() {
+    const slides = getSlides();
+    const n = slides.length;
+    document.getElementById('btn-prev').disabled = currentSlide === 0;
+    document.getElementById('btn-next').disabled = currentSlide === n - 1;
+    document.getElementById('slide-counter').textContent = `${currentSlide + 1} / ${n}`;
+    buildDots();
+    // update badge numbers
+    slides.forEach((s, i) => {
+      const badge = s.querySelector('.slide-num-badge');
+      if (badge) badge.textContent = i + 1;
+    });
+  }
+
+  function buildDots() {
+    const slides = getSlides();
+    const row = document.getElementById('dot-row');
+    row.innerHTML = '';
+    slides.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === currentSlide ? ' active' : '');
+      d.onclick = () => goToSlide(i);
+      row.appendChild(d);
+    });
+  }
+
+  function handleKey(e) {
+    if (document.activeElement && document.activeElement.isContentEditable) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+  }
+
+  // ── EDIT MODE ──
+  function toggleEdit() {
+    editMode = !editMode;
+    document.body.classList.toggle('edit-mode', editMode);
+    document.getElementById('btn-edit').classList.toggle('active', editMode);
+
+    document.querySelectorAll('[data-editable]').forEach(el => {
+      el.contentEditable = editMode ? 'true' : 'false';
+    });
+
+    if (!editMode) saveToStorage();
+  }
+
+  // ── AUTO SAVE ──
+  function setupAutoSave() {
+    document.getElementById('stage').addEventListener('input', () => {
+      scheduleSave();
+    });
+  }
+
+  function scheduleSave() {
+    clearTimeout(saveTimer);
+    setSaveStatus('saving');
+    saveTimer = setTimeout(() => {
+      saveToStorage();
+      setSaveStatus('saved');
+    }, 800);
+  }
+
+  function setSaveStatus(state) {
+    const el = document.getElementById('save-status');
+    if (state === 'saving') {
+      el.textContent = 'Saving…';
+      el.className = 'saving';
+    } else {
+      el.textContent = '✓ All changes saved';
+      el.className = 'saved';
+    }
+  }
+
+  // ── STORAGE ──
+  function saveToStorage() {
+    const stage = document.getElementById('stage');
+    const data = {
+      html: stage.innerHTML,
+      slide: currentSlide,
+      ts: Date.now()
+    };
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch(e) {
+      console.warn('Save failed:', e);
+    }
+  }
+
+  function loadFromStorage() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      if (data.html) {
+        document.getElementById('stage').innerHTML = data.html;
+        // Re-attach event listeners to new DOM
+        document.querySelectorAll('[data-editable]').forEach(el => {
+          el.contentEditable = 'false';
+        });
+      }
+      if (typeof data.slide === 'number') {
+        currentSlide = 0;
+        goToSlide(data.slide);
+      }
+      setSaveStatus('saved');
+    } catch(e) {
+      console.warn('Load failed:', e);
+    }
+  }
+
+  // ── ADD / DELETE / DUPLICATE SLIDES ──
+  function addSlide() {
+    const stage = document.getElementById('stage');
+    const slides = getSlides();
+    const newIndex = slides.length;
+
+    const slide = document.createElement('div');
+    slide.className = 'slide';
+    slide.dataset.index = newIndex;
+    slide.innerHTML = `
+      <div class="slide-actions">
+        <button onclick="duplicateSlide(this)">Duplicate</button>
+        <button class="danger" onclick="deleteSlide(this)">Delete</button>
+      </div>
+      <div class="slide-inner">
+        <div class="slide-header">
+          <div class="slide-label" data-editable contenteditable="${editMode}">New Section</div>
+          <div class="slide-title" data-editable contenteditable="${editMode}">Slide Title</div>
+        </div>
+        <div class="slide-body">
+          <ul class="bullet-list">
+            <li data-editable contenteditable="${editMode}">Add your content here — click to edit in Edit Mode</li>
+            <li data-editable contenteditable="${editMode}">Second bullet point</li>
+            <li data-editable contenteditable="${editMode}">Third bullet point</li>
+          </ul>
+        </div>
+      </div>
+      <div class="slide-num-badge">${newIndex + 1}</div>
+    `;
+    stage.appendChild(slide);
+    goToSlide(newIndex);
+    saveToStorage();
+  }
+
+  function deleteSlide(btn) {
+    const slides = getSlides();
+    if (slides.length <= 1) return alert('Cannot delete the only slide.');
+    const slide = btn.closest('.slide');
+    const idx = getSlides().indexOf(slide);
+    slide.remove();
+    currentSlide = Math.min(currentSlide, getSlides().length - 1);
+    getSlides()[currentSlide].classList.add('active');
+    updateNav();
+    saveToStorage();
+  }
+
+  function duplicateSlide(btn) {
+    const slide = btn.closest('.slide');
+    const clone = slide.cloneNode(true);
+    clone.classList.remove('active');
+    slide.after(clone);
+    const idx = getSlides().indexOf(clone);
+    goToSlide(idx);
+    saveToStorage();
+  }
+
+  // ── FULLSCREEN ──
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  }
+</script>
+</body>
+</html>
