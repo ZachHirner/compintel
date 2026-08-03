@@ -17,7 +17,6 @@ COMPETITOR = "keysight"
 
 URLS = [
     "https://www.linkedin.com/company/keysight-technologies?trk=nav_type_overview",
-    "https://www.linkedin.com/company/keysight-technologies/jobs?trk=nav_type_jobs",
     "https://www.keysight.com/blogs/en/",
     "https://www.youtube.com/@keysight",
     "https://x.com/Keysight?lang=en",

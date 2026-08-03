@@ -18,8 +18,6 @@ COMPETITOR = "playwright"
 URLS = [
     # Microsoft LinkedIn company overview
     "https://www.linkedin.com/company/microsoft/",
-    # Microsoft LinkedIn Jobs — signals hiring direction
-    "https://www.linkedin.com/company/microsoft/jobs/",
     # Playwright YouTube channel
     "https://www.youtube.com/@Playwrightdev",
     # Playwright LinkedIn (community/product page)
