@@ -19,10 +19,10 @@ COMPETITOR = "opentext"
 URLS = [
     # LinkedIn company overview
     "https://www.linkedin.com/company/opentext/",
-    # OpenText blog — general
+    # LinkedIn Jobs — signals hiring direction and focus areas
+    "https://www.linkedin.com/company/opentext/jobs/",
+    # OpenText blog
     "https://blogs.opentext.com/",
-    # OpenText DevOps blog — targeted content for our use case
-    "https://blogs.opentext.com/technologies/devops/",
     # OpenText YouTube channel
     "https://www.youtube.com/@OpenText",
     "https://x.com/OpenText?lang=en",

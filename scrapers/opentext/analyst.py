@@ -18,12 +18,6 @@ COMPETITOR = "opentext"
 URLS = [
     # Forrester search — OpenText mentions in the last 30 days
     "https://www.forrester.com/allSearch?query=OpenText&publishedSinceInDays=30",
-    # Forrester blogs — free analyst commentary, no paywall
-    "https://www.forrester.com/blogs/",
-    # Gartner Peer Insights — OpenText software testing market reviews and ratings
-    "https://www.gartner.com/reviews/market/software-testing-tools/vendor/opentext",
-    # Gartner Peer Insights — OpenText application quality management
-    "https://www.gartner.com/reviews/market/devops-platforms/vendor/opentext",
 ]
 
 
