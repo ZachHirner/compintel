@@ -19,8 +19,8 @@ COMPETITOR = "opentext"
 URLS = [
     # PeerSpot — OpenText vendor overview page
     "https://www.peerspot.com/vendors/opentext",
-    # PeerSpot — OpenText Performance Engineering reviews
-    "https://www.peerspot.com/products/opentext-performance-engineering-reviews",
+    # Gartner Peer Insights — OpenText software testing reviews
+    "https://www.gartner.com/reviews/market/software-testing-tools/vendor/opentext",
     # PeerSpot — OpenText Functional Testing reviews
     "https://www.peerspot.com/products/opentext-functional-testing-reviews",
     # PeerSpot — Application Quality Management reviews
