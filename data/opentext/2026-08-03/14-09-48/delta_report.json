@@ -1,0 +1,273 @@
+{
+  "competitor": "opentext",
+  "run_date": "2026-08-03",
+  "previous_run_dir": "data/opentext/2026-08-03/11-43-04",
+  "changes_detected": true,
+  "changed_pages": [
+    {
+      "url": "https://www.opentext.com/products/devops-cloud",
+      "source_type": "competitor",
+      "prev_length": 12856,
+      "curr_length": 12380,
+      "length_delta": -476,
+      "change_pct": 3.7,
+      "added_lines": [],
+      "removed_lines": [
+        "We use cookies and similar technologies (including third party cookies from our partners) to enable essential site functionality, enhance site navigation, analyze site usage, personalization, and assist in our advertising and marketing efforts and provide social media features, for which we may share cookie data with our third-party partners. You can update or manage your settings at any time. To learn more, see our",
+        "Cookie Policy",
+        "Cookies Preferences",
+        "Reject All",
+        "Accept All"
+      ]
+    },
+    {
+      "url": "https://www.opentext.com/products/saas/core-software-delivery-platform",
+      "source_type": "competitor",
+      "prev_length": 24039,
+      "curr_length": 23563,
+      "length_delta": -476,
+      "change_pct": 2.0,
+      "added_lines": [
+        "This field is required"
+      ],
+      "removed_lines": [
+        "This field is required",
+        "We use cookies and similar technologies (including third party cookies from our partners) to enable essential site functionality, enhance site navigation, analyze site usage, personalization, and assist in our advertising and marketing efforts and provide social media features, for which we may share cookie data with our third-party partners. You can update or manage your settings at any time. To learn more, see our",
+        "Cookie Policy",
+        "Cookies Preferences",
+        "Reject All",
+        "Accept All"
+      ]
+    },
+    {
+      "url": "https://www.opentext.com/products/application-quality-management",
+      "source_type": "competitor",
+      "prev_length": 25179,
+      "curr_length": 24703,
+      "length_delta": -476,
+      "change_pct": 1.9,
+      "added_lines": [],
+      "removed_lines": [
+        "We use cookies and similar technologies (including third party cookies from our partners) to enable essential site functionality, enhance site navigation, analyze site usage, personalization, and assist in our advertising and marketing efforts and provide social media features, for which we may share cookie data with our third-party partners. You can update or manage your settings at any time. To learn more, see our",
+        "Cookie Policy",
+        "Cookies Preferences",
+        "Reject All",
+        "Accept All"
+      ]
+    },
+    {
+      "url": "https://www.opentext.com/about/press-release-listing",
+      "source_type": "competitor",
+      "prev_length": 2498,
+      "curr_length": 2022,
+      "length_delta": -476,
+      "change_pct": 19.1,
+      "added_lines": [
+        "OpenText named a Leader in 2025 IDC MarketScape  for Worldwide Analytical Databases"
+      ],
+      "removed_lines": [
+        "OpenText named a Leader in 2025 IDC MarketScape  for Worldwide Analytical Databases",
+        "We use cookies and similar technologies (including third party cookies from our partners) to enable essential site functionality, enhance site navigation, analyze site usage, personalization, and assist in our advertising and marketing efforts and provide social media features, for which we may share cookie data with our third-party partners. You can update or manage your settings at any time. To learn more, see our",
+        "Cookie Policy",
+        "Cookies Preferences",
+        "Reject All",
+        "Accept All"
+      ]
+    },
+    {
+      "url": "https://www.linkedin.com/company/opentext/",
+      "source_type": "social_media",
+      "prev_length": 19984,
+      "curr_length": 20401,
+      "length_delta": 417,
+      "change_pct": 2.1,
+      "added_lines": [
+        "550,247 followers",
+        "Discover all 22,867 employees",
+        "Employees at OpenText",
+        "Malcolm Isaacs",
+        "LinkedIn Member",
+        "LinkedIn Member",
+        "LinkedIn Member",
+        "LinkedIn Member",
+        "LinkedIn Member",
+        "View 23k employees at OpenText",
+        "Sign in",
+        "Welcome back",
+        "Email or phone",
+        "Password",
+        "Show",
+        "Forgot password?",
+        "Sign in",
+        "or",
+        "By clicking Continue to join or sign in, you agree to LinkedIn’s",
+        "User Agreement",
+        ",",
+        "Privacy Policy",
+        ", and",
+        "Cookie Policy",
+        ".",
+        "New to LinkedIn?",
+        "Join now",
+        "or",
+        "By clicking Continue to join or sign in, you agree to LinkedIn’s",
+        "User Agreement",
+        ",",
+        "Privacy Policy",
+        ", and",
+        "Cookie Policy",
+        ".",
+        "See all employees",
+        "550,247 followers",
+        "5h",
+        "27",
+        "550,247 followers"
+      ],
+      "removed_lines": [
+        "550,214 followers",
+        "View all 22,868 employees",
+        "Employees at OpenText",
+        "Malcolm Isaacs",
+        "Leo Yeung",
+        "Scott Ganson",
+        "Deno Konstantinidis",
+        "See all employees",
+        "550,214 followers",
+        "3h",
+        "20",
+        "550,214 followers",
+        "38.63%",
+        "18",
+        "Like",
+        "Comment",
+        "Share",
+        "OpenText",
+        "550,214 followers",
+        "3d",
+        "391",
+        "550,214 followers",
+        "550,214 followers",
+        "31",
+        "550,214 followers",
+        "550,214 followers",
+        "9.40%",
+        "69",
+        "550,214 followers",
+        "550,214 followers",
+        "6d",
+        "550,214 followers",
+        "97",
+        "550,214 followers",
+        "19.11%",
+        "550,214 followers",
+        "550,214 followers",
+        "550,214 followers",
+        "550,214 followers",
+        "550,214 followers"
+      ]
+    },
+    {
+      "url": "https://blogs.opentext.com/",
+      "source_type": "social_media",
+      "prev_length": 12785,
+      "curr_length": 12785,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "We'd like to show you notifications for the latest news and updates.",
+        "Allow",
+        "Cancel",
+        "This field is required"
+      ],
+      "removed_lines": [
+        "This field is required",
+        "We'd like to show you notifications for the latest news and updates.",
+        "Allow",
+        "Cancel"
+      ]
+    },
+    {
+      "url": "https://www.youtube.com/@OpenText",
+      "source_type": "social_media",
+      "prev_length": 7179,
+      "curr_length": 7176,
+      "length_delta": -3,
+      "change_pct": 0.0,
+      "added_lines": [
+        "YouTube Premium",
+        "Info",
+        "Shopping",
+        "If playback doesn't begin shortly, try restarting your device.",
+        "•",
+        "6,016 views",
+        "Info",
+        "Shopping",
+        "If playback doesn't begin shortly, try restarting your device.",
+        "•"
+      ],
+      "removed_lines": [
+        "Try Premium for $0",
+        "Info",
+        "Shopping",
+        "If playback doesn't begin shortly, try restarting your device.",
+        "•",
+        "6,010 views",
+        "Info",
+        "Shopping",
+        "If playback doesn't begin shortly, try restarting your device.",
+        "•"
+      ]
+    },
+    {
+      "url": "https://x.com/OpenText?lang=en",
+      "source_type": "social_media",
+      "prev_length": 1892,
+      "curr_length": 1892,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "337",
+        "383",
+        "337"
+      ],
+      "removed_lines": [
+        "333",
+        "381",
+        "336"
+      ]
+    },
+    {
+      "url": "https://www.peerspot.com/products/opentext-functional-testing-reviews",
+      "source_type": "review",
+      "prev_length": 31113,
+      "curr_length": 31113,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word",
+        "mmMwWLliI0fiflO&1",
+        "mmMwWLliI0fiflO&1",
+        "mmMwWLliI0fiflO&1",
+        "mmMwWLliI0fiflO&1",
+        "mmMwWLliI0fiflO&1",
+        "mmMwWLliI0fiflO&1",
+        "mmMwWLliI0fiflO&1",
+        "Confirm My Choices"
+      ],
+      "removed_lines": [
+        "Confirm My Choices",
+        "word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word",
+        "mmMwWLliI0fiflO&1",
+        "mmMwWLliI0fiflO&1",
+        "mmMwWLliI0fiflO&1",
+        "mmMwWLliI0fiflO&1",
+        "mmMwWLliI0fiflO&1",
+        "mmMwWLliI0fiflO&1",
+        "mmMwWLliI0fiflO&1"
+      ]
+    }
+  ],
+  "new_pages": [],
+  "removed_pages": [],
+  "unchanged_count": 7
+}
