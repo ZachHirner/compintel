@@ -2,6 +2,7 @@
 Delta detection: compares the current scrape run against the most recent previous run
 and surfaces meaningful content changes for competitive intelligence.
 """
+import difflib
 import json
 import hashlib
 import logging
@@ -50,6 +51,33 @@ def _load_pages(run_dir: Path, source_type: str) -> dict[str, str]:
     return {p["url"]: p["content"] for p in data.get("pages", [])}
 
 
+def _text_diff_excerpts(prev_text: str, curr_text: str, max_lines: int = 40) -> dict:
+    """
+    Return the added and removed lines from a unified diff of two text blocks.
+    Splits on newlines; strips blank diff lines. Caps at max_lines per side.
+    """
+    prev_lines = prev_text.splitlines(keepends=True)
+    curr_lines = curr_text.splitlines(keepends=True)
+    diff = list(difflib.unified_diff(prev_lines, curr_lines, lineterm="", n=0))
+
+    added = []
+    removed = []
+    for line in diff:
+        if line.startswith("+") and not line.startswith("+++"):
+            stripped = line[1:].strip()
+            if stripped:
+                added.append(stripped)
+        elif line.startswith("-") and not line.startswith("---"):
+            stripped = line[1:].strip()
+            if stripped:
+                removed.append(stripped)
+
+    return {
+        "added_lines": added[:max_lines],
+        "removed_lines": removed[:max_lines],
+    }
+
+
 def _compare(current_run_dir: Path, previous_run_dir: Path) -> dict:
     changed = []
     new_pages = []
@@ -66,6 +94,7 @@ def _compare(current_run_dir: Path, previous_run_dir: Path) -> dict:
             elif _hash(curr_content) != _hash(prev[url]):
                 prev_len = len(prev[url])
                 curr_len = len(curr_content)
+                excerpts = _text_diff_excerpts(prev[url], curr_content)
                 changed.append({
                     "url": url,
                     "source_type": source_type,
@@ -73,6 +102,8 @@ def _compare(current_run_dir: Path, previous_run_dir: Path) -> dict:
                     "curr_length": curr_len,
                     "length_delta": curr_len - prev_len,
                     "change_pct": round(abs(curr_len - prev_len) / max(prev_len, 1) * 100, 1),
+                    "added_lines": excerpts["added_lines"],
+                    "removed_lines": excerpts["removed_lines"],
                 })
             else:
                 unchanged_count += 1
@@ -104,24 +135,27 @@ def _ai_summarize_changes(
     client = anthropic.Anthropic()
 
     for change in significant:
-        source_type = change["source_type"]
-        curr_content = _load_pages(current_run_dir, source_type).get(change["url"], "")[:3000]
-        prev_content = _load_pages(previous_run_dir, source_type).get(change["url"], "")[:3000]
+        added = "\n".join(change.get("added_lines", []))[:2000]
+        removed = "\n".join(change.get("removed_lines", []))[:2000]
 
         try:
             resp = client.messages.create(
                 model=MODEL,
-                max_tokens=300,
+                max_tokens=400,
                 messages=[{
                     "role": "user",
                     "content": (
-                        f"You are a competitive intelligence analyst tracking {competitor.upper()}. "
-                        "Compare these two versions of the same web page and summarize what changed "
-                        "in 1-2 sentences. Focus only on substantive changes: new products, pricing "
-                        "updates, messaging shifts, new features, or headcount changes. "
-                        "If the change appears trivial (nav links, cookie notices, formatting), "
-                        "say so in one sentence.\n\n"
-                        f"PREVIOUS:\n{prev_content}\n\nCURRENT:\n{curr_content}"
+                        f"You are a competitive intelligence analyst tracking {competitor.upper()}.\n"
+                        f"URL: {change['url']}\n\n"
+                        "Below are the EXACT lines added and removed since the last scrape.\n"
+                        "Identify any substantive competitive changes: new product names, "
+                        "updated pricing or packaging, changed taglines or messaging, new feature "
+                        "names, headcount or funding numbers, or newly announced partnerships.\n"
+                        "Quote the specific changed text where possible. "
+                        "If the diff only contains nav links, timestamps, cookie notices, or "
+                        "formatting noise, say: 'No substantive changes — cosmetic/layout diff only.'\n\n"
+                        f"LINES ADDED:\n{added or '(none)'}\n\n"
+                        f"LINES REMOVED:\n{removed or '(none)'}"
                     ),
                 }],
             )
