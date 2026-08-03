@@ -1,0 +1,43 @@
+{
+  "competitor": "playwright",
+  "run_date": "2026-08-03",
+  "previous_run_dir": "data/playwright/2026-08-03/11-02-19",
+  "changes_detected": true,
+  "changed_pages": [
+    {
+      "url": "https://www.linkedin.com/company/microsoft/",
+      "source_type": "social_media",
+      "prev_length": 30898,
+      "curr_length": 30897,
+      "length_delta": -1,
+      "change_pct": 0.0
+    },
+    {
+      "url": "https://www.linkedin.com/company/microsoft/jobs/",
+      "source_type": "social_media",
+      "prev_length": 490,
+      "curr_length": 5443,
+      "length_delta": 4953,
+      "change_pct": 1010.8
+    },
+    {
+      "url": "https://www.youtube.com/@Playwrightdev",
+      "source_type": "social_media",
+      "prev_length": 4864,
+      "curr_length": 4653,
+      "length_delta": -211,
+      "change_pct": 4.3
+    },
+    {
+      "url": "https://www.linkedin.com/company/playwrightweb/",
+      "source_type": "social_media",
+      "prev_length": 12075,
+      "curr_length": 490,
+      "length_delta": -11585,
+      "change_pct": 95.9
+    }
+  ],
+  "new_pages": [],
+  "removed_pages": [],
+  "unchanged_count": 9
+}
