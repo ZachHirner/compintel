@@ -18,8 +18,6 @@ COMPETITOR = "uipath"
 URLS = [
     # LinkedIn company overview
     "https://www.linkedin.com/company/uipath/",
-    # LinkedIn Jobs — signals hiring direction
-    "https://www.linkedin.com/company/uipath/jobs/",
     # UiPath blog
     "https://www.uipath.com/blog",
     # YouTube channel
