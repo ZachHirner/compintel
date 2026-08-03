@@ -1,0 +1,83 @@
+{
+  "competitor": "uipath",
+  "run_date": "2026-08-03",
+  "previous_run_dir": "data/uipath/2026-08-03/11-02-13",
+  "changes_detected": true,
+  "changed_pages": [
+    {
+      "url": "https://www.uipath.com/product",
+      "source_type": "competitor",
+      "prev_length": 5077,
+      "curr_length": 5077,
+      "length_delta": 0,
+      "change_pct": 0.0
+    },
+    {
+      "url": "https://www.uipath.com/platform/agentic-automation",
+      "source_type": "competitor",
+      "prev_length": 13073,
+      "curr_length": 13073,
+      "length_delta": 0,
+      "change_pct": 0.0
+    },
+    {
+      "url": "https://www.linkedin.com/company/uipath/",
+      "source_type": "social_media",
+      "prev_length": 13611,
+      "curr_length": 13214,
+      "length_delta": -397,
+      "change_pct": 2.9
+    },
+    {
+      "url": "https://www.uipath.com/blog",
+      "source_type": "social_media",
+      "prev_length": 9400,
+      "curr_length": 9400,
+      "length_delta": 0,
+      "change_pct": 0.0
+    },
+    {
+      "url": "https://www.youtube.com/@UiPath",
+      "source_type": "social_media",
+      "prev_length": 13584,
+      "curr_length": 13584,
+      "length_delta": 0,
+      "change_pct": 0.0
+    },
+    {
+      "url": "https://x.com/UiPath?lang=en",
+      "source_type": "social_media",
+      "prev_length": 1606,
+      "curr_length": 1606,
+      "length_delta": 0,
+      "change_pct": 0.0
+    },
+    {
+      "url": "https://www.uipath.com/resources/automation-analyst-reports",
+      "source_type": "analyst",
+      "prev_length": 7451,
+      "curr_length": 7451,
+      "length_delta": 0,
+      "change_pct": 0.0
+    },
+    {
+      "url": "https://www.uipath.com/newsroom",
+      "source_type": "analyst",
+      "prev_length": 5479,
+      "curr_length": 5479,
+      "length_delta": 0,
+      "change_pct": 0.0
+    },
+    {
+      "url": "https://www.peerspot.com/products/uipath-reviews",
+      "source_type": "review",
+      "prev_length": 46845,
+      "curr_length": 48693,
+      "length_delta": 1848,
+      "change_pct": 3.9
+    }
+  ],
+  "new_pages": [],
+  "removed_pages": [],
+  "unchanged_count": 5
+}
