@@ -20,7 +20,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
-from analysis import summarize
+from analysis import summarize, delta as delta_mod
 
 logging.basicConfig(
     level=logging.INFO,
@@ -112,6 +112,13 @@ def main():
             if src.exists():
                 (output_dir / filename).write_bytes(src.read_bytes())
 
+    # Delta detection runs after every scrape (no API key required for hash comparison)
+    if not args.analyze_only:
+        logger.info("=== Running delta detection ===")
+        delta_report = delta_mod.run(run_dir, args.competitor, DATA_ROOT, report_date)
+    else:
+        delta_report = None
+
     if args.scrape_only:
         print("\nScrape complete. Raw data saved to:", run_dir)
         for key, filename in RAW_FILE_MAP.items():
@@ -120,16 +127,35 @@ def main():
                 pages = json.loads(path.read_text()).get("pages", [])
                 ok = sum(1 for p in pages if not p["content"].startswith("ERROR"))
                 print(f"  {key}: {ok}/{len(pages)} pages scraped successfully")
+        if delta_report:
+            n_changed = len(delta_report.get("changed_pages", []))
+            n_new = len(delta_report.get("new_pages", []))
+            print(f"\nDelta vs previous run: {n_changed} page(s) changed, {n_new} new page(s)")
         return
 
     import os
     if not os.environ.get("ANTHROPIC_API_KEY"):
         logger.warning("ANTHROPIC_API_KEY not set — skipping analysis, scrape data saved.")
         print("\nScrape complete (analysis skipped — no ANTHROPIC_API_KEY). Raw data saved to:", run_dir)
+        if delta_report:
+            n_changed = len(delta_report.get("changed_pages", []))
+            n_new = len(delta_report.get("new_pages", []))
+            print(f"Delta vs previous run: {n_changed} page(s) changed, {n_new} new page(s)")
         return
 
     logger.info("=== Running analysis (date: %s) ===", report_date)
     report = summarize.run(output_dir, scraped, report_date)
+
+    # Merge delta summary into CI report
+    if delta_report:
+        report["delta"] = {
+            "previous_run_dir": delta_report.get("previous_run_dir"),
+            "changes_detected": delta_report.get("changes_detected"),
+            "changed_pages": delta_report.get("changed_pages", []),
+            "new_pages": delta_report.get("new_pages", []),
+        }
+        out_path = output_dir / "ci_report.json"
+        out_path.write_text(json.dumps(report, indent=2, ensure_ascii=False))
 
     print("\n" + "=" * 60)
     print(f"COMPETITIVE INTELLIGENCE REPORT — {args.competitor.upper()}")
