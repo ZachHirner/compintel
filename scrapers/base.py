@@ -7,12 +7,13 @@ import logging
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium_stealth import stealth
 
 logger = logging.getLogger(__name__)
 
 _DEFAULT_WAIT = 6
-_DEFAULT_CHAR_LIMIT = 25_000
+_DEFAULT_CHAR_LIMIT = 50_000
 
 
 def _build_driver() -> webdriver.Chrome:
@@ -41,6 +42,31 @@ def _build_driver() -> webdriver.Chrome:
     return driver
 
 
+def _load_and_scroll(driver: webdriver.Chrome, url: str, wait: int) -> None:
+    """Load url, wait for JS to finish, then scroll to trigger lazy-loaded content."""
+    driver.get(url)
+    WebDriverWait(driver, 15).until(
+        lambda d: d.execute_script("return document.readyState") == "complete"
+    )
+    time.sleep(wait)
+    # Scroll incrementally to trigger lazy-load
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight / 2);")
+    time.sleep(2)
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+    time.sleep(2)
+
+
+def _extract_text(driver: webdriver.Chrome, char_limit: int) -> str:
+    """Extract main content text from the current page, stripping nav/layout noise."""
+    soup = BeautifulSoup(driver.page_source, "html.parser")
+    for tag in soup(["script", "style", "noscript", "svg", "header", "footer", "nav"]):
+        tag.decompose()
+    # Prefer semantic content containers; fall back to full body
+    content = soup.find("main") or soup.find("article") or soup.find("body") or soup
+    text = content.get_text(separator="\n", strip=True)
+    return text[:char_limit]
+
+
 def scrape_site(url: str, wait: int = _DEFAULT_WAIT, char_limit: int = _DEFAULT_CHAR_LIMIT) -> str:
     """
     Load *url* in a Chrome instance with stealth patches applied,
@@ -49,15 +75,8 @@ def scrape_site(url: str, wait: int = _DEFAULT_WAIT, char_limit: int = _DEFAULT_
     driver = _build_driver()
     try:
         logger.info("Fetching %s", url)
-        driver.get(url)
-        time.sleep(wait)
-
-        soup = BeautifulSoup(driver.page_source, "html.parser")
-        for tag in soup(["script", "style", "noscript", "svg"]):
-            tag.decompose()
-
-        text = soup.get_text(separator="\n", strip=True)
-        return text[:char_limit]
+        _load_and_scroll(driver, url, wait)
+        return _extract_text(driver, char_limit)
     finally:
         driver.quit()
 
@@ -73,15 +92,8 @@ def scrape_multiple(urls: list[str], wait: int = _DEFAULT_WAIT, char_limit: int 
         for url in urls:
             try:
                 logger.info("Fetching %s", url)
-                driver.get(url)
-                time.sleep(wait)
-
-                soup = BeautifulSoup(driver.page_source, "html.parser")
-                for tag in soup(["script", "style", "noscript", "svg"]):
-                    tag.decompose()
-
-                text = soup.get_text(separator="\n", strip=True)
-                results[url] = text[:char_limit]
+                _load_and_scroll(driver, url, wait)
+                results[url] = _extract_text(driver, char_limit)
             except Exception as exc:
                 logger.warning("Failed to scrape %s: %s", url, exc)
                 results[url] = f"ERROR: {exc}"
