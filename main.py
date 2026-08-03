@@ -129,7 +129,7 @@ def run_competitor(competitor: str, report_date: str, run_timestamp: str, args: 
         return
 
     logger.info("=== Running analysis (date: %s) ===", report_date)
-    report = summarize.run(output_dir, scraped, report_date)
+    report = summarize.run(output_dir, scraped, report_date, competitor=args.competitor)
 
     if delta_report:
         report["delta"] = {

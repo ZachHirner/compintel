@@ -11,11 +11,11 @@ logger = logging.getLogger(__name__)
 
 MODEL = "claude-sonnet-5"
 
-SYSTEM_PROMPT = """You are a senior competitive intelligence analyst at Tricentis, a software testing company.
-Tricentis competes directly with OpenText in the DevOps quality / software testing market.
+_SYSTEM_PROMPT_TEMPLATE = """You are a senior competitive intelligence analyst at Tricentis, a software testing company.
+Tricentis competes directly with {competitor_name} in the DevOps quality / software testing market.
 Your job is to synthesize raw web-scraped data into actionable CI reports for the Tricentis sales and product teams."""
 
-ANALYSIS_PROMPT_TEMPLATE = """Below is raw text scraped from four source types about OpenText.
+ANALYSIS_PROMPT_TEMPLATE = """Below is raw text scraped from four source types about {competitor_name}.
 Analyze all sources and produce a structured competitive intelligence report in JSON.
 
 ---
@@ -39,13 +39,13 @@ Analyze all sources and produce a structured competitive intelligence report in 
 Produce a JSON object with exactly these keys:
 
 {{
-  "competitor": "OpenText",
+  "competitor": "{competitor_name}",
   "report_date": "{report_date}",
-  "executive_summary": "3-4 sentence overview of OpenText's current competitive position in DevOps/quality testing",
+  "executive_summary": "3-4 sentence overview of {competitor_name}'s current competitive position in DevOps/quality testing",
   "key_products": [
     {{"name": "...", "description": "...", "target_segment": "..."}}
   ],
-  "positioning_themes": ["list of 3-5 core messaging themes OpenText uses"],
+  "positioning_themes": ["list of 3-5 core messaging themes {competitor_name} uses"],
   "strengths": ["list of genuine strengths from product pages + analyst data"],
   "weaknesses": ["list of weaknesses surfaced in customer reviews and analyst commentary"],
   "recent_moves": ["list of notable recent announcements, acquisitions, or pivots from newsroom/blog"],
@@ -59,10 +59,10 @@ Produce a JSON object with exactly these keys:
     "top_praise": ["top 3 praised aspects from reviews"]
   }},
   "tricentis_battlecard_notes": {{
-    "where_we_win": ["situations or deal types where Tricentis beats OpenText"],
-    "where_they_win": ["situations or deal types where OpenText beats Tricentis"],
+    "where_we_win": ["situations or deal types where Tricentis beats {competitor_name}"],
+    "where_they_win": ["situations or deal types where {competitor_name} beats Tricentis"],
     "key_differentiators": ["Tricentis advantages to emphasize in competitive deals"],
-    "landmines": ["OpenText weaknesses to probe during discovery"],
+    "landmines": ["{competitor_name} weaknesses to probe during discovery"],
     "suggested_talk_tracks": ["1-2 sentence talk tracks for AEs"]
   }},
   "data_quality_notes": "Brief note on which sources had useful data vs. blocked/empty pages"
@@ -71,17 +71,20 @@ Produce a JSON object with exactly these keys:
 Return only the JSON object, no markdown fences."""
 
 
+_PER_PAGE_CHAR_LIMIT = 10_000
+
+
 def _extract_text(scraped_data: dict) -> str:
     """Flatten a scraped data dict into a single text block for the prompt."""
     parts = []
     for page in scraped_data.get("pages", []):
         url = page.get("url", "unknown")
         content = page.get("content", "")
-        parts.append(f"[{url}]\n{content[:4000]}")  # cap per-page to keep prompt manageable
+        parts.append(f"[{url}]\n{content[:_PER_PAGE_CHAR_LIMIT]}")
     return "\n\n".join(parts) if parts else "No data available."
 
 
-def run(output_dir: Path, scraped_data: dict[str, dict], report_date: str) -> dict:
+def run(output_dir: Path, scraped_data: dict[str, dict], report_date: str, competitor: str = "opentext") -> dict:
     """
     scraped_data: {
         "competitor": <dict from competitor.run()>,
@@ -90,9 +93,11 @@ def run(output_dir: Path, scraped_data: dict[str, dict], report_date: str) -> di
         "review": <dict from review.run()>,
     }
     """
-    logger.info("[analysis] Building CI report via Claude API")
+    competitor_name = competitor.replace("-", " ").title()
+    logger.info("[analysis] Building CI report for %s via Claude API", competitor_name)
 
     prompt = ANALYSIS_PROMPT_TEMPLATE.format(
+        competitor_name=competitor_name,
         competitor_content=_extract_text(scraped_data.get("competitor", {})),
         social_content=_extract_text(scraped_data.get("social_media", {})),
         analyst_content=_extract_text(scraped_data.get("analyst", {})),
@@ -100,11 +105,13 @@ def run(output_dir: Path, scraped_data: dict[str, dict], report_date: str) -> di
         report_date=report_date,
     )
 
+    system_prompt = _SYSTEM_PROMPT_TEMPLATE.format(competitor_name=competitor_name)
+
     client = anthropic.Anthropic()
     message = client.messages.create(
         model=MODEL,
         max_tokens=4096,
-        system=SYSTEM_PROMPT,
+        system=system_prompt,
         messages=[{"role": "user", "content": prompt}],
     )
 
