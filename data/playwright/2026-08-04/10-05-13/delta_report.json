@@ -1,0 +1,163 @@
+{
+  "competitor": "playwright",
+  "run_date": "2026-08-04",
+  "previous_run_dir": "data/playwright/2026-08-03/14-09-53",
+  "changes_detected": true,
+  "changed_pages": [
+    {
+      "url": "https://github.com/microsoft/playwright/releases",
+      "source_type": "competitor",
+      "prev_length": 31804,
+      "curr_length": 31802,
+      "length_delta": -2,
+      "change_pct": 0.0,
+      "added_lines": [
+        "94k"
+      ],
+      "removed_lines": [
+        "93.9k"
+      ]
+    },
+    {
+      "url": "https://www.linkedin.com/company/microsoft/",
+      "source_type": "social_media",
+      "prev_length": 31320,
+      "curr_length": 31318,
+      "length_delta": -2,
+      "change_pct": 0.0,
+      "added_lines": [
+        "28,789,537 followers",
+        "View all 233,335 employees",
+        "5d",
+        "10,688",
+        "433 Comments",
+        "1,350",
+        "68 Comments",
+        "Like",
+        "Comment",
+        "Share",
+        "Microsoft",
+        "28,789,537 followers",
+        "1w",
+        "966",
+        "10,719",
+        "426 Comments",
+        "1w",
+        "340",
+        "743",
+        "43 Comments",
+        "893",
+        "76 Comments",
+        "6,315",
+        "584 Comments",
+        "7,482",
+        "786 Comments",
+        "42,156 followers",
+        "976",
+        "33 Comments",
+        "27.47%",
+        "4,037",
+        "117 Comments",
+        "2w",
+        "3.76%",
+        "1,213",
+        "4.03%",
+        "615",
+        "56 Comments",
+        "2.76%",
+        "1,162"
+      ],
+      "removed_lines": [
+        "28,782,204 followers",
+        "View all 233,343 employees",
+        "4d",
+        "10,549",
+        "425 Comments",
+        "1,329",
+        "67 Comments",
+        "Like",
+        "Comment",
+        "Share",
+        "Microsoft",
+        "28,782,204 followers",
+        "6d",
+        "960",
+        "10,655",
+        "424 Comments",
+        "6d",
+        "339",
+        "738",
+        "44 Comments",
+        "871",
+        "75 Comments",
+        "6,275",
+        "581 Comments",
+        "7,432",
+        "781 Comments",
+        "42,128 followers",
+        "969",
+        "32 Comments",
+        "100.00%",
+        "3,981",
+        "115 Comments",
+        "1w",
+        "10.08%",
+        "1,209",
+        "1.86%",
+        "600",
+        "55 Comments",
+        "1.25%",
+        "1,163"
+      ]
+    },
+    {
+      "url": "https://www.youtube.com/@Playwrightdev",
+      "source_type": "social_media",
+      "prev_length": 4864,
+      "curr_length": 4861,
+      "length_delta": -3,
+      "change_pct": 0.1,
+      "added_lines": [
+        "YouTube Premium",
+        "35.2K subscribers",
+        "52,008 views",
+        "52K views"
+      ],
+      "removed_lines": [
+        "Try Premium for $0",
+        "35.1K subscribers",
+        "51,938 views",
+        "51K views"
+      ]
+    },
+    {
+      "url": "https://x.com/playwrightweb?lang=en",
+      "source_type": "social_media",
+      "prev_length": 1759,
+      "curr_length": 1754,
+      "length_delta": -5,
+      "change_pct": 0.3,
+      "added_lines": [
+        "973",
+        "106",
+        "See Playwright’s full profile",
+        "Continue to X"
+      ],
+      "removed_lines": [
+        "974",
+        "107",
+        "See @playwrightweb's full profile",
+        "Sign up",
+        "Log in"
+      ]
+    }
+  ],
+  "new_pages": [],
+  "removed_pages": [
+    {
+      "url": "https://www.linkedin.com/company/microsoft/jobs/",
+      "source_type": "social_media"
+    }
+  ],
+  "unchanged_count": 8
+}
