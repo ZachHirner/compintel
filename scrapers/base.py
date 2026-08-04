@@ -7,13 +7,19 @@ import logging
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium_stealth import stealth
 
 logger = logging.getLogger(__name__)
 
 _DEFAULT_WAIT = 6
 _DEFAULT_CHAR_LIMIT = 50_000
+
+# Minimum characters of visible body text before we consider the page usefully loaded.
+# Pages that only render a banner/overlay/cookie wall tend to stay below this.
+_MIN_CONTENT_CHARS = 500
 
 
 def _build_driver() -> webdriver.Chrome:
@@ -42,14 +48,37 @@ def _build_driver() -> webdriver.Chrome:
     return driver
 
 
+def _wait_for_content(driver: webdriver.Chrome, timeout: int = 20) -> None:
+    """
+    Wait until the page body contains at least _MIN_CONTENT_CHARS of visible text.
+    This catches JS-heavy pages where readyState fires before the main content
+    hydrates — e.g. countdown banners or overlays that render first and block
+    the rest of the page from appearing until their JS bundle finishes.
+    Falls back gracefully after timeout rather than raising.
+    """
+    try:
+        WebDriverWait(driver, timeout).until(
+            lambda d: len(
+                BeautifulSoup(d.page_source, "html.parser")
+                .get_text(separator=" ", strip=True)
+            ) >= _MIN_CONTENT_CHARS
+        )
+    except Exception:
+        # Page didn't reach threshold — proceed anyway and capture what's there
+        logger.debug("Content threshold not reached within %ds — proceeding", timeout)
+
+
 def _load_and_scroll(driver: webdriver.Chrome, url: str, wait: int) -> None:
-    """Load url, wait for JS to finish, then scroll to trigger lazy-loaded content."""
+    """Load url, wait for meaningful content to appear, then scroll to trigger lazy-loaded content."""
     driver.get(url)
+    # Phase 1: wait for DOM ready
     WebDriverWait(driver, 15).until(
         lambda d: d.execute_script("return document.readyState") == "complete"
     )
+    # Phase 2: wait for actual content to hydrate (handles JS overlays / countdown banners)
+    _wait_for_content(driver)
     time.sleep(wait)
-    # Scroll incrementally to trigger lazy-load
+    # Phase 3: scroll incrementally to trigger lazy-load
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight / 2);")
     time.sleep(2)
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
