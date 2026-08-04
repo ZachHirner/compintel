@@ -30,16 +30,36 @@ def _hash(text: str) -> str:
 
 
 def _find_previous_run(competitor_dir: Path, current_run_dir: Path) -> Path | None:
-    """Return the most recent run directory that precedes current_run_dir."""
-    runs = []
+    """
+    Return the most recent run from a different calendar date than current_run_dir.
+    Falls back to any earlier run if no prior-date run exists.
+    This prevents same-day test runs from being compared against each other.
+    """
+    current_date = current_run_dir.parent.name  # YYYY-MM-DD
+    same_date_runs = []
+    prior_date_runs = []
+
     for date_dir in competitor_dir.iterdir():
         if not date_dir.is_dir() or date_dir.name.startswith("."):
             continue
         for time_dir in date_dir.iterdir():
-            if time_dir.is_dir() and time_dir.resolve() != current_run_dir.resolve():
-                runs.append(time_dir)
-    runs.sort(key=lambda p: f"{p.parent.name}/{p.name}")
-    return runs[-1] if runs else None
+            if not time_dir.is_dir() or time_dir.resolve() == current_run_dir.resolve():
+                continue
+            key = f"{date_dir.name}/{time_dir.name}"
+            current_key = f"{current_date}/{current_run_dir.name}"
+            if key >= current_key:
+                continue  # skip runs after the current one
+            if date_dir.name == current_date:
+                same_date_runs.append(time_dir)
+            else:
+                prior_date_runs.append(time_dir)
+
+    # Prefer the latest run from a prior date; fall back to same-day if none
+    for pool in (prior_date_runs, same_date_runs):
+        if pool:
+            pool.sort(key=lambda p: f"{p.parent.name}/{p.name}")
+            return pool[-1]
+    return None
 
 
 def _load_pages(run_dir: Path, source_type: str) -> dict[str, str]:
