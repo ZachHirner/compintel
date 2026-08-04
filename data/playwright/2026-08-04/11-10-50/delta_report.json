@@ -1,0 +1,152 @@
+{
+  "competitor": "playwright",
+  "run_date": "2026-08-04",
+  "previous_run_dir": "data/playwright/2026-08-03/14-09-53",
+  "changes_detected": true,
+  "changed_pages": [
+    {
+      "url": "https://github.com/microsoft/playwright/releases",
+      "source_type": "competitor",
+      "prev_length": 31804,
+      "curr_length": 31802,
+      "length_delta": -2,
+      "change_pct": 0.0,
+      "added_lines": [
+        "94k"
+      ],
+      "removed_lines": [
+        "93.9k"
+      ]
+    },
+    {
+      "url": "https://www.linkedin.com/company/microsoft/",
+      "source_type": "social_media",
+      "prev_length": 31320,
+      "curr_length": 30898,
+      "length_delta": -422,
+      "change_pct": 1.3,
+      "added_lines": [
+        "28,789,602 followers",
+        "View all 233,345 employees",
+        "Employees at Microsoft",
+        "Reid Hoffman",
+        "Reid Hoffman is an Influencer",
+        "Tim Bakke",
+        "Leigh Huang",
+        "Jeffrey Dunn",
+        "See all employees",
+        "5d",
+        "10,699",
+        "433 Comments",
+        "1w",
+        "1,352",
+        "68 Comments",
+        "Like",
+        "Comment",
+        "Share",
+        "Microsoft",
+        "28,789,602 followers",
+        "1w",
+        "966",
+        "10,731",
+        "425 Comments",
+        "1w",
+        "340",
+        "743",
+        "43 Comments",
+        "894",
+        "76 Comments",
+        "6,317",
+        "585 Comments",
+        "7,487",
+        "787 Comments",
+        "42,158 followers",
+        "976",
+        "33 Comments",
+        "4,045",
+        "117 Comments",
+        "2w"
+      ],
+      "removed_lines": [
+        "28,782,204 followers",
+        "View all 233,343 employees",
+        "Employees at Microsoft",
+        "Reid Hoffman",
+        "Reid Hoffman is an Influencer",
+        "LinkedIn Member",
+        "LinkedIn Member",
+        "LinkedIn Member",
+        "LinkedIn Member",
+        "LinkedIn Member",
+        "View 233k employees at Microsoft",
+        "Sign in",
+        "Welcome back",
+        "Email or phone",
+        "Password",
+        "Show",
+        "Forgot password?",
+        "Sign in",
+        "or",
+        "By clicking Continue to join or sign in, you agree to LinkedIn’s",
+        "User Agreement",
+        ",",
+        "Privacy Policy",
+        ", and",
+        "Cookie Policy",
+        ".",
+        "New to LinkedIn?",
+        "Join now",
+        "or",
+        "By clicking Continue to join or sign in, you agree to LinkedIn’s",
+        "User Agreement",
+        ",",
+        "Privacy Policy",
+        ", and",
+        "Cookie Policy",
+        ".",
+        "See all employees",
+        "4d",
+        "10,549",
+        "425 Comments"
+      ]
+    },
+    {
+      "url": "https://x.com/playwrightweb?lang=en",
+      "source_type": "social_media",
+      "prev_length": 1759,
+      "curr_length": 1754,
+      "length_delta": -5,
+      "change_pct": 0.3,
+      "added_lines": [
+        "973",
+        "106",
+        "See Playwright’s full profile",
+        "Continue to X"
+      ],
+      "removed_lines": [
+        "974",
+        "107",
+        "See @playwrightweb's full profile",
+        "Sign up",
+        "Log in"
+      ]
+    }
+  ],
+  "new_pages": [
+    {
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC46Zj8pDH5tDosqm1gd7WTg",
+      "source_type": "social_media"
+    }
+  ],
+  "removed_pages": [
+    {
+      "url": "https://www.linkedin.com/company/microsoft/jobs/",
+      "source_type": "social_media"
+    },
+    {
+      "url": "https://www.youtube.com/@Playwrightdev",
+      "source_type": "social_media"
+    }
+  ],
+  "unchanged_count": 8
+}
