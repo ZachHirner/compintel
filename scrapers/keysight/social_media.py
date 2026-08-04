@@ -1,31 +1,33 @@
 """
-Scraper: Social media — Keysight/Eggplant LinkedIn, blog, and YouTube.
-
-LinkedIn surfaces company-level signals. The Eggplant/Keysight blog and
-YouTube channel show which use cases and verticals they are pushing.
-
-Note: Twitter/X requires a logged-in session; excluded from prototype.
+Scraper: Social media — Keysight LinkedIn, blog, YouTube RSS, and X/Twitter.
 """
 import json
 import logging
 from pathlib import Path
-from scrapers.base import scrape_multiple
+from scrapers.base import scrape_multiple_with_rss
 
 logger = logging.getLogger(__name__)
 
 COMPETITOR = "keysight"
 
 URLS = [
+    # LinkedIn company overview
     "https://www.linkedin.com/company/keysight-technologies?trk=nav_type_overview",
+    # Blog (bot-verified — kept for monitoring, may return thin content)
     "https://www.keysight.com/blogs/en/",
-    "https://www.youtube.com/@keysight",
+    # X/Twitter
     "https://x.com/Keysight?lang=en",
+]
+
+RSS_URLS = [
+    # YouTube RSS feed — channel ID UCsUQ4q-woGsK3VaAQynptbg
+    "https://www.youtube.com/feeds/videos.xml?channel_id=UCsUQ4q-woGsK3VaAQynptbg",
 ]
 
 
 def run(output_dir: Path) -> dict:
     logger.info("[social_media] Starting Keysight social media scrape")
-    raw = scrape_multiple(URLS)
+    raw = scrape_multiple_with_rss(URLS, rss_urls=RSS_URLS)
 
     output = {
         "source_type": "social_media",

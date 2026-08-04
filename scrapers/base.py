@@ -1,9 +1,12 @@
 """
 Shared browser driver and scraping utilities for all CI scrapers.
 Uses Selenium with stealth patches to avoid bot detection.
+RSS feeds are fetched directly without a browser.
 """
 import time
 import logging
+import urllib.request
+from xml.etree import ElementTree
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -94,6 +97,62 @@ def _extract_text(driver: webdriver.Chrome, char_limit: int) -> str:
     content = soup.find("main") or soup.find("article") or soup.find("body") or soup
     text = content.get_text(separator="\n", strip=True)
     return text[:char_limit]
+
+
+def fetch_rss(url: str, max_items: int = 10) -> str:
+    """
+    Fetch a YouTube RSS feed and return a plain-text summary of the latest videos.
+    Returns title, published date, and description for each entry — no browser needed.
+    """
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            xml = resp.read()
+        root = ElementTree.fromstring(xml)
+        ns = {
+            "atom": "http://www.w3.org/2005/Atom",
+            "media": "http://search.yahoo.com/mrss/",
+            "yt": "http://www.youtube.com/xml/schemas/2015",
+        }
+        entries = root.findall("atom:entry", ns)[:max_items]
+        lines = []
+        for entry in entries:
+            title = entry.findtext("atom:title", default="", namespaces=ns)
+            published = entry.findtext("atom:published", default="", namespaces=ns)[:10]
+            description = ""
+            group = entry.find("media:group", ns)
+            if group is not None:
+                desc_el = group.find("media:description", ns)
+                if desc_el is not None and desc_el.text:
+                    description = desc_el.text[:300].replace("\n", " ")
+            link_el = entry.find("atom:link", ns)
+            link = link_el.get("href", "") if link_el is not None else ""
+            lines.append(f"[{published}] {title}\n{description}\n{link}")
+        return "\n\n".join(lines) if lines else "No videos found."
+    except Exception as exc:
+        logger.warning("RSS fetch failed for %s: %s", url, exc)
+        return f"ERROR: {exc}"
+
+
+def scrape_multiple_with_rss(
+    urls: list[str],
+    rss_urls: list[str] | None = None,
+    wait: int = _DEFAULT_WAIT,
+    char_limit: int = _DEFAULT_CHAR_LIMIT,
+) -> dict[str, str]:
+    """
+    Scrape regular URLs via Selenium and fetch RSS URLs directly.
+    Returns {url: text_content} for all URLs combined.
+    """
+    results: dict[str, str] = {}
+    if rss_urls:
+        for url in rss_urls:
+            logger.info("Fetching RSS %s", url)
+            results[url] = fetch_rss(url)
+    if urls:
+        browser_results = scrape_multiple(urls, wait=wait, char_limit=char_limit)
+        results.update(browser_results)
+    return results
 
 
 def scrape_site(url: str, wait: int = _DEFAULT_WAIT, char_limit: int = _DEFAULT_CHAR_LIMIT) -> str:

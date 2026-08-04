@@ -1,16 +1,10 @@
 """
-Scraper: Social media — OpenText LinkedIn company page and blog.
-
-LinkedIn's public company page is accessible without login and surfaces
-recent posts, employee count, and follower growth signals. The OpenText
-blog doubles as a content/social signal for product focus areas.
-
-Note: Twitter/X requires a logged-in session; excluded from prototype.
+Scraper: Social media — OpenText LinkedIn, blog, YouTube RSS, and X/Twitter.
 """
 import json
 import logging
 from pathlib import Path
-from scrapers.base import scrape_multiple
+from scrapers.base import scrape_multiple_with_rss
 
 logger = logging.getLogger(__name__)
 
@@ -21,15 +15,19 @@ URLS = [
     "https://www.linkedin.com/company/opentext/",
     # OpenText blog
     "https://blogs.opentext.com/",
-    # OpenText YouTube channel
-    "https://www.youtube.com/@OpenText",
+    # X/Twitter
     "https://x.com/OpenText?lang=en",
+]
+
+RSS_URLS = [
+    # YouTube RSS feed — channel ID UC6PP20Bl59j3Nexlvfl18Aw
+    "https://www.youtube.com/feeds/videos.xml?channel_id=UC6PP20Bl59j3Nexlvfl18Aw",
 ]
 
 
 def run(output_dir: Path) -> dict:
     logger.info("[social_media] Starting OpenText social media scrape")
-    raw = scrape_multiple(URLS)
+    raw = scrape_multiple_with_rss(URLS, rss_urls=RSS_URLS)
 
     output = {
         "source_type": "social_media",

@@ -1,15 +1,10 @@
 """
-Scraper: Social media — AccelQ LinkedIn, blog, and YouTube.
-
-LinkedIn public company page surfaces follower growth and recent posts.
-The AccelQ blog signals product focus areas and go-to-market messaging.
-
-Note: Twitter/X requires a logged-in session; excluded from prototype.
+Scraper: Social media — AccelQ LinkedIn, blog, YouTube RSS, and X/Twitter.
 """
 import json
 import logging
 from pathlib import Path
-from scrapers.base import scrape_multiple
+from scrapers.base import scrape_multiple_with_rss
 
 logger = logging.getLogger(__name__)
 
@@ -18,17 +13,21 @@ COMPETITOR = "accelq"
 URLS = [
     # LinkedIn public company page
     "https://www.linkedin.com/company/accelq/",
-    # AccelQ blog — content strategy signals product direction
+    # AccelQ blog
     "https://www.accelq.com/blog/",
-    # YouTube channel — product demos and webinars
-    "https://www.youtube.com/@accelq",
+    # X/Twitter
     "https://x.com/ACCELQ?lang=en",
+]
+
+RSS_URLS = [
+    # YouTube RSS feed — channel ID UCW8CbXDMJ7nHW8pFDDuPkVA
+    "https://www.youtube.com/feeds/videos.xml?channel_id=UCW8CbXDMJ7nHW8pFDDuPkVA",
 ]
 
 
 def run(output_dir: Path) -> dict:
     logger.info("[social_media] Starting AccelQ social media scrape")
-    raw = scrape_multiple(URLS)
+    raw = scrape_multiple_with_rss(URLS, rss_urls=RSS_URLS)
 
     output = {
         "source_type": "social_media",
