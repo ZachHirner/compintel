@@ -1,0 +1,159 @@
+{
+  "competitor": "keysight",
+  "run_date": "2026-08-04",
+  "previous_run_dir": "data/keysight/2026-08-03/14-09-48",
+  "changes_detected": true,
+  "changed_pages": [
+    {
+      "url": "https://www.linkedin.com/company/keysight-technologies?trk=nav_type_overview",
+      "source_type": "social_media",
+      "prev_length": 19348,
+      "curr_length": 19232,
+      "length_delta": -116,
+      "change_pct": 0.6,
+      "added_lines": [
+        "328,037 followers",
+        "Discover all 13,847 employees",
+        "328,037 followers",
+        "25m",
+        "Report this post",
+        "Preparing the next generation of",
+        "#engineers",
+        "starts with providing access to the tools used across industry.",
+        "Keysight has donated hardware and 52 software licenses to the University of Houston Cullen College of Engineering, strengthening hands-on learning in electrical and computer engineering and undergraduate circuits courses. This collaboration will help students connect classroom concepts with real-world engineering practice and build the skills needed to address complex",
+        "#technical",
+        "challenges. Learn more about Keysight’s commitment to engineering",
+        "#education",
+        ":",
+        "https://ow.ly/EVG350ZwbYg",
+        "6",
+        "Like",
+        "Comment",
+        "Share",
+        "Keysight Technologies",
+        "328,037 followers",
+        "22h",
+        "100.00%",
+        "18",
+        "1 Comment",
+        "Like",
+        "Comment",
+        "Share",
+        "Keysight Technologies",
+        "328,037 followers",
+        "1d",
+        "22",
+        "Like",
+        "Comment",
+        "Share",
+        "Keysight Technologies",
+        "328,037 followers",
+        "4d",
+        "46",
+        "328,037 followers",
+        "5d"
+      ],
+      "removed_lines": [
+        "327,592 followers",
+        "View all 13,847 employees",
+        "327,592 followers",
+        "1h",
+        "30.42%",
+        "5",
+        "Like",
+        "Comment",
+        "Share",
+        "Keysight Technologies",
+        "327,592 followers",
+        "3h",
+        "10",
+        "Like",
+        "Comment",
+        "Share",
+        "Keysight Technologies",
+        "327,592 followers",
+        "3d",
+        "41",
+        "327,592 followers",
+        "4d",
+        "97",
+        "2 Comments",
+        "Like",
+        "Comment",
+        "Share",
+        "Keysight Technologies",
+        "327,592 followers",
+        "4d",
+        "30",
+        "327,592 followers",
+        "53",
+        "Like",
+        "Comment",
+        "Share",
+        "Keysight Technologies",
+        "327,592 followers",
+        "5d",
+        "231"
+      ]
+    },
+    {
+      "url": "https://www.keysight.com/blogs/en/",
+      "source_type": "social_media",
+      "prev_length": 219,
+      "curr_length": 317,
+      "length_delta": 98,
+      "change_pct": 44.7,
+      "added_lines": [
+        "Most Popular",
+        "Keysight Picks",
+        "Unlocking the Potential of 6G FR3",
+        "6G aims to connect the physical, digital, and human worlds through emerging technology focusing on new spectrum utilization, artificial intelligence (AI) integration into networks and devices, digital twins...",
+        "Read More",
+        "Show More",
+        "POPULAR TAGS",
+        "See All Tags"
+      ],
+      "removed_lines": [
+        "Verifying your connection to Keysight.com.",
+        "Please wait while we perform a quick security check to ensure you're a real user. This will only take a moment.",
+        "Verification successful. Waiting for www.keysight.com to respond"
+      ]
+    },
+    {
+      "url": "https://x.com/Keysight?lang=en",
+      "source_type": "social_media",
+      "prev_length": 1769,
+      "curr_length": 1767,
+      "length_delta": -2,
+      "change_pct": 0.1,
+      "added_lines": [
+        "3.7K",
+        "See Keysight’s full profile",
+        "Continue to X"
+      ],
+      "removed_lines": [
+        "3.6K",
+        "See @Keysight's full profile",
+        "Sign up",
+        "Log in"
+      ]
+    }
+  ],
+  "new_pages": [
+    {
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCsUQ4q-woGsK3VaAQynptbg",
+      "source_type": "social_media"
+    }
+  ],
+  "removed_pages": [
+    {
+      "url": "https://www.linkedin.com/company/keysight-technologies/jobs?trk=nav_type_jobs",
+      "source_type": "social_media"
+    },
+    {
+      "url": "https://www.youtube.com/@keysight",
+      "source_type": "social_media"
+    }
+  ],
+  "unchanged_count": 2
+}
