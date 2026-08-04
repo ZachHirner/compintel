@@ -1,15 +1,10 @@
 """
-Scraper: Social media — Playwright GitHub, YouTube, and LinkedIn.
-
-GitHub is the primary community hub for Playwright (open-source project).
-LinkedIn and YouTube surface Microsoft's commercial promotion of Playwright.
-
-Note: Twitter/X requires a logged-in session; excluded from prototype.
+Scraper: Social media — Playwright LinkedIn, YouTube RSS, and X/Twitter.
 """
 import json
 import logging
 from pathlib import Path
-from scrapers.base import scrape_multiple
+from scrapers.base import scrape_multiple_with_rss
 
 logger = logging.getLogger(__name__)
 
@@ -18,17 +13,21 @@ COMPETITOR = "playwright"
 URLS = [
     # Microsoft LinkedIn company overview
     "https://www.linkedin.com/company/microsoft/",
-    # Playwright YouTube channel
-    "https://www.youtube.com/@Playwrightdev",
     # Playwright LinkedIn (community/product page)
     "https://www.linkedin.com/company/playwrightweb/",
+    # X/Twitter
     "https://x.com/playwrightweb?lang=en",
+]
+
+RSS_URLS = [
+    # YouTube RSS feed — channel ID UC46Zj8pDH5tDosqm1gd7WTg
+    "https://www.youtube.com/feeds/videos.xml?channel_id=UC46Zj8pDH5tDosqm1gd7WTg",
 ]
 
 
 def run(output_dir: Path) -> dict:
     logger.info("[social_media] Starting Playwright social media scrape")
-    raw = scrape_multiple(URLS)
+    raw = scrape_multiple_with_rss(URLS, rss_urls=RSS_URLS)
 
     output = {
         "source_type": "social_media",
