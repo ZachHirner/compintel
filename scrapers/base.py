@@ -35,6 +35,9 @@ def _build_driver() -> webdriver.Chrome:
     options.add_argument("--disable-blink-features=AutomationControlled")
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
     options.add_experimental_option("useAutomationExtension", False)
+    options.add_experimental_option("prefs", {
+        "profile.default_content_setting_values.notifications": 2
+    })
 
     driver = webdriver.Chrome(options=options)
 
