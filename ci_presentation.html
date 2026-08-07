@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tricentis CI Research Agent — Internship Presentation</title>
+<style>
+  :root {
+    --blue: #003B71;
+    --teal: #00A99D;
+    --teal-light: #E6F7F6;
+    --blue-light: #EBF1F8;
+    --gray-bg: #F4F6F8;
+    --gray-border: #D1D5DB;
+    --text-dark: #1F2937;
+    --text-muted: #6B7280;
+    --white: #ffffff;
+    --red: #EF4444;
+    --green: #10B981;
+    --yellow: #F59E0B;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0d1117;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  /* ── TOP BAR ── */
+  #topbar {
+    width: 100%;
+    background: #161b22;
+    border-bottom: 1px solid #30363d;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+  }
+  #topbar .logo { font-size: 13px; font-weight: 700; color: var(--teal); letter-spacing: 1px; text-transform: uppercase; }
+  #topbar .controls { display: flex; align-items: center; gap: 8px; }
+  #topbar button {
+    background: #21262d; border: 1px solid #30363d; color: #c9d1d9;
+    padding: 5px 12px; border-radius: 6px; font-size: 12px; cursor: pointer;
+    transition: all 0.15s;
+  }
+  #topbar button:hover { background: #30363d; color: #fff; }
+  #topbar button.primary { background: var(--teal); border-color: var(--teal); color: #fff; font-weight: 600; }
+  #topbar button.primary:hover { background: #00c4b7; }
+  #topbar button.danger { background: #da3633; border-color: #da3633; color: #fff; }
+  #slide-counter { font-size: 12px; color: #8b949e; padding: 0 4px; min-width: 60px; text-align: center; }
+
+  /* ── EDIT MODE BADGE ── */
+  #edit-badge {
+    display: none;
+    background: var(--yellow);
+    color: #000;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+  body.editing #edit-badge { display: block; }
+
+  /* ── SLIDE VIEWPORT ── */
+  #viewport {
+    margin-top: 52px;
+    width: 100%;
+    max-width: 960px;
+    padding: 24px 16px 80px;
+  }
+
+  .slide {
+    display: none;
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    min-height: 540px;
+    position: relative;
+  }
+  .slide.active { display: flex; flex-direction: column; }
+
+  /* ── SLIDE HEADER BAND ── */
+  .slide-header {
+    background: var(--blue);
+    padding: 28px 40px 22px;
+    position: relative;
+  }
+  .slide-header.teal { background: var(--teal); }
+  .slide-header.dark { background: #0d1117; }
+  .slide-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 6px;
+  }
+  .slide-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .slide-subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+  .slide-num {
+    position: absolute;
+    bottom: 12px;
+    right: 20px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    font-weight: 600;
+  }
+
+  /* ── SLIDE BODY ── */
+  .slide-body {
+    flex: 1;
+    padding: 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  /* ── EDITABLE ── */
+  [contenteditable="true"] { outline: none; }
+  body.editing [contenteditable="true"] {
+    border-radius: 4px;
+    outline: 1.5px dashed var(--teal);
+    cursor: text;
+    min-height: 1em;
+  }
+  body.editing [contenteditable="true"]:focus {
+    outline: 2px solid var(--teal);
+    background: rgba(0,169,157,0.04);
+  }
+
+  /* ── COMPONENTS ── */
+  .big-question {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.3;
+    text-align: center;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .answer-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    flex: 1;
+  }
+  .answer-box {
+    border-radius: 10px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .answer-box.manual { background: #FEF2F2; border: 1.5px solid #FCA5A5; }
+  .answer-box.auto   { background: var(--teal-light); border: 1.5px solid var(--teal); }
+  .answer-box h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .answer-box.manual h3 { color: var(--red); }
+  .answer-box.auto h3 { color: var(--teal); }
+  .answer-box .big-num { font-size: 52px; font-weight: 800; line-height: 1; }
+  .answer-box.manual .big-num { color: var(--red); }
+  .answer-box.auto .big-num { color: var(--teal); }
+  .answer-box p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+  .delta-card {
+    background: var(--gray-bg);
+    border-radius: 10px;
+    border-left: 4px solid var(--teal);
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .delta-card.blue-border { border-left-color: var(--blue); }
+  .delta-card.yellow-border { border-left-color: var(--yellow); }
+  .delta-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+  .delta-tag.blue { color: var(--blue); }
+  .delta-tag.yellow { color: var(--yellow); }
+  .delta-source {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+  .delta-headline {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.4;
+  }
+  .delta-intel {
+    font-size: 13px;
+    color: var(--text-dark);
+    line-height: 1.5;
+    background: var(--white);
+    border-radius: 6px;
+    padding: 10px 14px;
+    border: 1px solid var(--gray-border);
+  }
+  .delta-intel strong { color: var(--blue); }
+
+  .time-table { width: 100%; border-collapse: collapse; }
+  .time-table th {
+    background: var(--blue);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 10px 16px;
+    text-align: left;
+    letter-spacing: 0.5px;
+  }
+  .time-table td {
+    padding: 10px 16px;
+    font-size: 13px;
+    color: var(--text-dark);
+    border-bottom: 1px solid var(--gray-border);
+  }
+  .time-table tr:nth-child(even) td { background: var(--gray-bg); }
+  .time-table tr.total td { font-weight: 700; color: var(--red); background: #FEF2F2; }
+
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .pillar {
+    background: var(--blue);
+    border-radius: 10px;
+    padding: 22px 18px;
+    text-align: center;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+  .pillar-icon { font-size: 30px; }
+  .pillar-title { font-size: 14px; font-weight: 700; letter-spacing: 0.5px; }
+  .pillar-desc { font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.4; }
+
+  .coverage-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--gray-border);
+  }
+  .cg-header {
+    background: var(--blue);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 10px 8px;
+    text-align: center;
+  }
+  .cg-row-label {
+    background: var(--gray-bg);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--blue);
+    padding: 10px 8px;
+    text-align: center;
+    border-bottom: 1px solid var(--gray-border);
+  }
+  .cg-cell {
+    font-size: 12px;
+    padding: 10px 8px;
+    text-align: center;
+    border-bottom: 1px solid var(--gray-border);
+    border-left: 1px solid var(--gray-border);
+  }
+  .cg-cell.ok { background: #D1FAE5; color: #065F46; font-weight: 600; }
+  .cg-cell.partial { background: #FEF3C7; color: #92400E; font-weight: 600; }
+  .cg-cell.blocked { background: #FEE2E2; color: #991B1B; font-weight: 600; }
+
+  .pipeline-steps {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex: 1;
+    justify-content: center;
+  }
+  .p-step {
+    background: var(--blue);
+    color: #fff;
+    border-radius: 10px;
+    padding: 18px 16px;
+    text-align: center;
+    flex: 1;
+    max-width: 130px;
+  }
+  .p-step .p-icon { font-size: 26px; margin-bottom: 6px; }
+  .p-step .p-title { font-size: 12px; font-weight: 700; letter-spacing: 0.3px; }
+  .p-step .p-desc { font-size: 10px; color: rgba(255,255,255,0.65); margin-top: 4px; line-height: 1.3; }
+  .p-arrow { font-size: 22px; color: var(--teal); padding: 0 6px; font-weight: 700; }
+
+  .roadmap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .roadmap-item {
+    border-radius: 10px;
+    border: 1.5px solid var(--gray-border);
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .roadmap-item .r-icon { font-size: 24px; }
+  .roadmap-item .r-title { font-size: 13px; font-weight: 700; color: var(--blue); }
+  .roadmap-item .r-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+
+  .closing-stat {
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .closing-stat .c-num { font-size: 80px; font-weight: 800; color: var(--teal); line-height: 1; }
+  .closing-stat .c-label { font-size: 18px; font-weight: 600; color: var(--blue); }
+  .closing-stat .c-sub { font-size: 14px; color: var(--text-muted); max-width: 420px; line-height: 1.5; text-align: center; }
+
+  /* ── DOTS NAV ── */
+  #dots {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 100;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #30363d;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .dot.active { background: var(--teal); transform: scale(1.3); }
+
+  /* ── SECTION DIVIDER SLIDE ── */
+  .section-divider {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(135deg, var(--blue) 0%, #00527a 100%);
+    padding: 40px;
+  }
+  .section-divider .sec-num { font-size: 80px; font-weight: 800; color: rgba(255,255,255,0.08); line-height: 1; }
+  .section-divider .sec-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); }
+  .section-divider .sec-title { font-size: 32px; font-weight: 700; color: #fff; text-align: center; line-height: 1.2; }
+  .section-divider .sec-sub { font-size: 14px; color: rgba(255,255,255,0.6); text-align: center; max-width: 480px; line-height: 1.5; }
+
+  .callout {
+    background: var(--teal-light);
+    border: 1.5px solid var(--teal);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 14px;
+    color: var(--text-dark);
+    line-height: 1.5;
+  }
+  .callout strong { color: var(--teal); }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div id="topbar">
+  <div class="logo">Tricentis CI Research Agent</div>
+  <div class="controls">
+    <span id="edit-badge">EDIT MODE</span>
+    <button onclick="prevSlide()">← Prev</button>
+    <span id="slide-counter">1 / 13</span>
+    <button onclick="nextSlide()">Next →</button>
+    <button class="primary" onclick="toggleEdit()" id="edit-btn">✏️ Edit</button>
+    <button onclick="addSlide()">+ Slide</button>
+    <button class="danger" onclick="deleteSlide()">✕ Delete</button>
+  </div>
+</div>
+
+<div id="viewport">
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SLIDE 1 — OPENING QUESTION -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="slide active" id="slide-1">
+    <div class="slide-header dark">
+      <div class="slide-tag" contenteditable="false">The Hook</div>
+      <div class="slide-num">1 / 13</div>
+    </div>
+    <div class="slide-body" style="justify-content:center;">
+      <div class="big-question" contenteditable="true">
+        "How long would it take you to check what 5 competitors changed on their websites, social media, and analyst coverage this morning?"
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SLIDE 2 — THE ANSWER -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-2">
+    <div class="slide-header">
+      <div class="slide-tag" contenteditable="false">The Answer</div>
+      <div class="slide-title" contenteditable="true">Manual vs. Automated</div>
+      <div class="slide-num">2 / 13</div>
+    </div>
+    <div class="slide-body">
+      <div class="answer-split">
+        <div class="answer-box manual">
+          <h3>Doing it manually</h3>
+          <div class="big-num" contenteditable="true">2.5hrs</div>
+          <p contenteditable="true">Per run. 3× per week. Visiting 50+ URLs, comparing notes, writing summaries — before your AEs even start their day.</p>
+        </div>
+        <div class="answer-box auto">
+          <h3>This system</h3>
+          <div class="big-num" contenteditable="true">&lt;5min</div>
+          <p contenteditable="true">Fully automated. Every Monday, Wednesday, and Friday at 8:30 AM — zero manual effort, every run.</p>
+        </div>
+      </div>
+      <div class="callout" contenteditable="true">
+        <strong>That's 30+ hours a month saved</strong> — for one person — just to stay current on the competitive landscape.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SLIDE 3 — SECTION DIVIDER: LIVE OUTPUT -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-3">
+    <div class="section-divider">
+      <div class="sec-num" contenteditable="true">01</div>
+      <div class="sec-label" contenteditable="true">Live Output</div>
+      <div class="sec-title" contenteditable="true">What the system found this morning</div>
+      <div class="sec-sub" contenteditable="true">August 5, 2026 — 8:39 AM run. Here's the actual delta across all 5 competitors, pulled and analyzed in minutes.</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SLIDE 4 — DELTA: UIPATH -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-4">
+    <div class="slide-header teal">
+      <div class="slide-tag" contenteditable="false">August 5 Delta — UiPath</div>
+      <div class="slide-title" contenteditable="true">UiPath: Two Active Plays This Morning</div>
+      <div class="slide-subtitle" contenteditable="true">Healthcare vertical + Financial services push — both surfaced by the pipeline today</div>
+      <div class="slide-num">4 / 13</div>
+    </div>
+    <div class="slide-body">
+      <div class="delta-card">
+        <div class="delta-tag">⚡ New Blog Post — uipath.com/blog</div>
+        <div class="delta-source" contenteditable="true">Source: UiPath Blog • Published August 5, 2026</div>
+        <div class="delta-headline" contenteditable="true">"Leading U.S. hospital automates software testing, cutting manual effort by 95%"</div>
+        <div class="delta-intel" contenteditable="true"><strong>Signal:</strong> UiPath is pushing a healthcare vertical case study with a 95% efficiency claim — direct overlap with Tosca territory. A strong counter-narrative is needed for any healthcare-focused deal.</div>
+      </div>
+      <div class="delta-card">
+        <div class="delta-tag">⚡ New Tweet — @UiPath</div>
+        <div class="delta-source" contenteditable="true">Source: X/Twitter • Posted within the last hour of the scrape</div>
+        <div class="delta-headline" contenteditable="true">"When Fiserv had just days to onboard a major restaurant chain, or face $10M in SLA penalties, they turned to UiPath..."</div>
+        <div class="delta-intel" contenteditable="true"><strong>Signal:</strong> Financial services, high-stakes SLA story. UiPath is running two vertical pushes simultaneously — both live in the market right now.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SLIDE 5 — DELTA: OPENTEXT + ACCELQ -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-5">
+    <div class="slide-header">
+      <div class="slide-tag" contenteditable="false">August 5 Delta — OpenText & AccelQ</div>
+      <div class="slide-title" contenteditable="true">OpenText & AccelQ: Messaging Moves</div>
+      <div class="slide-num">5 / 13</div>
+    </div>
+    <div class="slide-body">
+      <div class="delta-card blue-border">
+        <div class="delta-tag blue">⚡ New Blog Post — OpenText</div>
+        <div class="delta-source" contenteditable="true">Source: blogs.opentext.com • Published August 5, 2026</div>
+        <div class="delta-headline" contenteditable="true">"Three AI content management questions deciding your Copilot rollout"</div>
+        <div class="delta-intel" contenteditable="true"><strong>Signal:</strong> OpenText is positioning their Content Aviator product inside Microsoft 365 Copilot — an ecosystem play targeting Microsoft-heavy organizations. Worth flagging in competitive deals.</div>
+      </div>
+      <div class="delta-card yellow-border">
+        <div class="delta-tag yellow">⚡ Homepage Messaging Change — AccelQ</div>
+        <div class="delta-source" contenteditable="true">Source: accelq.com/blog • Detected vs. August 4 run</div>
+        <div class="delta-headline" contenteditable="true">Featured post swapped overnight: "Autonomous Quality Engineering" → technical how-to content</div>
+        <div class="delta-intel" contenteditable="true"><strong>Signal:</strong> AccelQ appears to be A/B testing or pulling back from the "autonomous" messaging angle. Worth watching — could signal a broader repositioning away from the AI-heavy pitch.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SLIDE 6 — DELTA: PLAYWRIGHT + KEYSIGHT -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-6">
+    <div class="slide-header">
+      <div class="slide-tag" contenteditable="false">August 5 Delta — Playwright & Keysight</div>
+      <div class="slide-title" contenteditable="true">Playwright & Keysight: Momentum Signals</div>
+      <div class="slide-num">6 / 13</div>
+    </div>
+    <div class="slide-body">
+      <div class="delta-card">
+        <div class="delta-tag">⚡ GitHub Star Milestone — Playwright</div>
+        <div class="delta-source" contenteditable="true">Source: github.com/microsoft/playwright/releases</div>
+        <div class="delta-headline" contenteditable="true">Playwright crossed 94,000 GitHub stars — growing ~100 stars per day</div>
+        <div class="delta-intel" contenteditable="true"><strong>Signal:</strong> Steady developer adoption momentum in developer-led organizations. The "free vs. paid" positioning question is increasingly active in the market — this is a signal worth tracking.</div>
+      </div>
+      <div class="delta-card blue-border">
+        <div class="delta-tag blue">⚡ Blog Access Inconsistency — Keysight</div>
+        <div class="delta-source" contenteditable="true">Source: keysight.com/blogs/en</div>
+        <div class="delta-headline" contenteditable="true">Keysight blog alternates between bot-wall and live content across runs</div>
+        <div class="delta-intel" contenteditable="true"><strong>Signal:</strong> Keysight appears to be actively managing web access — possible site rebuild or content restructuring underway. The pipeline will surface any major changes as they land.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SLIDE 7 — THE MANUAL ALTERNATIVE -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-7">
+    <div class="slide-header">
+      <div class="slide-tag" contenteditable="false">The Cost of Doing Nothing</div>
+      <div class="slide-title" contenteditable="true">What This Would Take Manually</div>
+      <div class="slide-subtitle" contenteditable="true">Per run, per person, 3× per week</div>
+      <div class="slide-num">7 / 13</div>
+    </div>
+    <div class="slide-body">
+      <table class="time-table">
+        <thead>
+          <tr><th>Task</th><th>Time</th></tr>
+        </thead>
+        <tbody>
+          <tr><td contenteditable="true">Visit 50+ URLs across 5 competitors</td><td contenteditable="true">45 min</td></tr>
+          <tr><td contenteditable="true">Compare each page to what you saw last time</td><td contenteditable="true">60 min</td></tr>
+          <tr><td contenteditable="true">Summarize what changed in a readable format</td><td contenteditable="true">30 min</td></tr>
+          <tr><td contenteditable="true">Distribute to sales team</td><td contenteditable="true">15 min</td></tr>
+          <tr class="total"><td>Total per run × 3 runs per week × 4 weeks</td><td>~30 hrs/month</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" contenteditable="true">
+        And that's assuming you catch everything. Realistically, <strong>a new blog post or tweet gets missed</strong> because no one has time to check X/Twitter, YouTube, and PeerSpot every other day.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SLIDE 8 — SECTION DIVIDER: WHAT IS IT -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-8">
+    <div class="section-divider">
+      <div class="sec-num" contenteditable="true">02</div>
+      <div class="sec-label" contenteditable="true">Under the Hood</div>
+      <div class="sec-title" contenteditable="true">What this system actually is</div>
+      <div class="sec-sub" contenteditable="true">An automated pipeline built on Python, GitHub Actions, and Claude AI — scraping, detecting, and surfacing competitive intel three times a week.</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SLIDE 9 — THE THREE PILLARS -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-9">
+    <div class="slide-header">
+      <div class="slide-tag" contenteditable="false">System Overview</div>
+      <div class="slide-title" contenteditable="true">Three Things This System Does</div>
+      <div class="slide-num">9 / 13</div>
+    </div>
+    <div class="slide-body" style="justify-content:center;">
+      <div class="pillar-grid">
+        <div class="pillar">
+          <div class="pillar-icon">🔍</div>
+          <div class="pillar-title" contenteditable="true">Scrape</div>
+          <div class="pillar-desc" contenteditable="true">50+ sources per run across 5 competitors — websites, LinkedIn, X/Twitter, YouTube RSS, analyst coverage, and review sites</div>
+        </div>
+        <div class="pillar" style="background:var(--teal);">
+          <div class="pillar-icon">📊</div>
+          <div class="pillar-title" contenteditable="true">Detect</div>
+          <div class="pillar-desc" contenteditable="true">Line-level diff between every run and the previous one — surfaces exactly what changed, not just that something changed</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">⚡</div>
+          <div class="pillar-title" contenteditable="true">Surface</div>
+          <div class="pillar-desc" contenteditable="true">Actionable intel — not raw data. New blog posts, messaging changes, analyst mentions, and customer story launches flagged immediately</div>
+        </div>
+      </div>
+      <div class="callout" contenteditable="true">
+        Built entirely during a summer internship using <strong>Python, Selenium, GitHub Actions, and the Claude API</strong>.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SLIDE 10 — COVERAGE MAP -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-10">
+    <div class="slide-header">
+      <div class="slide-tag" contenteditable="false">Coverage</div>
+      <div class="slide-title" contenteditable="true">What's Being Tracked</div>
+      <div class="slide-subtitle" contenteditable="true">5 competitors × 4 source types — 50+ URLs monitored every run</div>
+      <div class="slide-num">10 / 13</div>
+    </div>
+    <div class="slide-body">
+      <div class="coverage-grid">
+        <div class="cg-header">Competitor</div>
+        <div class="cg-header">Website</div>
+        <div class="cg-header">Social</div>
+        <div class="cg-header">Analyst</div>
+        <div class="cg-header">Reviews</div>
+
+        <div class="cg-row-label" contenteditable="true">AccelQ</div>
+        <div class="cg-cell ok" contenteditable="true">✓ OK</div>
+        <div class="cg-cell ok" contenteditable="true">✓ OK</div>
+        <div class="cg-cell ok" contenteditable="true">✓ OK</div>
+        <div class="cg-cell ok" contenteditable="true">✓ OK</div>
+
+        <div class="cg-row-label" contenteditable="true">Keysight</div>
+        <div class="cg-cell partial" contenteditable="true">~ Partial</div>
+        <div class="cg-cell ok" contenteditable="true">✓ OK</div>
+        <div class="cg-cell ok" contenteditable="true">✓ OK</div>
+        <div class="cg-cell ok" contenteditable="true">✓ OK</div>
+
+        <div class="cg-row-label" contenteditable="true">OpenText</div>
+        <div class="cg-cell ok" contenteditable="true">✓ OK</div>
+        <div class="cg-cell ok" contenteditable="true">✓ OK</div>
+        <div class="cg-cell ok" contenteditable="true">✓ OK</div>
+        <div class="cg-cell ok" contenteditable="true">✓ OK</div>
+
+        <div class="cg-row-label" contenteditable="true">Playwright</div>
+        <div class="cg-cell ok" contenteditable="true">✓ OK</div>
+        <div class="cg-cell partial" contenteditable="true">~ Partial</div>
+        <div class="cg-cell ok" contenteditable="true">✓ OK</div>
+        <div class="cg-cell ok" contenteditable="true">✓ OK</div>
+
+        <div class="cg-row-label" contenteditable="true">UiPath</div>
+        <div class="cg-cell ok" contenteditable="true">✓ OK</div>
+        <div class="cg-cell ok" contenteditable="true">✓ OK</div>
+        <div class="cg-cell ok" contenteditable="true">✓ OK</div>
+        <div class="cg-cell ok" contenteditable="true">✓ OK</div>
+      </div>
+      <div class="callout" contenteditable="true">
+        Sources marked <strong>Partial</strong> hit bot-detection walls (LinkedIn login, Keysight bot check). These are monitored — the pipeline flags when access degrades.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SLIDE 11 — HOW IT RUNS -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-11">
+    <div class="slide-header">
+      <div class="slide-tag" contenteditable="false">Architecture</div>
+      <div class="slide-title" contenteditable="true">How It Runs — Zero Human Involvement</div>
+      <div class="slide-subtitle" contenteditable="true">Mon / Wed / Fri at 8:30 AM Central, fully automated</div>
+      <div class="slide-num">11 / 13</div>
+    </div>
+    <div class="slide-body" style="justify-content:center; gap:24px;">
+      <div class="pipeline-steps">
+        <div class="p-step">
+          <div class="p-icon">⏰</div>
+          <div class="p-title" contenteditable="true">Schedule Fires</div>
+          <div class="p-desc" contenteditable="true">GitHub Actions cron trigger 8:30 AM Central</div>
+        </div>
+        <div class="p-arrow">→</div>
+        <div class="p-step" style="background:var(--teal);">
+          <div class="p-icon">🤖</div>
+          <div class="p-title" contenteditable="true">5 Parallel Scrapers</div>
+          <div class="p-desc" contenteditable="true">Selenium headless Chrome — all competitors run simultaneously</div>
+        </div>
+        <div class="p-arrow">→</div>
+        <div class="p-step">
+          <div class="p-icon">📊</div>
+          <div class="p-title" contenteditable="true">Delta Detection</div>
+          <div class="p-desc" contenteditable="true">Line-level diff vs. prior run — noise filtered out</div>
+        </div>
+        <div class="p-arrow">→</div>
+        <div class="p-step" style="background:var(--teal);">
+          <div class="p-icon">💾</div>
+          <div class="p-title" contenteditable="true">Committed to Repo</div>
+          <div class="p-desc" contenteditable="true">Data + delta report saved and versioned in GitHub</div>
+        </div>
+      </div>
+      <div class="callout" contenteditable="true">
+        The research agent (this chat) can then be asked to analyze any run, dig into a specific signal, or summarize what changed — <strong>on demand, in minutes</strong>.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SLIDE 12 — WHAT'S NEXT -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-12">
+    <div class="slide-header">
+      <div class="slide-tag" contenteditable="false">Roadmap</div>
+      <div class="slide-title" contenteditable="true">What's Next</div>
+      <div class="slide-subtitle" contenteditable="true">Three additions that take this from a pipeline to a full intel platform</div>
+      <div class="slide-num">12 / 13</div>
+    </div>
+    <div class="slide-body">
+      <div class="roadmap-grid">
+        <div class="roadmap-item">
+          <div class="r-icon">🧠</div>
+          <div class="r-title" contenteditable="true">Claude API Integration</div>
+          <div class="r-desc" contenteditable="true">AI summaries auto-generated on every delta run — high-signal changes analyzed and explained without anyone asking</div>
+        </div>
+        <div class="roadmap-item">
+          <div class="r-icon">💬</div>
+          <div class="r-title" contenteditable="true">Slack Integration</div>
+          <div class="r-desc" contenteditable="true">Monday/Wednesday/Friday morning briefing delivered directly to a Tricentis competitive intel Slack channel — no login required</div>
+        </div>
+        <div class="roadmap-item">
+          <div class="r-icon">📋</div>
+          <div class="r-title" contenteditable="true">Showpad Integration</div>
+          <div class="r-desc" contenteditable="true">Battle cards published to Showpad automatically updated when the pipeline detects a messaging change or new competitor claim</div>
+        </div>
+        <div class="roadmap-item">
+          <div class="r-icon">📈</div>
+          <div class="r-title" contenteditable="true">Trend Tracking</div>
+          <div class="r-desc" contenteditable="true">30/60/90-day trend view — see how competitor messaging, follower growth, and review sentiment shifts over time</div>
+        </div>
+        <div class="roadmap-item">
+          <div class="r-icon">🌐</div>
+          <div class="r-title" contenteditable="true">Expanded Coverage</div>
+          <div class="r-desc" contenteditable="true">Any new competitor can be added in minutes — pipeline generates all scraper files and opens a GitHub PR automatically</div>
+        </div>
+        <div class="roadmap-item">
+          <div class="r-icon">🔗</div>
+          <div class="r-title" contenteditable="true">Agentic Research</div>
+          <div class="r-desc" contenteditable="true">When a new blog post or press release is detected, the AI automatically fetches and reads it — delivering finished intel, not just an alert</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SLIDE 13 — CLOSING -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="slide" id="slide-13">
+    <div class="slide-header dark">
+      <div class="slide-tag" contenteditable="false">Closing</div>
+      <div class="slide-num">13 / 13</div>
+    </div>
+    <div class="slide-body" style="justify-content:center;">
+      <div class="closing-stat">
+        <div class="c-num" contenteditable="true">&lt;5 min</div>
+        <div class="c-label" contenteditable="true">Every Monday, Wednesday, and Friday — automatically</div>
+        <div class="c-sub" contenteditable="true">Before the workday starts, the pipeline has already checked every competitor, detected every change, and surfaced what matters — delivering the freshest competitive intel with zero manual effort.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end viewport -->
+
+<!-- DOTS -->
+<div id="dots"></div>
+
+<script>
+  const STORAGE_KEY = 'tricentis_ci_presentation_v1';
+  let currentSlide = 1;
+  let totalSlides = 13;
+  let editMode = false;
+  let saveTimer = null;
+
+  // ── Save/Load ──────────────────────────────────────────
+  function saveToStorage() {
+    const slides = document.querySelectorAll('.slide');
+    const data = {};
+    slides.forEach((sl, i) => {
+      const editable = sl.querySelectorAll('[contenteditable="true"]');
+      editable.forEach((el, j) => {
+        data[`slide${i}_el${j}`] = el.innerHTML;
+      });
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function loadFromStorage() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    try {
+      const data = JSON.parse(raw);
+      const slides = document.querySelectorAll('.slide');
+      slides.forEach((sl, i) => {
+        const editable = sl.querySelectorAll('[contenteditable="true"]');
+        editable.forEach((el, j) => {
+          const key = `slide${i}_el${j}`;
+          if (data[key] !== undefined) el.innerHTML = data[key];
+        });
+      });
+    } catch(e) {}
+  }
+
+  function scheduleSave() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveToStorage, 800);
+  }
+
+  document.addEventListener('input', (e) => {
+    if (e.target.hasAttribute('contenteditable')) scheduleSave();
+  });
+
+  // ── Navigation ────────────────────────────────────────
+  function showSlide(n) {
+    document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById(`slide-${n}`);
+    if (el) el.classList.add('active');
+    currentSlide = n;
+    document.getElementById('slide-counter').textContent = `${n} / ${totalSlides}`;
+    document.querySelectorAll('.dot').forEach((d, i) => {
+      d.classList.toggle('active', i + 1 === n);
+    });
+  }
+
+  function nextSlide() {
+    if (currentSlide < totalSlides) showSlide(currentSlide + 1);
+  }
+
+  function prevSlide() {
+    if (currentSlide > 1) showSlide(currentSlide - 1);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (editMode && document.activeElement.getAttribute('contenteditable') === 'true') return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prevSlide();
+  });
+
+  // ── Edit Mode ─────────────────────────────────────────
+  function toggleEdit() {
+    editMode = !editMode;
+    document.body.classList.toggle('editing', editMode);
+    document.getElementById('edit-btn').textContent = editMode ? '✓ Done' : '✏️ Edit';
+    if (!editMode) saveToStorage();
+  }
+
+  // ── Add / Delete Slides ───────────────────────────────
+  function addSlide() {
+    totalSlides++;
+    const id = `slide-${totalSlides}`;
+    const div = document.createElement('div');
+    div.className = 'slide';
+    div.id = id;
+    div.innerHTML = `
+      <div class="slide-header">
+        <div class="slide-tag" contenteditable="false">New Slide</div>
+        <div class="slide-title" contenteditable="true">Slide Title</div>
+        <div class="slide-num">${totalSlides} / ${totalSlides}</div>
+      </div>
+      <div class="slide-body">
+        <div class="callout" contenteditable="true">Add your content here. Click ✏️ Edit to start editing any text on this slide.</div>
+      </div>
+    `;
+    document.getElementById('viewport').appendChild(div);
+    rebuildDots();
+    showSlide(totalSlides);
+  }
+
+  function deleteSlide() {
+    if (totalSlides <= 1) return;
+    const el = document.getElementById(`slide-${currentSlide}`);
+    if (!confirm(`Delete slide ${currentSlide}?`)) return;
+    el.remove();
+    // Renumber
+    const slides = document.querySelectorAll('.slide');
+    totalSlides = slides.length;
+    slides.forEach((s, i) => {
+      s.id = `slide-${i + 1}`;
+      const num = s.querySelector('.slide-num');
+      if (num) num.textContent = `${i + 1} / ${totalSlides}`;
+    });
+    rebuildDots();
+    showSlide(Math.min(currentSlide, totalSlides));
+  }
+
+  // ── Dots ──────────────────────────────────────────────
+  function rebuildDots() {
+    const container = document.getElementById('dots');
+    container.innerHTML = '';
+    for (let i = 1; i <= totalSlides; i++) {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === currentSlide ? ' active' : '');
+      d.onclick = () => showSlide(i);
+      container.appendChild(d);
+    }
+  }
+
+  // ── Init ──────────────────────────────────────────────
+  loadFromStorage();
+  rebuildDots();
+  showSlide(1);
+</script>
+</body>
+</html>
