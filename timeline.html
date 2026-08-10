@@ -11,7 +11,7 @@
 <body>
 <canvas id="c"></canvas>
 <script>
-const W = 1600, H = 560;
+const W = 1600, H = 600;
 const canvas = document.getElementById('c');
 canvas.width = W; canvas.height = H;
 const ctx = canvas.getContext('2d');
@@ -22,45 +22,45 @@ const C = {
   white: '#FFFFFF', navyLt: '#1A4F8A',
 };
 
-const TL_Y = 280;
+const TL_Y = 290;
 const ML = 100, MR = 100;
-const RECT_W = 180, RECT_H = 104;
-const ABOVE_Y = 58;
-const BELOW_Y = 384;
+const RECT_W = 185, RECT_H = 124;
+const ABOVE_Y = 54;
+const BELOW_Y = 412;
 
 const events = [
   {
-    time: '0:00', label: 'Pipeline Triggers',
+    time: '0:00', icon: '⚡', label: 'Pipeline Triggers',
     subs: ['GitHub Actions cron fires', 'Mon · Wed · Fri  8:30 AM Central', 'Repo checked out, deps installed'],
     color: C.navy, above: true,
   },
   {
-    time: '0:30', label: 'Scraping Begins',
+    time: '0:30', icon: '🌐', label: 'Scraping Begins',
     subs: ['Selenium headless Chrome launches', 'Stealth patches bypass bot detection', '5 competitor jobs run simultaneously'],
     color: C.teal, above: false,
   },
   {
-    time: '4:00', label: '50+ URLs Captured',
+    time: '4:00', icon: '📥', label: '50+ URLs Captured',
     subs: ['Website · LinkedIn · X · YouTube', 'Analyst coverage · Review sites', 'Raw text saved to data/<competitor>/'],
     color: C.orange, above: true,
   },
   {
-    time: '4:30', label: 'Delta Report Ready',
-    subs: ['Line-by-line diff vs previous run', 'Noise filtered — no false positives', 'Only meaningful changes flagged'],
+    time: '4:30', icon: '🔍', label: 'Delta Report Ready',
+    subs: ['Line-by-line diff vs previous run', 'No false positives', 'Only meaningful changes flagged'],
     color: C.teal, above: false,
   },
   {
-    time: '5:00', label: 'AI Analysis Begins',
+    time: '5:00', icon: '🤖', label: 'AI Analysis Begins',
     subs: ['Claude reads each competitor delta', 'Finds: new features, pricing shifts,', 'messaging changes, personnel moves'],
     color: C.navy, above: true,
   },
   {
-    time: '7:30', label: 'Summaries Written',
+    time: '7:30', icon: '📝', label: 'Summaries Written',
     subs: ['Structured report per competitor', 'Actionable signals highlighted', 'ci_report.json updated'],
     color: C.teal, above: false,
   },
   {
-    time: '10:00', label: 'Pipeline Complete',
+    time: '10:00', icon: '✅', label: 'Pipeline Complete',
     subs: ['All 5 competitor reports ready', 'Committed & pushed to GitHub', 'Available to all 3 AI agents'],
     color: C.navy, above: true,
   },
@@ -125,7 +125,7 @@ events.forEach(e => {
   ctx.shadowBlur = 10;
   ctx.shadowOffsetY = 3;
   ctx.fillStyle = e.color;
-  rr(ex - RECT_W/2, ry, RECT_W, RECT_H, 7);
+  rr(ex - RECT_W/2, ry, RECT_W, RECT_H, 8);
   ctx.fill();
   ctx.restore();
 
@@ -154,29 +154,32 @@ events.forEach(e => {
   ctx.fillStyle = C.muted;
   ctx.font = 'bold 11px Calibri, Arial, sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText(e.time, ex, e.above ? TL_Y + 26 : TL_Y - 17);
+  ctx.fillText(e.time, ex, e.above ? TL_Y + 27 : TL_Y - 18);
 
-  // Label (bold title)
-  const cy = ry + RECT_H / 2;
+  // Icon
+  ctx.font = '18px serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(e.icon, ex, ry + 22);
+
+  // Title
   ctx.fillStyle = C.white;
   ctx.font = 'bold 13px Calibri, Arial, sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText(e.label, ex, cy - 22);
+  ctx.fillText(e.label, ex, ry + 40);
 
-  // Divider line under title
-  ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+  // Divider
+  ctx.strokeStyle = 'rgba(255,255,255,0.28)';
   ctx.lineWidth = 1;
   ctx.beginPath();
-  ctx.moveTo(ex - RECT_W/2 + 12, cy - 12);
-  ctx.lineTo(ex + RECT_W/2 - 12, cy - 12);
+  ctx.moveTo(ex - RECT_W/2 + 14, ry + 48);
+  ctx.lineTo(ex + RECT_W/2 - 14, ry + 48);
   ctx.stroke();
 
   // Sub lines
   ctx.font = '11px Calibri, Arial, sans-serif';
   ctx.globalAlpha = 0.88;
+  ctx.fillStyle = C.white;
   e.subs.forEach((line, li) => {
-    ctx.fillStyle = C.white;
-    ctx.fillText(line, ex, cy - 2 + li * 15);
+    ctx.fillText(line, ex, ry + 63 + li * 16);
   });
   ctx.globalAlpha = 1;
 });
@@ -185,10 +188,10 @@ events.forEach(e => {
 ctx.font = '10px Calibri, Arial, sans-serif';
 ctx.textAlign = 'center';
 ctx.fillStyle = C.teal;
-ctx.fillText('← Selenium scraping  (~3.5 min) →', (events[1].x + events[2].x) / 2, TL_Y + 44);
+ctx.fillText('← Selenium scraping  (~3.5 min) →', (events[1].x + events[2].x) / 2, TL_Y + 46);
 ctx.fillStyle = C.navy;
-ctx.globalAlpha = 0.55;
-ctx.fillText('← Claude AI analysis  (~2.5 min) →', (events[4].x + events[5].x) / 2, TL_Y + 44);
+ctx.globalAlpha = 0.5;
+ctx.fillText('← Claude AI analysis  (~2.5 min) →', (events[4].x + events[5].x) / 2, TL_Y + 46);
 ctx.globalAlpha = 1;
 </script>
 </body>
