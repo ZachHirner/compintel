@@ -11,7 +11,7 @@
 <body>
 <canvas id="c"></canvas>
 <script>
-const W = 1700, H = 600;
+const W = 1700, H = 660;
 const canvas = document.getElementById('c');
 canvas.width = W; canvas.height = H;
 const ctx = canvas.getContext('2d');
@@ -25,9 +25,9 @@ const C = {
 
 const TL_Y = 290;
 const ML = 100, MR = 100;
-const RECT_W = 175, RECT_H = 124;
-const ABOVE_Y = 54;
-const BELOW_Y = 412;
+const RECT_W = 195, RECT_H = 148;
+const ABOVE_Y = 36;
+const BELOW_Y = 440;
 
 const events = [
   {
@@ -91,7 +91,7 @@ ctx.fillRect(0, 0, W, H);
 
 // Title
 ctx.fillStyle = C.navy;
-ctx.font = 'bold 21px Calibri, Arial, sans-serif';
+ctx.font = 'bold 28px Calibri, Arial, sans-serif';
 ctx.textAlign = 'center';
 ctx.fillText('CI Research Pipeline — End to End  (~10 Minutes)', W/2, 38);
 
@@ -110,7 +110,7 @@ ctx.restore();
 
 // Separator label
 ctx.fillStyle = C.muted;
-ctx.font = '10px Calibri, Arial, sans-serif';
+ctx.font = '13px Calibri, Arial, sans-serif';
 ctx.textAlign = 'center';
 ctx.globalAlpha = 0.55;
 ctx.fillText('separate schedule', sepX, H - 44);
@@ -180,7 +180,7 @@ events.forEach(e => {
 
   // Time label (handle two-line times)
   ctx.fillStyle = C.muted;
-  ctx.font = 'bold 11px Calibri, Arial, sans-serif';
+  ctx.font = 'bold 14px Calibri, Arial, sans-serif';
   ctx.textAlign = 'center';
   const timeLines = e.time.split('\n');
   if (e.above) {
@@ -190,35 +190,35 @@ events.forEach(e => {
   }
 
   // Icon
-  ctx.font = '18px serif';
+  ctx.font = '22px serif';
   ctx.textAlign = 'center';
-  ctx.fillText(e.icon, ex, ry + 22);
+  ctx.fillText(e.icon, ex, ry + 26);
 
   // Title
   ctx.fillStyle = C.white;
-  ctx.font = 'bold 13px Calibri, Arial, sans-serif';
-  ctx.fillText(e.label, ex, ry + 40);
+  ctx.font = 'bold 17px Calibri, Arial, sans-serif';
+  ctx.fillText(e.label, ex, ry + 47);
 
   // Divider
   ctx.strokeStyle = 'rgba(255,255,255,0.28)';
   ctx.lineWidth = 1;
   ctx.beginPath();
-  ctx.moveTo(ex - RECT_W/2 + 14, ry + 48);
-  ctx.lineTo(ex + RECT_W/2 - 14, ry + 48);
+  ctx.moveTo(ex - RECT_W/2 + 14, ry + 54);
+  ctx.lineTo(ex + RECT_W/2 - 14, ry + 54);
   ctx.stroke();
 
   // Sub lines
-  ctx.font = '11px Calibri, Arial, sans-serif';
+  ctx.font = '14px Calibri, Arial, sans-serif';
   ctx.globalAlpha = 0.88;
   ctx.fillStyle = C.white;
   e.subs.forEach((line, li) => {
-    ctx.fillText(line, ex, ry + 63 + li * 16);
+    ctx.fillText(line, ex, ry + 67 + li * 19);
   });
   ctx.globalAlpha = 1;
 });
 
 // Band labels
-ctx.font = '10px Calibri, Arial, sans-serif';
+ctx.font = '13px Calibri, Arial, sans-serif';
 ctx.textAlign = 'center';
 ctx.fillStyle = C.teal;
 ctx.fillText('← Selenium scraping  (~3.5 min) →', (events[2].x + events[3].x) / 2, TL_Y + 46);
