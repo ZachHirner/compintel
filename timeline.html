@@ -4,34 +4,34 @@
 <meta charset="UTF-8">
 <title>CI Pipeline Timeline</title>
 <style>
-  body { margin: 0; padding: 30px 0; background: #F7F9FC; }
-  canvas { display: block; margin: 0 auto; }
+  * { margin: 0; padding: 0; }
+  body { width: 1920px; height: 1080px; overflow: hidden; background: #F7F9FC; }
+  canvas { display: block; }
 </style>
 </head>
 <body>
-<canvas id="c"></canvas>
+<canvas id="c" width="1920" height="1080"></canvas>
 <script>
-const W = 1700, H = 660;
+const W = 1920, H = 1080;
 const canvas = document.getElementById('c');
-canvas.width = W; canvas.height = H;
 const ctx = canvas.getContext('2d');
 
 const C = {
   navy: '#003B71', orange: '#F4A800', teal: '#00A99D',
-  health: '#4A7EA5',
-  bg: '#F7F9FC', text: '#1A202C', muted: '#718096',
-  white: '#FFFFFF', navyLt: '#1A4F8A',
+  health: '#4A7EA5', navyLt: '#1A4F8A',
+  bg: '#F7F9FC', white: '#FFFFFF',
+  text: '#1A202C', muted: '#718096',
 };
 
-const TL_Y = 290;
-const ML = 100, MR = 100;
-const RECT_W = 195, RECT_H = 148;
-const ABOVE_Y = 36;
-const BELOW_Y = 440;
+const TL_Y   = 430;
+const ML     = 115, MR = 115;
+const RECT_W = 210, RECT_H = 210;
+const ABOVE_Y = 98;
+const BELOW_Y = 548;
 
 const events = [
   {
-    time: 'Day Prior\n8:00 AM', icon: '📡', label: 'Health Check',
+    time: 'Day Prior · 8:00 AM', icon: '📡', label: 'Health Check',
     subs: ['Visits all 50+ URLs', 'Logs HTTP status codes', 'Opens GitHub issue if URL fails'],
     color: C.health, above: true,
   },
@@ -91,52 +91,54 @@ ctx.fillRect(0, 0, W, H);
 
 // Title
 ctx.fillStyle = C.navy;
-ctx.font = 'bold 28px Calibri, Arial, sans-serif';
+ctx.font = 'bold 38px Calibri, Arial, sans-serif';
 ctx.textAlign = 'center';
-ctx.fillText('CI Research Pipeline — End to End  (~10 Minutes)', W/2, 38);
+ctx.fillText('CI Research Pipeline — End to End', W/2, 54);
 
-// Separator between health check and pipeline (dashed vertical)
+ctx.fillStyle = C.muted;
+ctx.font = '20px Calibri, Arial, sans-serif';
+ctx.fillText('Fully automated · Runs 3× per week · ~10 minutes per run', W/2, 84);
+
+// Separator between health check and pipeline
 const sepX = (events[0].x + events[1].x) / 2;
 ctx.save();
-ctx.setLineDash([4, 5]);
+ctx.setLineDash([5, 6]);
 ctx.strokeStyle = C.muted;
-ctx.lineWidth = 1;
-ctx.globalAlpha = 0.35;
+ctx.lineWidth = 1.2;
+ctx.globalAlpha = 0.3;
 ctx.beginPath();
-ctx.moveTo(sepX, 55);
-ctx.lineTo(sepX, H - 55);
+ctx.moveTo(sepX, 96);
+ctx.lineTo(sepX, 800);
 ctx.stroke();
 ctx.restore();
-
-// Separator label
 ctx.fillStyle = C.muted;
+ctx.globalAlpha = 0.45;
 ctx.font = '13px Calibri, Arial, sans-serif';
 ctx.textAlign = 'center';
-ctx.globalAlpha = 0.55;
-ctx.fillText('separate schedule', sepX, H - 44);
+ctx.fillText('separate schedule', sepX, 818);
 ctx.globalAlpha = 1;
 
 // Duration bands
 ctx.fillStyle = 'rgba(0,169,157,0.09)';
-ctx.fillRect(events[2].x, TL_Y - 18, events[3].x - events[2].x, 36);
+ctx.fillRect(events[2].x, TL_Y - 20, events[3].x - events[2].x, 40);
 ctx.fillStyle = 'rgba(0,59,113,0.06)';
-ctx.fillRect(events[5].x, TL_Y - 18, events[6].x - events[5].x, 36);
+ctx.fillRect(events[5].x, TL_Y - 20, events[6].x - events[5].x, 40);
 
 // Timeline bar
 const grad = ctx.createLinearGradient(ML, 0, W - MR, 0);
 grad.addColorStop(0, C.health);
-grad.addColorStop(0.15, C.navy);
+grad.addColorStop(0.14, C.navy);
 grad.addColorStop(1, C.navyLt);
 ctx.fillStyle = grad;
-rr(ML, TL_Y - 5, W - ML - MR - 14, 10, 5);
+rr(ML, TL_Y - 5, W - ML - MR - 16, 10, 5);
 ctx.fill();
 
 // Arrow
 ctx.beginPath();
-const ax = W - MR + 6;
-ctx.moveTo(ax - 22, TL_Y - 10);
+const ax = W - MR + 7;
+ctx.moveTo(ax - 24, TL_Y - 11);
 ctx.lineTo(ax, TL_Y);
-ctx.lineTo(ax - 22, TL_Y + 10);
+ctx.lineTo(ax - 24, TL_Y + 11);
 ctx.fillStyle = C.navyLt;
 ctx.fill();
 
@@ -144,67 +146,61 @@ ctx.fill();
 events.forEach(e => {
   const ex = e.x;
   const ry = e.above ? ABOVE_Y : BELOW_Y;
-  const lineY1 = e.above ? ry + RECT_H + 1 : TL_Y + 7;
-  const lineY2 = e.above ? TL_Y - 7 : ry - 1;
+  const lineY1 = e.above ? ry + RECT_H + 1 : TL_Y + 8;
+  const lineY2 = e.above ? TL_Y - 8 : ry - 1;
 
-  // Rect shadow
+  // Shadow + rect
   ctx.save();
-  ctx.shadowColor = 'rgba(0,0,0,0.14)';
-  ctx.shadowBlur = 10;
-  ctx.shadowOffsetY = 3;
+  ctx.shadowColor = 'rgba(0,0,0,0.13)';
+  ctx.shadowBlur = 12;
+  ctx.shadowOffsetY = 4;
   ctx.fillStyle = e.color;
-  rr(ex - RECT_W/2, ry, RECT_W, RECT_H, 8);
+  rr(ex - RECT_W/2, ry, RECT_W, RECT_H, 9);
   ctx.fill();
   ctx.restore();
 
   // Dotted line
   ctx.save();
-  ctx.setLineDash([3, 4]);
+  ctx.setLineDash([4, 5]);
   ctx.strokeStyle = e.color;
-  ctx.lineWidth = 1.5;
-  ctx.globalAlpha = 0.65;
+  ctx.lineWidth = 1.8;
+  ctx.globalAlpha = 0.6;
   ctx.beginPath();
   ctx.moveTo(ex, lineY1);
   ctx.lineTo(ex, lineY2);
   ctx.stroke();
   ctx.restore();
 
-  // Circle on timeline
+  // Circle
   ctx.beginPath();
-  ctx.arc(ex, TL_Y, 10, 0, Math.PI * 2);
+  ctx.arc(ex, TL_Y, 11, 0, Math.PI * 2);
   ctx.fillStyle = e.color;
   ctx.fill();
   ctx.strokeStyle = C.white;
-  ctx.lineWidth = 2.5;
+  ctx.lineWidth = 3;
   ctx.stroke();
 
-  // Time label (handle two-line times)
+  // Time label
   ctx.fillStyle = C.muted;
-  ctx.font = 'bold 14px Calibri, Arial, sans-serif';
+  ctx.font = 'bold 13px Calibri, Arial, sans-serif';
   ctx.textAlign = 'center';
-  const timeLines = e.time.split('\n');
-  if (e.above) {
-    timeLines.forEach((t, i) => ctx.fillText(t, ex, TL_Y + 24 + i * 13));
-  } else {
-    timeLines.forEach((t, i) => ctx.fillText(t, ex, TL_Y - 26 + i * 13));
-  }
+  ctx.fillText(e.time, ex, e.above ? TL_Y + 28 : TL_Y - 20);
 
   // Icon
-  ctx.font = '22px serif';
-  ctx.textAlign = 'center';
-  ctx.fillText(e.icon, ex, ry + 26);
+  ctx.font = '24px serif';
+  ctx.fillText(e.icon, ex, ry + 32);
 
   // Title
   ctx.fillStyle = C.white;
   ctx.font = 'bold 17px Calibri, Arial, sans-serif';
-  ctx.fillText(e.label, ex, ry + 47);
+  ctx.fillText(e.label, ex, ry + 56);
 
   // Divider
-  ctx.strokeStyle = 'rgba(255,255,255,0.28)';
+  ctx.strokeStyle = 'rgba(255,255,255,0.25)';
   ctx.lineWidth = 1;
   ctx.beginPath();
-  ctx.moveTo(ex - RECT_W/2 + 14, ry + 54);
-  ctx.lineTo(ex + RECT_W/2 - 14, ry + 54);
+  ctx.moveTo(ex - RECT_W/2 + 16, ry + 66);
+  ctx.lineTo(ex + RECT_W/2 - 16, ry + 66);
   ctx.stroke();
 
   // Sub lines
@@ -212,20 +208,59 @@ events.forEach(e => {
   ctx.globalAlpha = 0.88;
   ctx.fillStyle = C.white;
   e.subs.forEach((line, li) => {
-    ctx.fillText(line, ex, ry + 67 + li * 19);
+    ctx.fillText(line, ex, ry + 86 + li * 20);
   });
   ctx.globalAlpha = 1;
 });
 
-// Band labels
+// Duration band labels
 ctx.font = '13px Calibri, Arial, sans-serif';
 ctx.textAlign = 'center';
 ctx.fillStyle = C.teal;
-ctx.fillText('← Selenium scraping  (~3.5 min) →', (events[2].x + events[3].x) / 2, TL_Y + 46);
+ctx.fillText('← Selenium scraping  (~3.5 min) →', (events[2].x + events[3].x) / 2, TL_Y + 52);
 ctx.fillStyle = C.navy;
-ctx.globalAlpha = 0.5;
-ctx.fillText('← Claude AI analysis  (~2.5 min) →', (events[5].x + events[6].x) / 2, TL_Y + 46);
+ctx.globalAlpha = 0.45;
+ctx.fillText('← Claude AI analysis  (~2.5 min) →', (events[5].x + events[6].x) / 2, TL_Y + 52);
 ctx.globalAlpha = 1;
+
+// Stat bar at bottom
+const stats = [
+  { num: '5',    label: 'Competitors Tracked' },
+  { num: '50+',  label: 'URLs Monitored' },
+  { num: '3×',   label: 'Per Week, Automated' },
+  { num: '<10',  label: 'Minutes Per Run' },
+];
+const barY = 838;
+const barH = H - barY;
+const statW = W / stats.length;
+
+ctx.fillStyle = C.navy;
+ctx.fillRect(0, barY, W, barH);
+ctx.fillStyle = C.orange;
+ctx.fillRect(0, barY, W, 4);
+
+stats.forEach((s, i) => {
+  const cx = statW * i + statW / 2;
+  const cy = barY + barH / 2;
+
+  if (i > 0) {
+    ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(statW * i, barY + 28);
+    ctx.lineTo(statW * i, barY + barH - 28);
+    ctx.stroke();
+  }
+
+  ctx.fillStyle = C.orange;
+  ctx.font = 'bold 54px Calibri, Arial, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(s.num, cx, cy + 16);
+
+  ctx.fillStyle = 'rgba(255,255,255,0.7)';
+  ctx.font = '18px Calibri, Arial, sans-serif';
+  ctx.fillText(s.label, cx, cy + 42);
+});
 </script>
 </body>
 </html>
