@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Manual Workflow</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { width: 1920px; height: 1080px; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script>
+const W = 1920, H = 1080;
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+// ── Background gradient (matches QBR template) ───────────────
+const bg = ctx.createLinearGradient(W, 0, 0, H);
+bg.addColorStop(0,   '#030B18');
+bg.addColorStop(0.5, '#071428');
+bg.addColorStop(1,   '#0E2A52');
+ctx.fillStyle = bg;
+ctx.fillRect(0, 0, W, H);
+
+// ── Dark corner triangles (template motif) ───────────────────
+ctx.fillStyle = '#050F20';
+ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(380,0); ctx.lineTo(0,260); ctx.closePath(); ctx.fill();
+ctx.beginPath(); ctx.moveTo(W,H); ctx.lineTo(W-340,H); ctx.lineTo(W,H-220); ctx.closePath(); ctx.fill();
+
+// ── Orange→pink gradient chevron (left side, template motif) ─
+const chevGrad = ctx.createLinearGradient(0, H*0.9, 260, H*0.1);
+chevGrad.addColorStop(0, '#F4A800');
+chevGrad.addColorStop(0.55, '#D4479A');
+chevGrad.addColorStop(1, '#7B3AC9');
+
+// Large chevron shape
+ctx.fillStyle = chevGrad;
+ctx.globalAlpha = 0.18;
+ctx.beginPath();
+ctx.moveTo(-30, 480); ctx.lineTo(180, 260); ctx.lineTo(280, 340);
+ctx.lineTo(80, 540); ctx.lineTo(280, 720); ctx.lineTo(180, 820); ctx.closePath();
+ctx.fill();
+ctx.globalAlpha = 1;
+
+// Thin teal outline rectangle (rotated, template motif)
+ctx.save();
+ctx.translate(180, 520);
+ctx.rotate(-0.32);
+ctx.strokeStyle = '#4A9EC4';
+ctx.lineWidth = 1.2;
+ctx.globalAlpha = 0.35;
+ctx.strokeRect(-80, -180, 230, 380);
+ctx.restore();
+ctx.globalAlpha = 1;
+
+// ── Tricentis logo mark (top left) ───────────────────────────
+ctx.fillStyle = '#FFFFFF';
+ctx.font = 'bold 20px Calibri, Arial, sans-serif';
+ctx.textAlign = 'left';
+ctx.fillText('✕  Tricentis', 52, 52);
+
+// ── Title ─────────────────────────────────────────────────────
+ctx.textAlign = 'center';
+ctx.fillStyle = '#FFFFFF';
+ctx.font = 'bold 42px Calibri, Arial, sans-serif';
+ctx.fillText('The Manual Way', W/2, 74);
+
+ctx.fillStyle = '#F4A800';
+ctx.font = '20px Calibri, Arial, sans-serif';
+ctx.fillText('Researching 5 competitors across 4 source types — no automation, no memory, no consistency', W/2, 106);
+
+// ── Step definitions ──────────────────────────────────────────
+const steps = [
+  { n:1,  icon:'🌐', title:'Identify Target URLs',        sub:'Locate product, blog, newsroom\n& social pages per competitor',  time:'~15 min' },
+  { n:2,  icon:'📖', title:'Parse Competitor Websites',   sub:'Read pages manually — no diff\ntool, no record of last visit',   time:'~20 min' },
+  { n:3,  icon:'💼', title:'Scrape LinkedIn Manually',    sub:'Scroll feed, check headcount,\nnote recent posts × 5 competitors',time:'~15 min' },
+  { n:4,  icon:'🐦', title:'Monitor X / Twitter',         sub:'Search handles, filter recent,\nscan for updates × 5',           time:'~10 min' },
+  { n:5,  icon:'📺', title:'Check YouTube Channels',      sub:'Visit each channel, look for\nnew uploads or announcements × 5', time:'~10 min' },
+  { n:6,  icon:'📊', title:'Query Analyst Coverage',      sub:'Search Forrester & Gartner\nmanually, navigate paywalls',       time:'~15 min' },
+  { n:7,  icon:'⭐', title:'Pull Review Site Data',       sub:'Read PeerSpot & TrustRadius,\nnote sentiment shifts',            time:'~10 min' },
+  { n:8,  icon:'📋', title:'Aggregate Raw Findings',      sub:'Consolidate from 30+ tabs\ninto docs — no structured format',   time:'~15 min' },
+  { n:9,  icon:'✍️', title:'Write Intelligence Summary',  sub:'Synthesize from memory\nno version control, no comparison',    time:'~20 min' },
+  { n:10, icon:'📤', title:'Format & Distribute',         sub:'Manual formatting every time\nno audit trail, no consistency',  time:'~10 min' },
+];
+
+// Layout: 5+5 in two rows
+const ML = 68, MR = 68;
+const ROWS = [[0,1,2,3,4],[5,6,7,8,9]];
+const ROW_Y = [178, 558];
+const ROW_H = 200;
+const GAP   = 16;
+const BOX_W = (W - ML - MR - 4*GAP) / 5;
+
+function drawBox(step, x, y, w, h) {
+  // Box background
+  const bx = ctx.createLinearGradient(x, y, x, y+h);
+  bx.addColorStop(0, 'rgba(255,60,60,0.18)');
+  bx.addColorStop(1, 'rgba(180,20,20,0.10)');
+  ctx.fillStyle = bx;
+  roundRect(x, y, w, h, 8); ctx.fill();
+
+  // Left red accent bar
+  ctx.fillStyle = '#E05252';
+  roundRect(x, y, 4, h, [4,0,0,4]); ctx.fill();
+
+  // Step number badge
+  ctx.fillStyle = '#E05252';
+  ctx.font = 'bold 12px Calibri, Arial, sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText(`STEP ${step.n}`, x+14, y+20);
+
+  // Icon
+  ctx.font = '22px serif';
+  ctx.textAlign = 'left';
+  ctx.fillText(step.icon, x+12, y+48);
+
+  // Title
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 14px Calibri, Arial, sans-serif';
+  ctx.textAlign = 'left';
+  const words = step.title.split(' ');
+  let line = '', lineY = y+70, maxW = w-18;
+  for (let wd of words) {
+    const test = line ? line+' '+wd : wd;
+    if (ctx.measureText(test).width > maxW && line) {
+      ctx.fillText(line, x+14, lineY); lineY+=17; line=wd;
+    } else { line=test; }
+  }
+  ctx.fillText(line, x+14, lineY); lineY+=20;
+
+  // Sub text (2 lines from \n)
+  ctx.fillStyle = 'rgba(255,255,255,0.65)';
+  ctx.font = '11.5px Calibri, Arial, sans-serif';
+  step.sub.split('\n').forEach(l => {
+    ctx.fillText(l, x+14, lineY); lineY+=15;
+  });
+
+  // Time badge (bottom right)
+  ctx.fillStyle = '#F4A800';
+  ctx.font = 'bold 12px Calibri, Arial, sans-serif';
+  ctx.textAlign = 'right';
+  ctx.fillText(step.time, x+w-10, y+h-10);
+}
+
+function arrow(x1, y, x2) {
+  const mid = (x1+x2)/2;
+  ctx.fillStyle = '#E05252';
+  ctx.globalAlpha = 0.7;
+  ctx.beginPath();
+  ctx.moveTo(mid-1, y); ctx.lineTo(mid+1, y);
+  ctx.lineTo(mid+8, y+14); ctx.lineTo(mid-8, y+14);
+  ctx.closePath(); ctx.fill();
+  ctx.globalAlpha = 1;
+  // line
+  ctx.strokeStyle = '#E05252';
+  ctx.lineWidth = 2;
+  ctx.globalAlpha = 0.5;
+  ctx.setLineDash([4,3]);
+  ctx.beginPath(); ctx.moveTo(x1+BOX_W, y+ROW_H/2); ctx.lineTo(x2, y+ROW_H/2); ctx.stroke();
+  ctx.setLineDash([]); ctx.globalAlpha = 1;
+}
+
+function roundRect(x, y, w, h, r) {
+  if (typeof r === 'number') r=[r,r,r,r];
+  ctx.beginPath();
+  ctx.moveTo(x+r[0], y);
+  ctx.lineTo(x+w-r[1], y); ctx.arcTo(x+w, y, x+w, y+r[1], r[1]);
+  ctx.lineTo(x+w, y+h-r[2]); ctx.arcTo(x+w, y+h, x+w-r[3], y+h, r[2]);
+  ctx.lineTo(x+r[3], y+h); ctx.arcTo(x, y+h, x, y+h-r[3], r[3]);
+  ctx.lineTo(x, y+r[0]); ctx.arcTo(x, y, x+r[0], y, r[0]);
+  ctx.closePath();
+}
+
+// Draw row 1
+ROWS[0].forEach((si, col) => {
+  const x = ML + col*(BOX_W+GAP);
+  drawBox(steps[si], x, ROW_Y[0], BOX_W, ROW_H);
+  if (col < 4) arrow(x, ROW_Y[0], x+BOX_W+GAP);
+});
+
+// Down arrow between rows
+const midX = W/2;
+const r1bottom = ROW_Y[0]+ROW_H+10;
+const r2top    = ROW_Y[1]-10;
+ctx.strokeStyle = '#E05252';
+ctx.lineWidth = 2.5;
+ctx.globalAlpha = 0.7;
+ctx.beginPath(); ctx.moveTo(midX, r1bottom); ctx.lineTo(midX, r2top-14); ctx.stroke();
+ctx.fillStyle = '#E05252';
+ctx.beginPath();
+ctx.moveTo(midX-10, r2top-14); ctx.lineTo(midX+10, r2top-14); ctx.lineTo(midX, r2top); ctx.closePath(); ctx.fill();
+ctx.globalAlpha = 1;
+
+// Draw row 2
+ROWS[1].forEach((si, col) => {
+  const x = ML + col*(BOX_W+GAP);
+  drawBox(steps[si], x, ROW_Y[1], BOX_W, ROW_H);
+  if (col < 4) arrow(x, ROW_Y[1], x+BOX_W+GAP);
+});
+
+// ── Bottom callout bar ────────────────────────────────────────
+const barY = 796;
+const barGrad = ctx.createLinearGradient(0, barY, W, barY);
+barGrad.addColorStop(0, 'rgba(224,82,82,0.25)');
+barGrad.addColorStop(0.5, 'rgba(224,82,82,0.18)');
+barGrad.addColorStop(1, 'rgba(224,82,82,0.25)');
+ctx.fillStyle = barGrad;
+roundRect(60, barY, W-120, 72, 8); ctx.fill();
+ctx.strokeStyle = '#E05252';
+ctx.lineWidth = 1;
+ctx.globalAlpha = 0.4;
+roundRect(60, barY, W-120, 72, 8); ctx.stroke();
+ctx.globalAlpha = 1;
+
+ctx.fillStyle = '#F4A800';
+ctx.font = 'bold 26px Calibri, Arial, sans-serif';
+ctx.textAlign = 'center';
+ctx.fillText('⏰  2.5+ hours of manual work — every Monday, Wednesday & Friday — start from scratch every time', W/2, barY+33);
+
+ctx.fillStyle = 'rgba(255,255,255,0.55)';
+ctx.font = '16px Calibri, Arial, sans-serif';
+ctx.fillText('No version control · No record of last run · No way to know what changed · Repeated 156× per year', W/2, barY+56);
+</script>
+</body>
+</html>

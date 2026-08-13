@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Automated Workflow</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { width: 1920px; height: 1080px; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script>
+const W = 1920, H = 1080;
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+// ── Background gradient (matches QBR template) ───────────────
+const bg = ctx.createLinearGradient(W, 0, 0, H);
+bg.addColorStop(0,   '#030B18');
+bg.addColorStop(0.5, '#071428');
+bg.addColorStop(1,   '#0E2A52');
+ctx.fillStyle = bg;
+ctx.fillRect(0, 0, W, H);
+
+// ── Dark corner triangles (template motif) ───────────────────
+ctx.fillStyle = '#050F20';
+ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(380,0); ctx.lineTo(0,260); ctx.closePath(); ctx.fill();
+ctx.beginPath(); ctx.moveTo(W,H); ctx.lineTo(W-340,H); ctx.lineTo(W,H-220); ctx.closePath(); ctx.fill();
+
+// ── Orange→pink gradient chevron (left side, template motif) ─
+const chevGrad = ctx.createLinearGradient(0, H*0.9, 260, H*0.1);
+chevGrad.addColorStop(0, '#F4A800');
+chevGrad.addColorStop(0.55, '#D4479A');
+chevGrad.addColorStop(1, '#7B3AC9');
+
+ctx.fillStyle = chevGrad;
+ctx.globalAlpha = 0.18;
+ctx.beginPath();
+ctx.moveTo(-30, 480); ctx.lineTo(180, 260); ctx.lineTo(280, 340);
+ctx.lineTo(80, 540); ctx.lineTo(280, 720); ctx.lineTo(180, 820); ctx.closePath();
+ctx.fill();
+ctx.globalAlpha = 1;
+
+// Thin teal outline rectangle (rotated, template motif)
+ctx.save();
+ctx.translate(180, 520);
+ctx.rotate(-0.32);
+ctx.strokeStyle = '#4A9EC4';
+ctx.lineWidth = 1.2;
+ctx.globalAlpha = 0.35;
+ctx.strokeRect(-80, -180, 230, 380);
+ctx.restore();
+ctx.globalAlpha = 1;
+
+// ── Tricentis logo mark (top left) ───────────────────────────
+ctx.fillStyle = '#FFFFFF';
+ctx.font = 'bold 20px Calibri, Arial, sans-serif';
+ctx.textAlign = 'left';
+ctx.fillText('✕  Tricentis', 52, 52);
+
+// ── Title ─────────────────────────────────────────────────────
+ctx.textAlign = 'center';
+ctx.fillStyle = '#FFFFFF';
+ctx.font = 'bold 42px Calibri, Arial, sans-serif';
+ctx.fillText('The Automated Way', W/2, 74);
+
+ctx.fillStyle = '#00C9B8';
+ctx.font = '20px Calibri, Arial, sans-serif';
+ctx.fillText('Same intelligence — 5 competitors, 4 source types — fully automated, every Monday, Wednesday & Friday', W/2, 106);
+
+// ── Steps ─────────────────────────────────────────────────────
+const steps = [
+  {
+    n: 1,
+    icon: '💬',
+    title: 'You Ask the Agent',
+    sub: 'Prompt your CI agent or let the\nGitHub Actions cron trigger automatically',
+    detail: 'Mon · Wed · Fri  8:30 AM Central\nZero manual intervention required',
+    time: '0 min',
+    color0: 'rgba(0,169,157,0.28)',
+    color1: 'rgba(0,100,120,0.14)',
+    bar: '#00A99D',
+  },
+  {
+    n: 2,
+    icon: '⚡',
+    title: 'Pipeline Executes',
+    sub: 'Selenium scrapes 50+ URLs across\nwebsites, LinkedIn, X, YouTube & analysts',
+    detail: 'Delta diff filters noise · Claude AI\nanalyzes changes · Structured report written',
+    time: '~10 min',
+    color0: 'rgba(0,120,200,0.28)',
+    color1: 'rgba(0,60,140,0.14)',
+    bar: '#1A7FCC',
+  },
+  {
+    n: 3,
+    icon: '📋',
+    title: 'Intel Report Ready',
+    sub: 'Structured competitive report committed\nto GitHub — available to all 3 AI agents',
+    detail: 'Version-controlled · Timestamped\nSearchable · Always up to date',
+    time: 'Instant',
+    color0: 'rgba(0,169,157,0.28)',
+    color1: 'rgba(0,100,120,0.14)',
+    bar: '#00A99D',
+  },
+];
+
+// Layout — 3 large centered boxes
+const BOX_W = 460;
+const BOX_H = 560;
+const GAP   = 90;
+const TOTAL  = steps.length * BOX_W + (steps.length - 1) * GAP;
+const START_X = (W - TOTAL) / 2;
+const BOX_Y  = 185;
+
+function roundRect(x, y, w, h, r) {
+  if (typeof r === 'number') r = [r,r,r,r];
+  ctx.beginPath();
+  ctx.moveTo(x+r[0], y);
+  ctx.lineTo(x+w-r[1], y); ctx.arcTo(x+w, y, x+w, y+r[1], r[1]);
+  ctx.lineTo(x+w, y+h-r[2]); ctx.arcTo(x+w, y+h, x+w-r[3], y+h, r[2]);
+  ctx.lineTo(x+r[3], y+h); ctx.arcTo(x, y+h, x, y+h-r[3], r[3]);
+  ctx.lineTo(x, y+r[0]); ctx.arcTo(x, y, x+r[0], y, r[0]);
+  ctx.closePath();
+}
+
+function drawStep(step, x, y, w, h) {
+  // Box shadow glow
+  ctx.save();
+  ctx.shadowColor = step.bar;
+  ctx.shadowBlur = 32;
+  ctx.shadowOffsetY = 0;
+
+  const bx = ctx.createLinearGradient(x, y, x, y+h);
+  bx.addColorStop(0, step.color0);
+  bx.addColorStop(1, step.color1);
+  ctx.fillStyle = bx;
+  roundRect(x, y, w, h, 14); ctx.fill();
+  ctx.restore();
+
+  // Top accent bar
+  ctx.fillStyle = step.bar;
+  roundRect(x, y, w, 6, [14,14,0,0]); ctx.fill();
+
+  // Step badge
+  ctx.fillStyle = step.bar;
+  ctx.font = 'bold 13px Calibri, Arial, sans-serif';
+  ctx.textAlign = 'center';
+  const badgeX = x + w/2;
+  const badgeY = y + 38;
+  ctx.beginPath(); ctx.arc(badgeX, badgeY, 20, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 14px Calibri, Arial, sans-serif';
+  ctx.fillText(step.n, badgeX, badgeY + 5);
+
+  // Icon
+  ctx.font = '52px serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(step.icon, x + w/2, y + 125);
+
+  // Title
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 26px Calibri, Arial, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(step.title, x + w/2, y + 178);
+
+  // Divider
+  ctx.strokeStyle = step.bar;
+  ctx.lineWidth = 1;
+  ctx.globalAlpha = 0.4;
+  ctx.beginPath();
+  ctx.moveTo(x + 36, y + 196);
+  ctx.lineTo(x + w - 36, y + 196);
+  ctx.stroke();
+  ctx.globalAlpha = 1;
+
+  // Sub text
+  ctx.fillStyle = 'rgba(255,255,255,0.80)';
+  ctx.font = '16px Calibri, Arial, sans-serif';
+  ctx.textAlign = 'center';
+  let lineY = y + 228;
+  step.sub.split('\n').forEach(line => {
+    ctx.fillText(line, x + w/2, lineY);
+    lineY += 24;
+  });
+
+  // Detail text (lighter)
+  ctx.fillStyle = 'rgba(255,255,255,0.50)';
+  ctx.font = '14px Calibri, Arial, sans-serif';
+  lineY += 18;
+  step.detail.split('\n').forEach(line => {
+    ctx.fillText(line, x + w/2, lineY);
+    lineY += 21;
+  });
+
+  // Time badge
+  const tbX = x + w/2;
+  const tbY = y + h - 44;
+  ctx.fillStyle = step.bar;
+  ctx.globalAlpha = 0.25;
+  roundRect(tbX - 60, tbY - 18, 120, 34, 17); ctx.fill();
+  ctx.globalAlpha = 1;
+  ctx.strokeStyle = step.bar;
+  ctx.lineWidth = 1.2;
+  roundRect(tbX - 60, tbY - 18, 120, 34, 17); ctx.stroke();
+  ctx.fillStyle = step.bar;
+  ctx.font = 'bold 17px Calibri, Arial, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('⏱ ' + step.time, tbX, tbY + 5);
+}
+
+function drawArrow(x1Right, y) {
+  const ax = x1Right + GAP/2;
+  const ay = y + BOX_H/2;
+
+  // Dashed line
+  ctx.save();
+  ctx.setLineDash([6, 5]);
+  ctx.strokeStyle = '#00C9B8';
+  ctx.lineWidth = 2;
+  ctx.globalAlpha = 0.5;
+  ctx.beginPath();
+  ctx.moveTo(x1Right + 8, ay);
+  ctx.lineTo(x1Right + GAP - 8, ay);
+  ctx.stroke();
+  ctx.restore();
+
+  // Arrowhead
+  ctx.fillStyle = '#00C9B8';
+  ctx.globalAlpha = 0.75;
+  ctx.beginPath();
+  ctx.moveTo(x1Right + GAP - 8, ay - 10);
+  ctx.lineTo(x1Right + GAP + 2, ay);
+  ctx.lineTo(x1Right + GAP - 8, ay + 10);
+  ctx.closePath();
+  ctx.fill();
+  ctx.globalAlpha = 1;
+}
+
+// Draw steps
+steps.forEach((step, i) => {
+  const x = START_X + i * (BOX_W + GAP);
+  drawStep(step, x, BOX_Y, BOX_W, BOX_H);
+  if (i < steps.length - 1) {
+    drawArrow(x + BOX_W, BOX_Y);
+  }
+});
+
+// ── Bottom callout bar ────────────────────────────────────────
+const barY = 800;
+const barGrad = ctx.createLinearGradient(0, barY, W, barY);
+barGrad.addColorStop(0, 'rgba(0,169,157,0.22)');
+barGrad.addColorStop(0.5, 'rgba(0,169,157,0.14)');
+barGrad.addColorStop(1, 'rgba(0,169,157,0.22)');
+ctx.fillStyle = barGrad;
+roundRect(60, barY, W-120, 72, 8); ctx.fill();
+ctx.strokeStyle = '#00A99D';
+ctx.lineWidth = 1;
+ctx.globalAlpha = 0.4;
+roundRect(60, barY, W-120, 72, 8); ctx.stroke();
+ctx.globalAlpha = 1;
+
+ctx.fillStyle = '#00C9B8';
+ctx.font = 'bold 26px Calibri, Arial, sans-serif';
+ctx.textAlign = 'center';
+ctx.fillText('✅  2.5+ hours of manual work → ~10 minutes, fully automated — every Monday, Wednesday & Friday', W/2, barY+33);
+
+ctx.fillStyle = 'rgba(255,255,255,0.55)';
+ctx.font = '16px Calibri, Arial, sans-serif';
+ctx.fillText('Version-controlled · Timestamped · Consistent every run · 156× per year, automatically', W/2, barY+56);
+</script>
+</body>
+</html>
