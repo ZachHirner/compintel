@@ -34,7 +34,7 @@ logger = logging.getLogger(__name__)
 
 DATA_ROOT = Path("data")
 
-SUPPORTED_COMPETITORS = ["opentext", "playwright", "uipath", "accelq", "keysight"]
+SUPPORTED_COMPETITORS = ["opentext", "playwright", "uipath", "accelq", "keysight", "panaya"]
 
 RAW_FILE_MAP = {
     "competitor": "competitor_raw.json",
