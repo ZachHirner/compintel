@@ -1,0 +1,10 @@
+{
+  "source_type": "review_websites",
+  "competitor": "playwright",
+  "pages": [
+    {
+      "url": "https://www.trustradius.com/products/playwright/reviews",
+      "content": "www.trustradius.com\nPerforming security verification\nThis website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot.\nVerification successful. Waiting for www.trustradius.com to respond\nRay ID:\na3136e38ec5e489c\nPerformance and Security by\nCloudflare\nPrivacy"
+    }
+  ]
+}
