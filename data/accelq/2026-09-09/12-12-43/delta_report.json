@@ -1,0 +1,179 @@
+{
+  "competitor": "accelq",
+  "run_date": "2026-09-09",
+  "previous_run_dir": "data/accelq/2026-09-07/13-18-59",
+  "changes_detected": true,
+  "changed_pages": [
+    {
+      "url": "https://www.linkedin.com/company/accelq/",
+      "source_type": "social_media",
+      "prev_length": 15363,
+      "curr_length": 14760,
+      "length_delta": -603,
+      "change_pct": 3.9,
+      "added_lines": [
+        "21,735 followers",
+        "Discover all 232 employees",
+        "21,735 followers",
+        "7h",
+        "Edited",
+        "Report this post",
+        "On International Tester’s Day, we’re celebrating the women who are shaping the software testing industry and strengthening the testing community. 🌎",
+        "From pioneering new approaches to sharing knowledge and inspiring others, their contributions continue to influence the way we think about quality.",
+        "Swipe through, get inspired, and tag a woman in testing who deserves to be recognized. 👇",
+        "Dorothy Graham",
+        "Lisa Crispin",
+        "Janet Gregory",
+        "Elisabeth Hendrickson",
+        "Maaret Pyhäjärvi",
+        "#InternationalTestersDay",
+        "#TestersDay",
+        "#WomenInTesting",
+        "#SoftwareTesting",
+        "#TestingCommunity",
+        "#ACCELQ",
+        "32",
+        "4 Comments",
+        "Like",
+        "Comment",
+        "Share",
+        "ACCELQ",
+        "21,735 followers",
+        "1d",
+        "Report this post",
+        "Dreamforce",
+        "is full of moments you don't plan for.",
+        "A spontaneous conversation.",
+        "A great demo.",
+        "A new connection.",
+        "A very long coffee queue. ☕",
+        "We turned a few of those moments into a game.",
+        "Save your Dreamforce Bingo card and play along.",
+        "And while you're checking off the squares, make ACCELQ Booth #502 your next stop.",
+        "#Dreamforce",
+        "#DF26"
+      ],
+      "removed_lines": [
+        "21,711 followers",
+        "View all 232 employees",
+        "21,711 followers",
+        "9h",
+        "22",
+        "Like",
+        "Comment",
+        "Share",
+        "ACCELQ",
+        "21,711 followers",
+        "3d",
+        "21,711 followers",
+        "4d",
+        "21,711 followers",
+        "5d",
+        "27",
+        "Like",
+        "Comment",
+        "Share",
+        "ACCELQ",
+        "21,711 followers",
+        "5d",
+        "21,711 followers",
+        "6d",
+        "21,711 followers",
+        "21,711 followers",
+        "42",
+        "21,711 followers",
+        "21,711 followers",
+        "21,711 followers",
+        "21,711 followers",
+        "5.07%",
+        "21,711 followers",
+        "1w",
+        "21,711 followers",
+        "34.54%",
+        "665",
+        "21,711 followers",
+        "21,711 followers",
+        "21,711 followers"
+      ]
+    },
+    {
+      "url": "https://www.accelq.com/blog/",
+      "source_type": "social_media",
+      "prev_length": 2568,
+      "curr_length": 2569,
+      "length_delta": 1,
+      "change_pct": 0.0,
+      "added_lines": [
+        "Working with Data Types and Data Lists in ACCELQ: A Complete Guide",
+        "1 September 2025",
+        "How to Get Started with ACCELQ – A Comprehensive Guide"
+      ],
+      "removed_lines": [
+        "How to Get Started with ACCELQ – A Comprehensive Guide",
+        "10 January 2024",
+        "Working with Data Types and Data Lists in ACCELQ: A Complete Guide"
+      ]
+    },
+    {
+      "url": "https://x.com/ACCELQ?lang=en",
+      "source_type": "social_media",
+      "prev_length": 305,
+      "curr_length": 305,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "a387d3ffaa20b87e"
+      ],
+      "removed_lines": [
+        "a377ba57bcc8a1e5"
+      ]
+    },
+    {
+      "url": "https://www.forrester.com/allSearch?query=AccelQ&publishedSinceInDays=30",
+      "source_type": "analyst",
+      "prev_length": 4862,
+      "curr_length": 4893,
+      "length_delta": 31,
+      "change_pct": 0.6,
+      "added_lines": [
+        "138 results",
+        "Access To Training Does Not Equal Response Readiness",
+        "Sep 9, 2026",
+        "From:",
+        "The State Of Incident Readiness And Response, 2026",
+        "Outside your subscription"
+      ],
+      "removed_lines": [
+        "122 results",
+        "Outside your subscription",
+        "Sample Zero Trust Metrics",
+        "Aug 13, 2026",
+        "From:",
+        "Craft Zero Trust Security Metrics That Matter"
+      ]
+    },
+    {
+      "url": "https://www.peerspot.com/products/accelq-reviews#reviews-container",
+      "source_type": "review",
+      "prev_length": 14851,
+      "curr_length": 14851,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "912,517 peers",
+        "48",
+        "BlazeMeter",
+        "vs ACCELQ"
+      ],
+      "removed_lines": [
+        "912,022 peers",
+        "45",
+        "vs ACCELQ",
+        "BlazeMeter"
+      ]
+    }
+  ],
+  "new_pages": [],
+  "removed_pages": [],
+  "unchanged_count": 7
+}
