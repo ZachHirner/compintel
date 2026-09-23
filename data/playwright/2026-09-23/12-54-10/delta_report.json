@@ -1,0 +1,111 @@
+{
+  "competitor": "playwright",
+  "run_date": "2026-09-23",
+  "previous_run_dir": "data/playwright/2026-09-21/13-50-37",
+  "changes_detected": true,
+  "changed_pages": [
+    {
+      "url": "https://github.com/microsoft/playwright/releases",
+      "source_type": "competitor",
+      "prev_length": 35538,
+      "curr_length": 35541,
+      "length_delta": 3,
+      "change_pct": 0.0,
+      "added_lines": [
+        "96.6k",
+        "jiafuzhang, mkosir, regseb, alexanderudodov, methbkts, lexroubos2, TheBigOx, flynnhou, eltonmkw, bitwisebro, and 4 more reacted with hooray emoji"
+      ],
+      "removed_lines": [
+        "96.5k",
+        "jiafuzhang, mkosir, regseb, AlexWebDev01, methbkts, lexroubos2, TheBigOx, flynnhou, eltonmkw, bitwisebro, and 4 more reacted with hooray emoji"
+      ]
+    },
+    {
+      "url": "https://www.linkedin.com/company/microsoft/",
+      "source_type": "social_media",
+      "prev_length": 27470,
+      "curr_length": 9068,
+      "length_delta": -18402,
+      "change_pct": 67.0,
+      "added_lines": [
+        "29,151,668 followers",
+        "View all 231,791 employees",
+        "Microsoft Copilot",
+        "Software Development"
+      ],
+      "removed_lines": [
+        "29,135,110 followers",
+        "View all 231,823 employees",
+        "Updates",
+        "Microsoft",
+        "reposted this",
+        "Kathleen Hogan",
+        "Kathleen Hogan is an Influencer",
+        "EVP, Chief Strategy and Transformation Officer",
+        "4d",
+        "Report this post",
+        "I've seen many periods of significant change over the course of my career. This moment feels different, not only because of how quickly AI is advancing, but because of the choices it asks leaders to make about how work changes and how people grow with it.",
+        "No organization has all the answers. What we can bring is a growth mindset: the willingness to experiment, learn from what doesn’t work, and keep adapting as the technology and our understanding of it evolves.",
+        "That’s why we committed to being Customer Zero. If we want to help customers realize the full value of AI, we need firsthand experience with the hard, deeply human work of transformation.",
+        "Today, we’re sharing more of that experience in",
+        "Microsoft",
+        "’s Frontier Playbook, drawing on hundreds of AI transformation efforts across the company. It includes what worked, where we failed, and how those lessons are changing the way we lead, build skills, and redesign work.",
+        "We’re still learning. But by sharing what we’ve learned so far, I hope we can help more organizations approach this moment with both ambition and humility, while creating a future in which technology helps people and organizations do more than they could before.",
+        "I share five lessons from our journey in my latest blog:",
+        "aka.ms/AA132p8d",
+        "629",
+        "115 Comments",
+        "Like",
+        "Comment",
+        "Share",
+        "Microsoft",
+        "reposted this",
+        "Microsoft News and Stories",
+        "43,319 followers",
+        "5d",
+        "Report this post",
+        "Microsoft began applying biomimicry at a datacenter in the Netherlands in 2022. Now it’s expanding the practice to more than 20 datacenter sites across the U.S. and in Germany, as well as making it part of all new datacenter projects in the U.S. and a growing number around the world.",
+        "By combining community input, ecological research and local understanding, teams are designing land, water and restoration plans that mimic and enhance natural systems. Learn more:",
+        "https://msft.it/6048ajwtE",
+        "203",
+        "20 Comments",
+        "Like",
+        "Comment",
+        "Share",
+        "Microsoft",
+        "reposted this"
+      ]
+    },
+    {
+      "url": "https://x.com/playwrightweb?lang=en",
+      "source_type": "social_media",
+      "prev_length": 305,
+      "curr_length": 305,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "a3fb6bde2eb9f3c5"
+      ],
+      "removed_lines": [
+        "a3eb43b13dbb1c1b"
+      ]
+    },
+    {
+      "url": "https://www.trustradius.com/products/playwright/reviews",
+      "source_type": "review",
+      "prev_length": 333,
+      "curr_length": 333,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "a3fb6d3d79862b95"
+      ],
+      "removed_lines": [
+        "a3eb451058ce753b"
+      ]
+    }
+  ],
+  "new_pages": [],
+  "removed_pages": [],
+  "unchanged_count": 8
+}
