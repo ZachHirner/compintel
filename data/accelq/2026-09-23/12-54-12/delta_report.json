@@ -1,0 +1,173 @@
+{
+  "competitor": "accelq",
+  "run_date": "2026-09-23",
+  "previous_run_dir": "data/accelq/2026-09-21/13-50-38",
+  "changes_detected": true,
+  "changed_pages": [
+    {
+      "url": "https://www.linkedin.com/company/accelq/",
+      "source_type": "social_media",
+      "prev_length": 15436,
+      "curr_length": 15516,
+      "length_delta": 80,
+      "change_pct": 0.5,
+      "added_lines": [
+        "20,143 followers",
+        "20,143 followers",
+        "1d",
+        "Edited",
+        "Report this post",
+        "Still doing these manually? 👀",
+        "For government QA teams, there’s a better way to approach testing.",
+        "ACCELQ brings autonomous testing to the New York Digital Government Summit 2026.",
+        "Come meet us today at Booth #13 and see how AI can help teams build more resilient automation, expand coverage, and simplify the testing lifecycle.",
+        "📍 Albany, New York",
+        "📅 September 22",
+        "📌 Booth #13",
+        "If you're at the Summit, come say hi. Let's talk about making quality autonomous.",
+        "#ACCELQ",
+        "Government Technology",
+        "#SoftwareTestAutomation",
+        "21",
+        "Like",
+        "Comment",
+        "Share",
+        "ACCELQ",
+        "20,143 followers",
+        "2d",
+        "20",
+        "Like",
+        "Comment",
+        "Share",
+        "ACCELQ",
+        "20,143 followers",
+        "5d",
+        "75",
+        "Like",
+        "Comment",
+        "Share",
+        "ACCELQ",
+        "20,143 followers",
+        "5d",
+        "35",
+        "Like",
+        "Comment"
+      ],
+      "removed_lines": [
+        "22,087 followers",
+        "22,087 followers",
+        "10h",
+        "19",
+        "Like",
+        "Comment",
+        "Share",
+        "ACCELQ",
+        "22,087 followers",
+        "3d",
+        "61",
+        "Like",
+        "Comment",
+        "Share",
+        "ACCELQ",
+        "22,087 followers",
+        "3d",
+        "34",
+        "Like",
+        "Comment",
+        "Share",
+        "ACCELQ",
+        "22,087 followers",
+        "3d",
+        "39",
+        "Like",
+        "Comment",
+        "Share",
+        "ACCELQ",
+        "22,087 followers",
+        "3d",
+        "18",
+        "Like",
+        "Comment",
+        "Share",
+        "ACCELQ",
+        "22,087 followers",
+        "4d",
+        "44.86%",
+        "22,087 followers"
+      ]
+    },
+    {
+      "url": "https://www.accelq.com/blog/",
+      "source_type": "social_media",
+      "prev_length": 2561,
+      "curr_length": 2552,
+      "length_delta": -9,
+      "change_pct": 0.4,
+      "added_lines": [
+        "Working with Data Types and Data Lists in ACCELQ: A Complete Guide",
+        "Yuvarani Elankumaran",
+        "1 September 2025",
+        "How to Get Started with ACCELQ",
+        "Software testing",
+        "25+ Software Testing Types: When and Why Each One Runs (2026)",
+        "Top 27 Automation Testing Interview Questions and Answers"
+      ],
+      "removed_lines": [
+        "Top 27 Automation Testing Interview Questions and Answers",
+        "Prashanth Punnam",
+        "25 March 2025",
+        "Working with Data Types and Data Lists in ACCELQ: A Complete Guide",
+        "How to Get Started with ACCELQ",
+        "Enterprise Testing",
+        "ACCELQ Product Overview – From Automation to Autonomous Quality Engineering"
+      ]
+    },
+    {
+      "url": "https://x.com/ACCELQ?lang=en",
+      "source_type": "social_media",
+      "prev_length": 305,
+      "curr_length": 305,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "a3fb6c3b4ce0ad87"
+      ],
+      "removed_lines": [
+        "a3eb44215c2c2881"
+      ]
+    },
+    {
+      "url": "https://www.forrester.com/allSearch?query=AccelQ&publishedSinceInDays=30",
+      "source_type": "analyst",
+      "prev_length": 4329,
+      "curr_length": 4329,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "141 results"
+      ],
+      "removed_lines": [
+        "129 results"
+      ]
+    },
+    {
+      "url": "https://www.peerspot.com/products/accelq-reviews#reviews-container",
+      "source_type": "review",
+      "prev_length": 14827,
+      "curr_length": 14827,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "913,924 peers",
+        "76"
+      ],
+      "removed_lines": [
+        "913,683 peers",
+        "75"
+      ]
+    }
+  ],
+  "new_pages": [],
+  "removed_pages": [],
+  "unchanged_count": 7
+}
