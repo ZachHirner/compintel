@@ -1,0 +1,145 @@
+{
+  "competitor": "playwright",
+  "run_date": "2026-09-25",
+  "previous_run_dir": "data/playwright/2026-09-23/12-54-10",
+  "changes_detected": true,
+  "changed_pages": [
+    {
+      "url": "https://github.com/microsoft/playwright/releases",
+      "source_type": "competitor",
+      "prev_length": 35541,
+      "curr_length": 35541,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "96.7k",
+        "26",
+        "vtrubesset, UweStolz, chfly2000, lin72h, m3thom, maciejcieslar, donovan-shook, ThibautMarechal, alex2276564, binbjz, and 16 more reacted with thumbs up emoji",
+        "alexander-vershinin, mxschmitt, methbkts, PhenX, Morgy93, lin72h, Tsuyoshi84, bsv11, binbjz, DetachHead, and 4 more reacted with hooray emoji",
+        "14",
+        "vtrubesset, Klaster1, lin72h, sopansagorkar, calcium-anything-headfirst, binbjz, DetachHead, ValorHeart, bitwisebro, hquiles, and 4 more reacted with heart emoji",
+        "15",
+        "sergiocarneiro, mxschmitt, cpAdm, salehghotbani, KijongHan, lin72h, chimurai, ThibautMarechal, binbjz, scott-au, and 5 more reacted with rocket emoji",
+        "26 reactions",
+        "14 reactions",
+        "15 reactions",
+        "52 people reacted",
+        "32",
+        "TatiChap, NicolasMurphy, mfulton26, larouxn, calcium-anything-headfirst, cpAdm, Tsingis, tmkx, methbkts, chfly2000, and 22 more reacted with hooray emoji",
+        "32 reactions",
+        "48 people reacted"
+      ],
+      "removed_lines": [
+        "96.6k",
+        "25",
+        "vtrubesset, UweStolz, chfly2000, lin72h, m3thom, maciejcieslar, donovan-shook, ThibautMarechal, alex2276564, binbjz, and 15 more reacted with thumbs up emoji",
+        "13",
+        "alexander-vershinin, mxschmitt, methbkts, PhenX, Morgy93, lin72h, Tsuyoshi84, bsv11, binbjz, DetachHead, and 3 more reacted with hooray emoji",
+        "13",
+        "vtrubesset, Klaster1, lin72h, sopansagorkar, calcium-anything-headfirst, binbjz, DetachHead, ValorHeart, bitwisebro, hquiles, and 3 more reacted with heart emoji",
+        "sergiocarneiro, mxschmitt, cpAdm, salehghotbani, KijongHan, lin72h, chimurai, ThibautMarechal, binbjz, scott-au, and 4 more reacted with rocket emoji",
+        "25 reactions",
+        "13 reactions",
+        "13 reactions",
+        "51 people reacted",
+        "31",
+        "TatiChap, NicolasMurphy, mfulton26, larouxn, calcium-anything-headfirst, cpAdm, Tsingis, tmkx, methbkts, chfly2000, and 21 more reacted with hooray emoji",
+        "31 reactions",
+        "47 people reacted"
+      ]
+    },
+    {
+      "url": "https://www.linkedin.com/company/microsoft/",
+      "source_type": "social_media",
+      "prev_length": 9068,
+      "curr_length": 27387,
+      "length_delta": 18319,
+      "change_pct": 202.0,
+      "added_lines": [
+        "29,167,552 followers",
+        "View all 231,760 employees",
+        "Employees at Microsoft",
+        "Reid Hoffman",
+        "Reid Hoffman is an Influencer",
+        "Co-Founder, LinkedIn, Manas AI & Inflection AI. Founding Team, PayPal.  Author of Superagency.  Podcaster of Possible and Masters of Scale.",
+        "LinkedIn Member",
+        "LinkedIn Member",
+        "LinkedIn Member",
+        "LinkedIn Member",
+        "LinkedIn Member",
+        "View 232k employees at Microsoft",
+        "Sign in",
+        "Welcome back",
+        "Email or phone",
+        "Password",
+        "Show",
+        "Forgot password?",
+        "Sign in",
+        "or",
+        "By clicking Continue to join or sign in, you agree to LinkedIn’s",
+        "User Agreement",
+        ",",
+        "Privacy Policy",
+        ", and",
+        "Cookie Policy",
+        ".",
+        "New to LinkedIn?",
+        "Join now",
+        "or",
+        "By clicking Continue to join or sign in, you agree to LinkedIn’s",
+        "User Agreement",
+        ",",
+        "Privacy Policy",
+        ", and",
+        "Cookie Policy",
+        ".",
+        "See all employees",
+        "Updates",
+        "Microsoft"
+      ],
+      "removed_lines": [
+        "29,151,668 followers",
+        "View all 231,791 employees",
+        "Employees at Microsoft",
+        "Reid Hoffman",
+        "Reid Hoffman is an Influencer",
+        "Co-Founder, LinkedIn, Manas AI & Inflection AI. Founding Team, PayPal.  Author of Superagency.  Podcaster of Possible and Masters of Scale.",
+        "Tim Bakke",
+        "Gabriel Coelho-Kostolny",
+        "Leigh Huang",
+        "See all employees"
+      ]
+    },
+    {
+      "url": "https://x.com/playwrightweb?lang=en",
+      "source_type": "social_media",
+      "prev_length": 305,
+      "curr_length": 305,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "a40bf07e9fce6012"
+      ],
+      "removed_lines": [
+        "a3fb6bde2eb9f3c5"
+      ]
+    },
+    {
+      "url": "https://www.trustradius.com/products/playwright/reviews",
+      "source_type": "review",
+      "prev_length": 333,
+      "curr_length": 333,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "a40bf1d7e9a92eee"
+      ],
+      "removed_lines": [
+        "a3fb6d3d79862b95"
+      ]
+    }
+  ],
+  "new_pages": [],
+  "removed_pages": [],
+  "unchanged_count": 8
+}
