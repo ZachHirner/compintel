@@ -1,0 +1,145 @@
+{
+  "competitor": "playwright",
+  "run_date": "2026-09-28",
+  "previous_run_dir": "data/playwright/2026-09-25/13-01-01",
+  "changes_detected": true,
+  "changed_pages": [
+    {
+      "url": "https://github.com/microsoft/playwright/releases",
+      "source_type": "competitor",
+      "prev_length": 35541,
+      "curr_length": 35541,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "96.8k"
+      ],
+      "removed_lines": [
+        "96.7k"
+      ]
+    },
+    {
+      "url": "https://www.linkedin.com/company/microsoft/",
+      "source_type": "social_media",
+      "prev_length": 27387,
+      "curr_length": 28710,
+      "length_delta": 1323,
+      "change_pct": 4.8,
+      "added_lines": [
+        "29,179,747 followers",
+        "View all 231,728 employees",
+        "Judson Althoff",
+        "3d",
+        "Report this post",
+        "I could not be more excited about our Copilot announcement today and the next wave of innovation we will bring to our customers.",
+        "https://lnkd.in/exq6UPDq",
+        "Copilot was built to enable AI in the flow of human ambition. It has evolved from a chat assistant to the singular place to get uninterrupted work done. With Home, the convergence of Chat and Cowork, you can interact conversationally and create artifacts collaboratively. Code allows you to build AI solutions that help overcome obstacles to improve how you work. Autopilot acts autonomously to execute ongoing tasks, manage projects, and handle follow-up. We are also announcing Office in Copilot: Word, Excel and PowerPoint are now built into the experience.",
+        "This all happens within the Copilot canvas, but the true differentiation and power of Copilot is derived from the Intelligence + Trust platforms upon which it sits.",
+        "Microsoft IQ is the open, heterogeneous, model-diverse, intelligence platform that enables individual and organizational IQ to compound from within, protecting your IP so your unique value does not leak to improve models. Work IQ pulls from an individual’s gated M365 environment, and today we are announcing that Copilot can now access data from across your organization by connecting to Fabric IQ and Dynamics 365.",
+        "A trust platform requires Observability, management, governance, and security of every agent and agentic process running across your technology stack to ensure you are seeing value and ROI. FinOps is critical here, and we are introducing new capabilities in Agent 365 and Copilot to manage model choice and cost for both user subscription licenses (USL) and usage-based billing (UBB), depending on the modality being used within Copilot.",
+        "Please join us at Ignite in November to learn about how our latest innovations will continue accelerating your path to become Frontier.",
+        "https://lnkd.in/ejMEq8gH",
+        "…more",
+        "Play Video",
+        "Video Player is loading.",
+        "Loaded",
+        ":",
+        "28.47%",
+        "0:00",
+        "Play",
+        "Back to start",
+        "Stream Type",
+        "LIVE",
+        "Current Time",
+        "0:00",
+        "/",
+        "Duration",
+        "1:33",
+        "1x",
+        "Playback Rate",
+        "Show Captions",
+        "Mute",
+        "Fullscreen",
+        "2,827",
+        "61 Comments",
+        "Like",
+        "Comment",
+        "Share",
+        "Microsoft"
+      ],
+      "removed_lines": [
+        "29,167,552 followers",
+        "View all 231,760 employees",
+        "5h",
+        "536",
+        "22 Comments",
+        "4h",
+        "411",
+        "22 Comments",
+        "107,230 followers",
+        "1d",
+        "115",
+        "7 Comments",
+        "Like",
+        "Comment",
+        "Share",
+        "Microsoft",
+        "29,167,552 followers",
+        "1d",
+        "402",
+        "25 Comments",
+        "Like",
+        "Comment",
+        "Share",
+        "Microsoft",
+        "29,167,552 followers",
+        "1d",
+        "451",
+        "36 Comments",
+        "3d",
+        "447",
+        "63 Comments",
+        "730,105 followers",
+        "1d",
+        "149",
+        "7 Comments",
+        "4d",
+        "681",
+        "43 Comments",
+        "686",
+        "129 Comments"
+      ]
+    },
+    {
+      "url": "https://x.com/playwrightweb?lang=en",
+      "source_type": "social_media",
+      "prev_length": 305,
+      "curr_length": 305,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "a4256750ed2f2314"
+      ],
+      "removed_lines": [
+        "a40bf07e9fce6012"
+      ]
+    },
+    {
+      "url": "https://www.trustradius.com/products/playwright/reviews",
+      "source_type": "review",
+      "prev_length": 333,
+      "curr_length": 333,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "a42568afca4faf0d"
+      ],
+      "removed_lines": [
+        "a40bf1d7e9a92eee"
+      ]
+    }
+  ],
+  "new_pages": [],
+  "removed_pages": [],
+  "unchanged_count": 8
+}
