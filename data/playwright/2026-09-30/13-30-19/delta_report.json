@@ -1,0 +1,153 @@
+{
+  "competitor": "playwright",
+  "run_date": "2026-09-30",
+  "previous_run_dir": "data/playwright/2026-09-28/15-10-59",
+  "changes_detected": true,
+  "changed_pages": [
+    {
+      "url": "https://github.com/microsoft/playwright/releases",
+      "source_type": "competitor",
+      "prev_length": 35541,
+      "curr_length": 35541,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "96.9k",
+        "16",
+        "sergiocarneiro, mxschmitt, cpAdm, salehghotbani, KijongHan, lin72h, chimurai, ThibautMarechal, binbjz, scott-au, and 6 more reacted with rocket emoji",
+        "16 reactions",
+        "53 people reacted"
+      ],
+      "removed_lines": [
+        "96.8k",
+        "15",
+        "sergiocarneiro, mxschmitt, cpAdm, salehghotbani, KijongHan, lin72h, chimurai, ThibautMarechal, binbjz, scott-au, and 5 more reacted with rocket emoji",
+        "15 reactions",
+        "52 people reacted"
+      ]
+    },
+    {
+      "url": "https://www.linkedin.com/company/microsoft/",
+      "source_type": "social_media",
+      "prev_length": 28710,
+      "curr_length": 29861,
+      "length_delta": 1151,
+      "change_pct": 4.0,
+      "added_lines": [
+        "29,193,444 followers",
+        "Satya Nadella",
+        "Satya Nadella is an Influencer",
+        "Chairman and CEO at Microsoft",
+        "21h",
+        "Report this post",
+        "AI is only as useful as the context it can reason over. With Fabric IQ now generally available in Copilot, you can ask questions of your enterprise data and get answers grounded in trusted business context, right where you work.",
+        "Arun Ulag",
+        "Executive Vice President at Microsoft",
+        "1d",
+        "Today, I’m in Barcelona with our",
+        "#FabCon",
+        "and",
+        "#SQLCon",
+        "communities, sharing what’s next across Microsoft Fabric and our database portfolio.",
+        "AI needs more than capable models. It needs your business data, your knowledge, and the context that makes your organization unique.",
+        "Here are a few of today’s announcements:",
+        "✅ Fabric IQ in Microsoft Copilot Chat and Cowork, generally available today, brings trusted business context into your Copilot experience.",
+        "✅ Apps in Power BI, entering preview in the coming weeks, will let people use natural language to build operational applications from trusted semantic models, powered by Fabric Apps.",
+        "✅ Database Hub in Fabric, now in preview, brings monitoring, governance, and management of your database estate into one experience.",
+        "✅ SQL Server on Azure Local, now generally available, gives customers more flexibility to run workloads close to their operations while maintaining control over where their data resides.",
+        "Less time connecting the pieces. More time putting your data and business knowledge to work.",
+        "Read more in my blog linked below 👇",
+        "#MicrosoftFabric",
+        "#PowerBI",
+        "613",
+        "63 Comments",
+        "Like",
+        "Comment",
+        "Share",
+        "Microsoft",
+        "reposted this",
+        "5d",
+        "9.75%",
+        "2,990",
+        "67 Comments",
+        "5d",
+        "989",
+        "67 Comments",
+        "5d"
+      ],
+      "removed_lines": [
+        "29,179,747 followers",
+        "3d",
+        "28.47%",
+        "2,827",
+        "61 Comments",
+        "3d",
+        "949",
+        "59 Comments",
+        "3d",
+        "933",
+        "52 Comments",
+        "107,680 followers",
+        "4d",
+        "13.47%",
+        "160",
+        "29,179,747 followers",
+        "4d",
+        "434",
+        "30 Comments",
+        "Like",
+        "Comment",
+        "Share",
+        "Microsoft",
+        "29,179,747 followers",
+        "4d",
+        "516",
+        "43 Comments",
+        "6d",
+        "473",
+        "68 Comments",
+        "730,167 followers",
+        "5d",
+        "45.72%",
+        "171",
+        "8 Comments",
+        "699",
+        "45 Comments",
+        "695",
+        "43,552 followers",
+        "1w"
+      ]
+    },
+    {
+      "url": "https://x.com/playwrightweb?lang=en",
+      "source_type": "social_media",
+      "prev_length": 305,
+      "curr_length": 305,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "a4354f6b6dd1e5db"
+      ],
+      "removed_lines": [
+        "a4256750ed2f2314"
+      ]
+    },
+    {
+      "url": "https://www.trustradius.com/products/playwright/reviews",
+      "source_type": "review",
+      "prev_length": 333,
+      "curr_length": 333,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "a43550c54a18a1f1"
+      ],
+      "removed_lines": [
+        "a42568afca4faf0d"
+      ]
+    }
+  ],
+  "new_pages": [],
+  "removed_pages": [],
+  "unchanged_count": 8
+}
