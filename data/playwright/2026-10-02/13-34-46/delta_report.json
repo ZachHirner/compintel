@@ -1,0 +1,145 @@
+{
+  "competitor": "playwright",
+  "run_date": "2026-10-02",
+  "previous_run_dir": "data/playwright/2026-09-30/13-30-19",
+  "changes_detected": true,
+  "changed_pages": [
+    {
+      "url": "https://github.com/microsoft/playwright/releases",
+      "source_type": "competitor",
+      "prev_length": 35541,
+      "curr_length": 35539,
+      "length_delta": -2,
+      "change_pct": 0.0,
+      "added_lines": [
+        "97k"
+      ],
+      "removed_lines": [
+        "96.9k"
+      ]
+    },
+    {
+      "url": "https://www.linkedin.com/company/microsoft/",
+      "source_type": "social_media",
+      "prev_length": 29861,
+      "curr_length": 9083,
+      "length_delta": -20778,
+      "change_pct": 69.6,
+      "added_lines": [
+        "29,206,325 followers",
+        "Locations",
+        "Primary",
+        "1 Microsoft Way",
+        "Redmond, Washington 98052, US",
+        "Get directions",
+        "1 Denison Street",
+        "North Sydney, NSW 2060, AU",
+        "Get directions",
+        "1950 Meadowvale Blvd",
+        "Mississauga, Ontario L5N 8L9, CA",
+        "Get directions",
+        "39, Quai du Président Roosevelt",
+        "Issy-les-Moulineaux, Île-de-France 92130, FR",
+        "Get directions",
+        "Walter-Gropius-Straße 5",
+        "München, 80807, DE",
+        "Get directions",
+        "2-16-3 Konan",
+        "Minato-ku, Tokyo 108-0075, JP",
+        "Get directions",
+        "Thames Valley Park Drive",
+        "Reading, Berkshire RG6 1WG, GB",
+        "Get directions",
+        "Kanalvej 7",
+        "2800 Kongens Lyngby, DK",
+        "Get directions",
+        "Luchthavenlaan 1k",
+        "Zaventem, Flemish Region 1930, BE",
+        "Get directions",
+        "Keilalahdentie 2-4",
+        "Espoo, 02150, FI",
+        "Get directions",
+        "Viale Pasubio, 21",
+        "Milan, Lombardy 20154, IT",
+        "Get directions",
+        "50, Jongro 1-gil",
+        "Jongno-gu, Seoul, KR",
+        "Get directions",
+        "Evert van de Beekstraat 354"
+      ],
+      "removed_lines": [
+        "29,193,444 followers",
+        "LinkedIn Member",
+        "LinkedIn Member",
+        "LinkedIn Member",
+        "LinkedIn Member",
+        "LinkedIn Member",
+        "View 232k employees at Microsoft",
+        "Sign in",
+        "Welcome back",
+        "Email or phone",
+        "Password",
+        "Show",
+        "Forgot password?",
+        "Sign in",
+        "or",
+        "By clicking Continue to join or sign in, you agree to LinkedIn’s",
+        "User Agreement",
+        ",",
+        "Privacy Policy",
+        ", and",
+        "Cookie Policy",
+        ".",
+        "New to LinkedIn?",
+        "Join now",
+        "or",
+        "By clicking Continue to join or sign in, you agree to LinkedIn’s",
+        "User Agreement",
+        ",",
+        "Privacy Policy",
+        ", and",
+        "Cookie Policy",
+        ".",
+        "Locations",
+        "Primary",
+        "1 Microsoft Way",
+        "Redmond, Washington 98052, US",
+        "Get directions",
+        "1 Denison Street",
+        "North Sydney, NSW 2060, AU",
+        "Get directions"
+      ]
+    },
+    {
+      "url": "https://x.com/playwrightweb?lang=en",
+      "source_type": "social_media",
+      "prev_length": 305,
+      "curr_length": 305,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "a445cf8aca36540f"
+      ],
+      "removed_lines": [
+        "a4354f6b6dd1e5db"
+      ]
+    },
+    {
+      "url": "https://www.trustradius.com/products/playwright/reviews",
+      "source_type": "review",
+      "prev_length": 333,
+      "curr_length": 333,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "a445d0e5bce3e1b4"
+      ],
+      "removed_lines": [
+        "a43550c54a18a1f1"
+      ]
+    }
+  ],
+  "new_pages": [],
+  "removed_pages": [],
+  "unchanged_count": 8
+}
