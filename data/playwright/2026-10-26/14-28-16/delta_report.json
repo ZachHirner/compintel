@@ -1,0 +1,151 @@
+{
+  "competitor": "playwright",
+  "run_date": "2026-10-26",
+  "previous_run_dir": "data/playwright/2026-10-23/12-55-27",
+  "changes_detected": true,
+  "changed_pages": [
+    {
+      "url": "https://github.com/microsoft/playwright/releases",
+      "source_type": "competitor",
+      "prev_length": 42216,
+      "curr_length": 42232,
+      "length_delta": 16,
+      "change_pct": 0.0,
+      "added_lines": [
+        "9",
+        "m3thom, zm-dv-pdc, binbjz, chfly2000, silvahakim30-hue, yairEO, duvban81-netizen, Jmenache, and yuta-mizumoto reacted with thumbs up emoji",
+        "9 reactions",
+        "10 people reacted"
+      ],
+      "removed_lines": [
+        "8",
+        "m3thom, zm-dv-pdc, binbjz, chfly2000, silvahakim30-hue, yairEO, duvban81-netizen, and Jmenache reacted with thumbs up emoji",
+        "8 reactions",
+        "9 people reacted"
+      ]
+    },
+    {
+      "url": "https://www.linkedin.com/company/microsoft/",
+      "source_type": "social_media",
+      "prev_length": 26338,
+      "curr_length": 24386,
+      "length_delta": -1952,
+      "change_pct": 7.4,
+      "added_lines": [
+        "29,377,206 followers",
+        "Employees at Microsoft",
+        "Reid Hoffman",
+        "Reid Hoffman is an Influencer",
+        "Co-Founder, LinkedIn, Manas AI & Inflection AI. Founding Team, PayPal.  Author of Superagency.  Podcaster of Possible and Masters of Scale.",
+        "LinkedIn Member",
+        "LinkedIn Member",
+        "LinkedIn Member",
+        "LinkedIn Member",
+        "LinkedIn Member",
+        "View 231k employees at Microsoft",
+        "Sign in",
+        "Welcome back",
+        "Email or phone",
+        "Password",
+        "Show",
+        "Forgot password?",
+        "Sign in",
+        "or",
+        "By clicking Continue to join or sign in, you agree to LinkedIn’s",
+        "User Agreement",
+        ",",
+        "Privacy Policy",
+        ", and",
+        "Cookie Policy",
+        ".",
+        "New to LinkedIn?",
+        "Join now",
+        "or",
+        "By clicking Continue to join or sign in, you agree to LinkedIn’s",
+        "User Agreement",
+        ",",
+        "Privacy Policy",
+        ", and",
+        "Cookie Policy",
+        ".",
+        "See all employees",
+        "Microsoft",
+        "reposted this",
+        "Brad Smith"
+      ],
+      "removed_lines": [
+        "29,354,892 followers",
+        "Employees at Microsoft",
+        "Reid Hoffman",
+        "Reid Hoffman is an Influencer",
+        "Co-Founder, LinkedIn, Manas AI & Inflection AI. Founding Team, PayPal.  Author of Superagency.  Podcaster of Possible and Masters of Scale.",
+        "Tim Bakke",
+        "Gabriel Coelho-Kostolny",
+        "Leigh Huang",
+        "See all employees",
+        "1d",
+        "11.54%",
+        "7,623",
+        "282 Comments",
+        "1d",
+        "8,031",
+        "338 Comments",
+        "2d",
+        "10.02%",
+        "8,438",
+        "326 Comments",
+        "3d",
+        "7,978",
+        "256 Comments",
+        "Like",
+        "Comment",
+        "Share",
+        "Microsoft",
+        "29,354,892 followers",
+        "27.68%",
+        "276",
+        "40 Comments",
+        "Like",
+        "Comment",
+        "Share",
+        "Microsoft",
+        "29,354,892 followers",
+        "76.66%",
+        "189",
+        "23 Comments",
+        "1w"
+      ]
+    },
+    {
+      "url": "https://x.com/playwrightweb?lang=en",
+      "source_type": "social_media",
+      "prev_length": 305,
+      "curr_length": 305,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "a50bdf20085845a9"
+      ],
+      "removed_lines": [
+        "a4f29f34ab6bd6b5"
+      ]
+    },
+    {
+      "url": "https://www.trustradius.com/products/playwright/reviews",
+      "source_type": "review",
+      "prev_length": 333,
+      "curr_length": 333,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "a50be07bbb9fca91"
+      ],
+      "removed_lines": [
+        "a4f2a08fcae8ef65"
+      ]
+    }
+  ],
+  "new_pages": [],
+  "removed_pages": [],
+  "unchanged_count": 8
+}
