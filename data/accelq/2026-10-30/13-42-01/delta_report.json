@@ -1,0 +1,171 @@
+{
+  "competitor": "accelq",
+  "run_date": "2026-10-30",
+  "previous_run_dir": "data/accelq/2026-10-28/13-58-02",
+  "changes_detected": true,
+  "changed_pages": [
+    {
+      "url": "https://www.linkedin.com/company/accelq/",
+      "source_type": "social_media",
+      "prev_length": 16797,
+      "curr_length": 16239,
+      "length_delta": -558,
+      "change_pct": 3.3,
+      "added_lines": [
+        "21,074 followers",
+        "21,074 followers",
+        "6h",
+        "Report this post",
+        "Trick or test? 🎃👻",
+        "While everyone is looking out for spooky surprises this Halloween, our QA Ghost is busy hunting down the bugs hiding in your software!",
+        "No haunted workflows. No scary regressions. Just smarter, autonomous testing with ACCELQ.",
+        "Wishing everyone a frightfully",
+        "#QFunFriday",
+        "! 🕸️",
+        "#FunFriday",
+        "#SoftwareTestingHumor",
+        "#SoftwareTesting",
+        "#ACCELQ",
+        "8",
+        "Like",
+        "Comment",
+        "Share",
+        "ACCELQ",
+        "21,074 followers",
+        "14h",
+        "Edited",
+        "Report this post",
+        "A day filled with learning, collaboration, and plenty of great memories! 🙌",
+        "That’s a wrap on ACCELQ",
+        "Wipro",
+        "Partner Day!",
+        "From exploring real-world web and API testing challenges to exchanging insights and celebrating learning milestones, it was a day packed with knowledge-sharing, teamwork, and meaningful conversations.",
+        "A big thank you to the Wipro team and leadership for the enthusiastic participation and collaboration. Congratulations to our certificate achievers and Share Your Experience winners! 🏆👏",
+        "Here’s a look back at the people, moments, and team spirit that made the day special. 📸",
+        "#TestAutomation",
+        "#Testing",
+        "#QCommunity",
+        "#ACCELQ",
+        "#ACCELQWiproPartnerDay",
+        "+9",
+        "35",
+        "2 Comments",
+        "Like",
+        "Comment"
+      ],
+      "removed_lines": [
+        "21,054 followers",
+        "21,054 followers",
+        "5h",
+        "24",
+        "Like",
+        "Comment",
+        "Share",
+        "ACCELQ",
+        "21,054 followers",
+        "8h",
+        "5.87%",
+        "34",
+        "Like",
+        "Comment",
+        "Share",
+        "ACCELQ",
+        "21,054 followers",
+        "1d",
+        "41",
+        "Like",
+        "Comment",
+        "Share",
+        "ACCELQ",
+        "21,054 followers",
+        "1d",
+        "60",
+        "21,054 followers",
+        "2d",
+        "21,054 followers",
+        "5d",
+        "21,054 followers",
+        "5d",
+        "84",
+        "21,054 followers",
+        "5d",
+        "54",
+        "21,054 followers",
+        "6d",
+        "21,054 followers",
+        "6d"
+      ]
+    },
+    {
+      "url": "https://www.accelq.com/blog/",
+      "source_type": "social_media",
+      "prev_length": 2532,
+      "curr_length": 2572,
+      "length_delta": 40,
+      "change_pct": 1.6,
+      "added_lines": [
+        "RSAT Migration Guide: How to Move Off RSAT Before May 2027",
+        "Enterprise Testing",
+        "What Is MCP Testing? A Practical Guide to Model Context Protocol"
+      ],
+      "removed_lines": [
+        "Enterprise Testing",
+        "RSAT Migration Guide: How to Move Off RSAT Before May 2027",
+        "What Is Chatbot Testing?"
+      ]
+    },
+    {
+      "url": "https://x.com/ACCELQ?lang=en",
+      "source_type": "social_media",
+      "prev_length": 305,
+      "curr_length": 305,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "a52c9114cbaed600"
+      ],
+      "removed_lines": [
+        "a51c2e3d5948f68c"
+      ]
+    },
+    {
+      "url": "https://www.forrester.com/allSearch?query=AccelQ&publishedSinceInDays=30",
+      "source_type": "analyst",
+      "prev_length": 5462,
+      "curr_length": 5462,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "191 results"
+      ],
+      "removed_lines": [
+        "186 results"
+      ]
+    },
+    {
+      "url": "https://www.peerspot.com/products/accelq-reviews#reviews-container",
+      "source_type": "review",
+      "prev_length": 14240,
+      "curr_length": 14240,
+      "length_delta": 0,
+      "change_pct": 0.0,
+      "added_lines": [
+        "accounting for 37% of users researching this solution on PeerSpot.  The top industry researching this solution are professionals from a",
+        "919,809 peers",
+        "71",
+        "260",
+        "84"
+      ],
+      "removed_lines": [
+        "accounting for 38% of users researching this solution on PeerSpot.  The top industry researching this solution are professionals from a",
+        "919,341 peers",
+        "72",
+        "259",
+        "83"
+      ]
+    }
+  ],
+  "new_pages": [],
+  "removed_pages": [],
+  "unchanged_count": 7
+}
